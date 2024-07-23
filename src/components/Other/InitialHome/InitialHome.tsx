@@ -5,7 +5,7 @@ import {
   RiTodoFill,
   RiArrowDownSLine,
   RiDownloadFill,
-  RiMailSendFill
+  RiMailSendFill,
 } from "react-icons/ri";
 
 import { Button } from "@/components/Other/UI/button";
@@ -14,11 +14,8 @@ import Badge from "@/components/Other/Bagde/Badge";
 import Socials from "@/components/Other/Socials/Socials";
 
 const InitialHome = () => {
-
   return (
-    <section
-      className="py-12 md:pt-24 xl:py-24 xl:pt-0 relative"
-    >
+    <section className="py-12 md:pt-24 xl:py-24 xl:pt-0 relative">
       <div className="container mx-auto">
         <div className="flex justify-between gap-x-8">
           <div
@@ -31,9 +28,19 @@ const InitialHome = () => {
             >
               Desenvolvedor Full Stack
             </div>
-            <h1 className="h1 mb-4">Olá, meu nome é Vagner Mengali</h1>
-            <p className="subtitle max-w-[490px] mx-auto xl:mx-0">
-              Desenvolvimento full stack com foco pronunciado e entusiasmo pela construção de soluções front-end poderosas.
+            <h1 className="h1 mb-4">ADAM NEVES</h1>
+            <p className=" max-w-[490px] mx-auto xl:mx-0 text-sm mb-5">
+              Desenvolvimento FullStack com um foco pronunciado e entusiasmo
+              pela criação de soluções poderosas e inovadoras. Minha experiência
+              abrange tanto o front-end quanto o back-end, permitindo-me
+              construir aplicações completas e integradas. Estou constantemente
+              em busca de novos desafios que me permitam aprender e aplicar as
+              mais recentes tecnologias, garantindo a entrega de produtos
+              robustos, escaláveis e seguros. Minha paixão por criar
+              experiências de usuário excepcionais e por otimizar o desempenho
+              das aplicações impulsiona meu trabalho diário, resultando em
+              soluções que não apenas atendem, mas superam as expectativas dos
+              usuários finais.
             </p>
             <div
               className="flex flex-col gap-y-3 md:flex-row gap-x-3
@@ -57,7 +64,7 @@ const InitialHome = () => {
             </div>
             <Socials
               containerStyles="flex gap-x-6 mx-auto xl:mx-0"
-              iconsStyles="text-foreground text-[22px] 
+              iconsStyles="text-foreground text-[22px]
             hover:text-primary transition-all"
             />
           </div>
@@ -72,13 +79,16 @@ const InitialHome = () => {
             <Badge
               containerStyles="absolute top-[80%] -left-[1rem]  animate-up-down-2"
               icon={<RiTodoFill />}
-              endCountNum={24}
-              badgeText="Projetos Finalizados"
+              endCountNum={68}
+              badgeText="Projetos finalizados"
             />
 
-            <Badge containerStyles="absolute top-[55%] -right-8 animate-up-down-1"
-              icon={<RiTeamFill />} endCountNum={6}
-              badgeText="Clientes satisfeitos" />
+            <Badge
+              containerStyles="absolute top-[55%] -right-8 animate-up-down-1"
+              icon={<RiTeamFill />}
+              endCountNum={12}
+              badgeText="Clientes satisfeitos"
+            />
             <DevImg
               alt="initial image"
               priority

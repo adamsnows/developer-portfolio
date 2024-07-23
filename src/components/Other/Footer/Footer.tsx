@@ -1,7 +1,6 @@
 import Socials from "@/components/Other/Socials/Socials";
 
 const Footer = () => {
-
   return (
     <footer className="bg-tertiary py-12">
       <div className="container mx-auto">
@@ -11,7 +10,7 @@ const Footer = () => {
             iconsStyles="text-white/70 text-[20px] hover:text-primary transition-all"
           />
           <div className="text-muted-foreground">
-            Direitos autorais &copy; Vagner Mengali. Todos os direitos reservados
+            Direitos autorais &copy; Adam Neves. Todos os direitos reservados
           </div>
         </div>
       </div>

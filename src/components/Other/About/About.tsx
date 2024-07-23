@@ -1,10 +1,12 @@
 import Image from "next/image";
-import {
-  RiGraduationCapFill,
-  RiBriefcaseFill,
-} from "react-icons/ri";
+import { RiGraduationCapFill, RiBriefcaseFill } from "react-icons/ri";
 import DevImg from "@/components/Other/DevImg/DevImg";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Other/UI/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/Other/UI/tabs";
 
 import { infoData, qualificationData, skillsData } from "@/data/about";
 import Icon from "@/components/Other/Icon/Icon";
@@ -18,7 +20,7 @@ const About = () => {
     <section className="xl:h-fit pb-12 xl:py-24">
       <div className="container mx-auto">
         <h2
-          className="section-title mb-8 xl:mb-16 text-center 
+          className="section-title mb-8 xl:mb-16 text-center
         mx-auto"
         >
           SOBRE MIM
@@ -56,16 +58,23 @@ const About = () => {
                 <TabsContent value="personal">
                   <div className="text-center xl:text-left">
                     <h3 className="h3 mb-4">
-                      Qualidade de serviço há mais de {new Date().getFullYear() - 2020} anos
+                      Qualidade de serviço há mais de{" "}
+                      {new Date().getFullYear() - 2020} anos
                     </h3>
                     <p className="subtitle max-w-xl mx-auto xl:mx-0">
-                      Movido por uma curiosidade insaciável, dedico-me ao ofício da codificação, engajando-me em novos projetos e aprendendo continuamente.
+                      Movido por uma curiosidade insaciável, dedico-me ao ofício
+                      da codificação, engajando-me em novos projetos e buscando
+                      constantemente aprimorar minhas habilidades. Minha paixão
+                      pelo aprendizado contínuo me impulsiona a explorar novas
+                      tecnologias e técnicas, garantindo que eu esteja sempre à
+                      frente das tendências e preparado para enfrentar qualquer
+                      desafio no desenvolvimento de software.
                     </p>
                     <div className="grid xl:grid-cols-2 gap-4 mb-12">
                       {infoData.map((item, index) => {
                         return (
                           <div
-                            className="flex items-center gap-x-4 mx-auto 
+                            className="flex items-center gap-x-4 mx-auto
                                     xl:mx-0"
                             key={index}
                           >
@@ -77,9 +86,9 @@ const About = () => {
                     </div>
 
                     <div className="flex flex-col gap-y-2">
-                      <div className="text-primary">Habilidade linguística</div>
+                      <div className="text-primary">Idiomas</div>
                       <div className="border-b border-border"></div>
-                      <div>Português(Nativo), Inglês(Básico) </div>
+                      <div>Português(Nativo), Inglês(Avançado) </div>
                     </div>
                   </div>
                 </TabsContent>
@@ -102,14 +111,17 @@ const About = () => {
                             (item: any, index: any) => {
                               const { company, role, years } = item;
                               return (
-                                <div className="flex gap-x-8 group" key={index}>
+                                <div
+                                  className="flex gap-x-8 group cursor-default"
+                                  key={index}
+                                >
                                   <div
-                                    className="h-[84px] w-[1px] bg-border 
+                                    className="h-[84px] w-[1px] bg-border
                                                     relative mb-2"
                                   >
                                     <div
                                       className="w-[11px] h-[11px] rounded-xl
-                                                        bg-primary absolute -left-[5px] 
+                                                        bg-primary absolute -left-[5px]
                                                         group-hover:translate-y-[84px]
                                                         transition-all duration-500"
                                     ></div>
@@ -128,7 +140,7 @@ const About = () => {
                                       {role}
                                     </div>
                                     <div
-                                      className="text-base 
+                                      className="text-base
                                                         font-medium"
                                     >
                                       {years}
@@ -152,14 +164,17 @@ const About = () => {
                             (item: any, index: any) => {
                               const { school, qualification, years } = item;
                               return (
-                                <div className="flex gap-x-8 group" key={index}>
+                                <div
+                                  className="flex gap-x-8 group cursor-default"
+                                  key={index}
+                                >
                                   <div
-                                    className="h-[84px] w-[1px] bg-border 
+                                    className="h-[84px] w-[1px] bg-border
                                                     relative mb-2"
                                   >
                                     <div
                                       className="w-[11px] h-[11px] rounded-xl
-                                                        bg-primary absolute -left-[5px] 
+                                                        bg-primary absolute -left-[5px]
                                                         group-hover:translate-y-[84px]
                                                         transition-all duration-500"
                                     ></div>
@@ -178,7 +193,7 @@ const About = () => {
                                       {qualification}
                                     </div>
                                     <div
-                                      className="text-base 
+                                      className="text-base
                                                         font-medium"
                                     >
                                       {years}
@@ -197,7 +212,9 @@ const About = () => {
                   <div className="text-center xl:text-left">
                     <h3 className="h3 mb-8">Meu Conjunto de Habilidades</h3>
                     <div className="mb-16">
-                      <h4 className="text-xl font-semibold mb-2">Habilidades</h4>
+                      <h4 className="text-xl font-semibold mb-2">
+                        Habilidades
+                      </h4>
                       <div className="border-b border-border mb-4"></div>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {getData(skillsData, "skills").data.map(
@@ -214,7 +231,7 @@ const About = () => {
                                     style={{ width: "48px", height: "48px" }}
                                     className="relative w-20 h-20 cursor-pointer transition duration-300 transform hover:scale-110 mx-2 my-2"
                                   >
-                                    <Icon width={48}height={48} id={imgPath} />
+                                    <Icon width={48} height={48} id={imgPath} />
                                   </div>
                                 ))}
                               </div>
@@ -233,7 +250,7 @@ const About = () => {
                           const { imgPath } = item;
                           return (
                             <div key={index}>
-                              <Icon width={28}height={28} id={imgPath} />
+                              <Icon width={28} height={28} id={imgPath} />
                             </div>
                           );
                         }

@@ -9,13 +9,9 @@ import {
 import { servicesData } from "@/data/service";
 
 const Services = () => {
-
   return (
     <section className="mb-12 xl:mb-36">
       <div className="container mx-auto">
-        <h2 className="section-title mb-12 xl:mb-24 text-center mx-auto">
-        MEUS SERVIÇOS
-        </h2>
         <div
           className="grid xl:grid-cols-3 justify-center gap-y-12 xl:gap-y-24
             xl:gap-x-8"
@@ -27,7 +23,7 @@ const Services = () => {
                      pt-16 pb-10 justify-center items-center relative"
                 key={index}
               >
-                <CardHeader className="text-primary absolute -top-[60px]">
+                <CardHeader className="text-primary absolute -top-[120px]">
                   <div
                     className="w-[100px] h-[50px] sm:w-[140px] sm:h-[80px]
                             bg-background flex justify-center items-center"
@@ -37,7 +33,7 @@ const Services = () => {
                 </CardHeader>
                 <CardContent className="text-center">
                   <CardTitle className="mb-4">{item.title}</CardTitle>
-                  <CardDescription className="text-lg">
+                  <CardDescription className="text-sm">
                     {item.description}
                   </CardDescription>
                 </CardContent>

@@ -9,7 +9,6 @@ const Badge = ({
   endCountText,
   badgeText,
 }: BagdeInterface) => {
-
   return (
     <div className={`badge ${containerStyles}`}>
       <div className="text-3xl text-primary">{icon}</div>
@@ -19,7 +18,7 @@ const Badge = ({
           {endCountText}
         </div>
         <div
-          className="max-w-[70px] leading-none text-[15px]
+          className="max-w-[70px] leading-none text-xs
           font-medium text-white"
         >
           {badgeText}

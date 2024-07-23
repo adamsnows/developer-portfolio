@@ -14,12 +14,11 @@ import {
 import { reviewsData } from "@/data/reviews";
 
 const Reviews = () => {
-
   return (
     <section className="mb-12 xl:mb-32">
       <div className="container mx-auto">
         <h2
-          className="section-title mb-12 text-center 
+          className="section-title mb-12 text-center
             mx-auto"
         >
           AVALIAÇÕES
@@ -40,12 +39,10 @@ const Reviews = () => {
           {reviewsData.map((person: any, index: number) => {
             return (
               <SwiperSlide key={index}>
-                <Card
-                  className="bg-secondary/40 p-8 max-h-96 h-screen overflow-hidden"
-                >
+                <Card className="bg-secondary/40 p-4 min-h-[502px] overflow-hidden">
                   <CardHeader
                     className="
-                            p-0 mb-10"
+                            p-0 mb-4"
                   >
                     <div className="flex items-center gap-x-4">
                       <Image
@@ -63,8 +60,8 @@ const Reviews = () => {
                     </div>
                   </CardHeader>
                   <CardDescription
-                    className="text-lg 
-                            text-muted-foreground overflow-y-scroll scrollbar-none h-60"
+                    className="text-sm
+                            text-muted-foreground overflow-y-scroll scrollbar-none "
                   >
                     {person.review}
                   </CardDescription>

@@ -1,58 +1,65 @@
 export const workData = [
   {
-    image: "/portfolio-purple.webp",
+    image: "/projects/maestria.png",
     category: "front end",
-    name: "Portfolio Open Source",
-    description: "Este é um portfólio desenvolvido para beneficiar desenvolvedores que ainda não têm seu portfólio ou desenvolvedores que desejam um portfólio já pronto.",
-    link: "https://developer-purple-portfolio-vagnermengali.vercel.app/",
-    github: "https://github.com/vagnermengali/developer-purple-portfolio"
+    name: "Maestria",
+    description:
+      "O sistema Maestria foi desenvolvido em colaboração estreita com advogados, priorizando a otimização da experiência do usuário. Através dessa parceria, conseguimos criar uma plataforma intuitiva e eficiente, que simplifica a busca jurisprudencial e proporciona aos nossos clientes uma jornada jurídica mais acessível e satisfatória.",
+    link: "https://site.maestrialaw.com.br/",
+    github: "/#",
   },
   {
-    image: "/yrprey.webp",
+    image: "/projects/migtech.png",
     category: "front end",
-    name: "YRprey",
-    description: "Um site modelo que simula diversas vulnerabilidades e falhas de segurança, desafiando desenvolvedores a testar suas habilidades na detecção e correção desses problemas em sistemas web.",
-    link: "https://yrprey-git-main-vagnermengali.vercel.app/",
-    github: "https://github.com/vagnermengali/yrprey"
+    name: "Migtech Hub",
+    description:
+      "Você é um profissional de saúde que busca fazer a transição de sua carreira em um novo país? Nossa equipe oferece suporte completo, desde a revalidação do diploma até a colocação profissional. Com uma abordagem personalizada, garantimos uma transição tranquila para o mercado dos EUA.",
+    link: "https://mighub.com/",
+    github: "/#",
   },
   {
-    image: "/portfolio-green.webp",
+    image: "/projects/vivala.png",
     category: "front end",
-    name: "Portfolio Open Source",
-    description: "Este é um portfólio desenvolvido para beneficiar desenvolvedores que ainda não têm seu portfólio ou desenvolvedores que desejam um portfólio já pronto.",
-    link: "https://developer-green-portfolio-vagnermengali.vercel.app/",
-    github: "https://github.com/vagnermengali/developer-green-portfolio"
+    name: "Vivalá",
+    description:
+      "Nosso objetivo é transformar o Brasil no maior destino de turismo sustentável do mundo criando expedições que sejam transformadoras para os viajantes, as comunidades e o planeta.",
+    link: "https://www.vivala.com.br/",
+    github: "/#",
   },
   {
-    image: "/dogma.webp",
+    image: "/projects/jabrasil.png",
     category: "front end",
-    name: "Dogma",
-    description: "Um website dedicado à empresa de construção, fornecendo informações sobre serviços, projetos concluídos e contatos.",
-    link: "https://www.grupodogma.site/",
-    github: "https://github.com/vagnermengali/dogma"
+    name: "JA Brasil (Painel Admin)",
+    description:
+      "Somos uma das maiores organizações sociais influentes no mundo e atuamos no Brasil há quatro décadas, beneficiando mais de 5 milhões de jovens em todas as regiões do país. Estamos focados em expandir a educação empreendedora e o desenvolvimento econômico do país.",
+    link: "https://jabrasil.org.br/",
+    github: "/#",
   },
   {
     image: "/portfolio-blue.webp",
     category: "front end",
     name: "Portfolio Open Source",
-    description: "Este é um portfólio desenvolvido para beneficiar desenvolvedores que ainda não têm seu portfólio ou desenvolvedores que desejam um portfólio já pronto.",
+    description:
+      "Este é um portfólio desenvolvido para beneficiar desenvolvedores que ainda não têm seu portfólio ou desenvolvedores que desejam um portfólio já pronto.",
     link: "https://developer-blue-portfolio-vagnermengali.vercel.app/",
-    github: "https://github.com/vagnermengali/developer-blue-portfolio"
+    github: "https://github.com/vagnermengali/developer-blue-portfolio",
   },
   {
     image: "/api.webp",
     category: "back end",
-    name: "User crud ",
-    description: "Este é um crud de usuário que visa facilitar o acesso com funcionalidades básicas de um usuário e login.",
-    link: "",
-    github: "https://github.com/vagnermengali/user-crud"
+    name: "SMVZap Clientes",
+    description:
+      "A SMVZap API é uma API robusta e multifuncional projetada para gerenciar e controlar aspectos cruciais de um sistema de usuários, incluindo o tempo premium, a criação e gestão de contas, e a definição de tipos de usuário. Esta API fornece endpoints que permitem a integração com o front end do SMVZap.",
+    link: "/#",
+    github: "/#",
   },
   {
     image: "/scanner-cnab.webp",
     category: "full stack",
     name: "Scanner CNAB",
-    description: "Este é a aplicação Scanner CNBA - Que tem fins de facilitar o escaneamento de documentos CNAB.txt",
+    description:
+      "Este é a aplicação Scanner CNBA - Que tem fins de facilitar o escaneamento de documentos CNAB.txt",
     link: "https://scanner-cnab-vagnermengali.vercel.app/",
-    github: "https://github.com/vagnermengali/developer-blue-portfolio"
+    github: "https://github.com/vagnermengali/developer-blue-portfolio",
   },
 ];

@@ -1,9 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  RiGithubFill,
-  RiExternalLinkFill
-} from "react-icons/ri";
+import { RiGithubFill, RiExternalLinkFill } from "react-icons/ri";
 
 import { Card, CardHeader } from "@/components/Other/UI/card";
 import { Badge } from "@/components/Other/UI/badge";
@@ -21,24 +18,26 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
            flex items-center justify-center bg-secondary/40 bg-work_project_bg xl:bg-no-repeat overflow-hidden xl:bg-contain"
         >
           <Image
-            className="absolute shadow-2xl translate-y-1/2 -translate-x-1/2 top-0 left-1/2"
+            className="absolute shadow-2xl translate-y-1/2 -translate-x-1/2 top-0 left-1/2 w-[300px] h-[135px] object-cover"
             src={project.image}
             width={300}
             height={300}
             alt="Project Image"
           />
           <div className="flex gap-x-4">
-            {project.link && <Link
-              target="_blank"
-              href={project.link}
-              aria-label={"deploy"}
-              className="bg-secondary w-[54px] h[54px]
+            {project.link && (
+              <Link
+                target="_blank"
+                href={project.link}
+                aria-label={"deploy"}
+                className="bg-secondary w-[54px] h[54px]
               rounded-[4px] flex justify-center scale-0 py-2
                   opacity-0 group-hover:scale-100 group-hover:opacity-100
                   transition-all duration-200"
-            >
-              <RiExternalLinkFill className="text-white" />
-            </Link>}
+              >
+                <RiExternalLinkFill className="text-white" />
+              </Link>
+            )}
             <Link
               target="_blank"
               href={project.github}
@@ -64,7 +63,7 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
         <p className="h4 mb-1">{project.name}</p>
         <p
           className={`text-muted-foreground
-                text-lg  ${cardClass}`}
+                text-sm  ${cardClass}`}
         >
           {project.description}
         </p>

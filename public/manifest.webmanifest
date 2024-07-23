@@ -1,8 +1,8 @@
 {
-  "name": "Portfolio | Vagner Mengali",
+  "name": "Portfólio | Adam Neves",
   "short_name": "Portfolio",
-  "description": "Portfólio pessoal de Vagner Mengali, mostrando seu trabalho e experiência.",
-  "author": "Vagner Mengali",
+  "description": "Portfólio pessoal de Adam Neves, mostrando seu trabalho e experiência.",
+  "author": "Adam Neves",
   "lang": "pt-BR",
   "theme_color": "#7a90ff",
   "background_color": "#090a1a",
@@ -63,8 +63,8 @@
   "i18n": {
     "locales": {
       "en": {
-        "name": "Portfolio | Vagner Mengali",
-        "description": "Personal portfolio of Vagner Mengali, showcasing his work and experience."
+        "name": "Portfolio | Adam Neves",
+        "description": "Personal portfolio of Adam Neves, showcasing his work and experience."
       }
     },
     "default_locale": "pt-BR"

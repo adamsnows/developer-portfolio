@@ -1,20 +1,25 @@
 import { useState } from "react";
 
-import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/Other/UI/tabs";
+import {
+  Tabs,
+  TabsList,
+  TabsContent,
+  TabsTrigger,
+} from "@/components/Other/UI/tabs";
 import ProjectCard from "@/components/Other/ProjectCard/ProjectCard";
 
-import { projectData } from "@/data/project";
+import { workData } from "@/data/work";
 
 const uniqueCategories: string[] = [
   "todos os projetos",
-  ...Array.from(new Set(projectData.map((item) => item.category)))
+  ...Array.from(new Set(workData.map((item) => item.category))),
 ];
 
 const Projects = () => {
   const [categories, setCategories] = useState(uniqueCategories);
   const [category, setCategory] = useState("todos os projetos");
 
-  const filteredProjects = projectData.filter((project) => {
+  const filteredProjects = workData.filter((project) => {
     return category === "todos os projetos"
       ? project
       : project.category === category;
@@ -52,7 +57,11 @@ const Projects = () => {
             {filteredProjects.map((project, index) => {
               return (
                 <TabsContent value={category} key={index}>
-                  <ProjectCard id={index} project={project} specialStyle={true} />
+                  <ProjectCard
+                    id={index}
+                    project={project}
+                    specialStyle={true}
+                  />
                 </TabsContent>
               );
             })}
