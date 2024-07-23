@@ -1,5 +1,23 @@
 export const workData = [
   {
+    image: "/projects/smvzap.png",
+    category: "full stack",
+    name: "SMVZap Extensão",
+    description:
+      "Projeto extremamente desafiador, onde pude desenvolver uma extensão para o chrome, que permite a inclusão de ferramentas poderosas para vendedores como disparos em massas, mensagens agendadas, mensagens automáticas, etc.",
+    link: "https://chromewebstore.google.com/detail/super-megavendas/edmbabikeafegjamjimkoalapngahbfl?authuser=0&hl=pt-BR",
+    github: "/#",
+  },
+  {
+    image: "/projects/smvflow.png",
+    category: "full stack",
+    name: "SMV Flow",
+    description:
+      "Painel admin para controle interno de inúmeros processos dentro da empresa Super Megavendas, assim como controle de usuários, permissões, etc.",
+    link: "https://acesso.smvflow.com/",
+    github: "/#",
+  },
+  {
     image: "/projects/maestria.png",
     category: "front end",
     name: "Maestria",
@@ -36,13 +54,13 @@ export const workData = [
     github: "/#",
   },
   {
-    image: "/portfolio-blue.webp",
-    category: "front end",
-    name: "Portfolio Open Source",
+    image: "/projects/gastrobox.png",
+    category: "full stack",
+    name: "Gastrobox",
     description:
-      "Este é um portfólio desenvolvido para beneficiar desenvolvedores que ainda não têm seu portfólio ou desenvolvedores que desejam um portfólio já pronto.",
-    link: "https://developer-blue-portfolio-vagnermengali.vercel.app/",
-    github: "https://github.com/vagnermengali/developer-blue-portfolio",
+      "Site de delivery de comida, com sistema de gerenciamento de pedidos e cardápio.",
+    link: "/#",
+    github: "/#",
   },
   {
     image: "/api.webp",
@@ -52,14 +70,5 @@ export const workData = [
       "A SMVZap API é uma API robusta e multifuncional projetada para gerenciar e controlar aspectos cruciais de um sistema de usuários, incluindo o tempo premium, a criação e gestão de contas, e a definição de tipos de usuário. Esta API fornece endpoints que permitem a integração com o front end do SMVZap.",
     link: "/#",
     github: "/#",
-  },
-  {
-    image: "/scanner-cnab.webp",
-    category: "full stack",
-    name: "Scanner CNAB",
-    description:
-      "Este é a aplicação Scanner CNBA - Que tem fins de facilitar o escaneamento de documentos CNAB.txt",
-    link: "https://scanner-cnab-vagnermengali.vercel.app/",
-    github: "https://github.com/vagnermengali/developer-blue-portfolio",
   },
 ];
