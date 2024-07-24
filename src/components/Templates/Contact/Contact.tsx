@@ -16,13 +16,14 @@ const Contact = () => {
             text-lg mb-4"
             >
               <span className="w-[30px] h-[2px] bg-primary"></span>
-              Diga olá
+              Hey, Adam!
             </div>
-            <h1 className="h1 max-w-md mb-8">Vamos trabalhar juntos</h1>
+            <h1 className="h1 max-w-md mb-8">Vamos trabalhar juntos?</h1>
             <p className="subtitle max-w-[400px]">
               Pronto para transformar ideias em realidade? Seja um projeto, uma
               colaboração ou apenas para dizer oi, deixe uma mensagem abaixo.
-              Sou todo ouvidos e ansiosa para iniciarmos essa jornada juntos!
+              Sou todo ouvidos e estou ansioso para iniciarmos essa jornada
+              juntos!
             </p>
           </div>
           <div
