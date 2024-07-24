@@ -94,7 +94,7 @@ const InitialHome = () => {
               priority
               containerStyles=" w-[510px] animate-up-down
             h-[510px] relative flex items-center"
-              imgSrc="/developer.webp"
+              imgSrc="/people/adam-face.png"
             />
           </div>
         </div>
