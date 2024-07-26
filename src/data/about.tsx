@@ -47,7 +47,7 @@ export const qualificationData = [
     data: [
       {
         company: "SUPER MEGAVENDAS",
-        role: "Tech Leader",
+        role: "FullStack Tech Leader",
         years: "jan de 2024 - ago de 2024",
         location: "Natal, Rio Grande do Norte, Brasil",
         description: [
