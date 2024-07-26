@@ -79,7 +79,7 @@ const InitialHome = () => {
             <Badge
               containerStyles="absolute top-[80%] -left-[1rem]  animate-up-down-2"
               icon={<RiTodoFill />}
-              endCountNum={68}
+              endCountNum={32}
               badgeText="Projetos finalizados"
             />
 

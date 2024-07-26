@@ -48,25 +48,34 @@ Para executar este projeto localmente, siga as instruções abaixo:
    ```bash
    git clone https://github.com/vagnermengali/developer-blue-portfolio.git
 
+   ```
+
 2. Acesse o diretório do projeto:
 
    ```bash
    cd developer-blue-portfolio
+
+   ```
 
 3. Instale as dependências:
 
    ```bash
    yarn install
 
+   ```
+
 4. Inicie o servidor de desenvolvimento:
 
    ```bash
    yarn dev
 
+   ```
+
 5. Acesse a aplicação no seu navegador através da rota:
 
    ```bash
    http://localhost:3000/
+   ```
 
 Acesse a aplicação no seu navegador através do seguinte endereço: [http://localhost:3000/](http://localhost:3000/). Explore os arquivos do projeto usando seu editor de código preferido e faça quaisquer alterações necessárias.
 
@@ -123,25 +132,34 @@ To run this project locally, follow the instructions below:
    ```bash
    git clone https://github.com/vagnermengali/developer-blue-portfolio.git
 
+   ```
+
 2. Access the project directory:
 
    ```bash
    cd developer-blue-portfolio
+
+   ```
 
 3. Install the dependencies:
 
    ```bash
    yarn install
 
+   ```
+
 4. Start the development server:
 
    ```bash
    yarn dev
 
+   ```
+
 5. Access the application in your browser through the route:
 
    ```bash
    http://localhost:3000/
+   ```
 
 Access the application in your browser through the following address: [http://localhost:3000/](http://localhost:3000/). Explore the project files using your preferred code editor and make any necessary changes.
 

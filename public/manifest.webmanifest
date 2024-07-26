@@ -49,8 +49,8 @@
   "related_applications": [
     {
       "platform": "web",
-      "url": "https://developer-blue-portfolio-vagnermengali.vercel.app/",
-      "id": "com.vagnermengali.portfolio"
+      "url": "https://adamsnows.vercel.app/",
+      "id": "com.adamsnows.portfolio"
     }
   ],
   "manifest_version": 3,
