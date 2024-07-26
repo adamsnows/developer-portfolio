@@ -124,6 +124,20 @@ export const qualificationData = [
         ],
         technologies: ["CSS", "Desenvolvimento Web"],
       },
+      {
+        company: "Free Lancer",
+        role: "Desenvolvedor FullStack",
+        years: "jan de 2020 - abr de 2022",
+        description: [
+          "Desenvolvimento de sites e sistemas web.",
+          "Manutenção de sites e sistemas web.",
+          "Implementação de recursos como pagamentos, planos, login e sistemas de perfil.",
+          "Integração de pipeline de CI/CD e revisão de código.",
+          "Resolução de problemas de UX/UI, inovando a visualização de lista.",
+          "NextJS, Tailwind, Bootstrap, React, React Native, NodeJS, Express, Prisma, MongoDB, PostgreSQL, Docker, SQLite, Sass, Vtex.",
+        ],
+        technologies: ["CSS", "Desenvolvimento Web"],
+      },
     ],
   },
 ];
