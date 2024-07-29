@@ -18,6 +18,15 @@ export const workData = [
     github: "/#",
   },
   {
+    image: "/projects/evnttz.png",
+    category: "front end",
+    name: "Evnttz",
+    description:
+      "Evnttz é uma plataforma abrangente de gestão de eventos projetada para simplificar o processo de organização e administração de eventos. Oferece recursos como venda de ingressos, gerenciamento de participantes, gamificação e análises em tempo real para aprimorar a experiência de organizadores e participantes. A plataforma utiliza tecnologias web modernas para proporcionar uma interface intuitiva e fácil de usar.",
+    link: "https://www.evnttz.com.br/",
+    github: "/#",
+  },
+  {
     image: "/projects/maestria.png",
     category: "front end",
     name: "Maestria",
