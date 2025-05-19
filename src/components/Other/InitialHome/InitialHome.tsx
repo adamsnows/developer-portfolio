@@ -1,15 +1,49 @@
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
+  RiAddLine,
   RiArrowDownSLine,
   RiBriefcase4Fill,
+  RiCloseLine,
   RiDownloadFill,
   RiMailSendFill,
   RiTeamFill,
   RiTodoFill,
 } from "react-icons/ri";
+
+const techStackData = [
+  { name: "React", category: "frontend", featured: true },
+  { name: "Next.js", category: "frontend", featured: true },
+  { name: "TypeScript", category: "language", featured: true },
+  { name: "Node.js", category: "backend", featured: true },
+  { name: "Git", category: "tools", featured: false },
+  { name: "GitHub", category: "tools", featured: false },
+  { name: "GitLab", category: "tools", featured: false },
+  { name: "Python", category: "language", featured: true },
+  { name: "GraphQL", category: "backend", featured: false },
+  { name: "Tailwind", category: "frontend", featured: false },
+  { name: "Sass", category: "frontend", featured: false },
+  { name: "FastAPI", category: "backend", featured: false },
+  { name: "Django", category: "backend", featured: false },
+  { name: "Express", category: "backend", featured: false },
+  { name: "NestJS", category: "backend", featured: false },
+  { name: "Vue", category: "frontend", featured: false },
+  { name: "Docker", category: "devops", featured: false },
+  { name: "Figma", category: "design", featured: false },
+  { name: "Jest", category: "testing", featured: false },
+  { name: "Linux", category: "os", featured: false },
+  { name: "Postman", category: "tools", featured: false },
+  { name: "Vercel", category: "hosting", featured: false },
+  { name: "Vite", category: "frontend", featured: false },
+  { name: "Bootstrap", category: "frontend", featured: false },
+  { name: "MongoDB", category: "database", featured: false },
+  { name: "PostgreSQL", category: "database", featured: false },
+  { name: "AWS", category: "cloud", featured: false },
+  { name: "GCP", category: "cloud", featured: false },
+  { name: "GitHub Actions", category: "ci-cd", featured: false },
+];
 
 import {
   fadeInRight,
@@ -25,6 +59,7 @@ import { Button } from "@/components/Other/UI/button";
 const InitialHome = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const codeBlockRef = useRef<HTMLPreElement>(null);
+  const [techStackExpanded, setTechStackExpanded] = useState(false);
 
   useEffect(() => {
     if (titleRef.current) {
@@ -51,16 +86,35 @@ const InitialHome = () => {
 
     // Simular digitação de código
     if (codeBlockRef.current) {
-      const codeText = `// Skilled developer in both front and back
+      // Group tech stack by category for the code typing animation
+      const techByCategory = techStackData.reduce((acc, tech) => {
+        if (!acc[tech.category]) acc[tech.category] = [];
+        acc[tech.category].push(tech.name);
+        return acc;
+      }, {} as Record<string, string[]>);
+
+      const codeText = `// Fullstack developer with diverse skills
 const developer = {
   name: "Adam Neves",
   skills: {
-    frontend: ["React", "NextJS", "CSS", "Animation"],
-    backend: ["Node.js", "Express", "API Design", "Database"],
-    architecture: ["Microservices", "AWS", "DevOps"]
+    frontend: ${JSON.stringify(techByCategory.frontend || []).replace(
+      /"/g,
+      "'"
+    )},
+    backend: ${JSON.stringify(techByCategory.backend || []).replace(/"/g, "'")},
+    database: ${JSON.stringify(techByCategory.database || []).replace(
+      /"/g,
+      "'"
+    )},
+    devOps: ${JSON.stringify([
+      ...(techByCategory.devops || []),
+      ...(techByCategory.cloud || []),
+      ...(techByCategory["ci-cd"] || []),
+    ]).replace(/"/g, "'")},
+    tools: ${JSON.stringify(techByCategory.tools || []).replace(/"/g, "'")}
   },
   createSolution: (problem) => {
-    return highQualitySolution
+    return robustAndScalableSolution;
   }
 };`;
 
@@ -68,7 +122,7 @@ const developer = {
       codeBlockRef.current.textContent = "";
 
       gsap.to(codeBlockRef.current, {
-        duration: 2,
+        duration: 6,
         onUpdate: function () {
           const progress = Math.floor(this.progress() * codeParts.length);
           codeBlockRef.current!.textContent = codeParts
@@ -80,9 +134,32 @@ const developer = {
     }
   }, []);
 
+  // Animation for tech stack expansion
+  useEffect(() => {
+    if (techStackExpanded) {
+      // Add staggered entrance effect to tech badges when expanded
+      const badges = document.querySelectorAll(".tech-badge");
+      gsap.fromTo(
+        badges,
+        { opacity: 0, y: 10 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.03,
+          ease: "power2.out",
+          duration: 0.4,
+        }
+      );
+    }
+  }, [techStackExpanded]);
+
+  const techStackVariants = {
+    hidden: { opacity: 0, height: 0 },
+    visible: { opacity: 1, height: "auto" },
+  };
+
   return (
     <section className="py-12 md:pt-24 xl:py-24 xl:pt-0 relative overflow-hidden">
-      {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0 opacity-20">
         <div className="absolute top-16 left-16 w-64 h-64 rounded-full bg-primary/20 blur-3xl"></div>
         <div className="absolute bottom-16 right-16 w-96 h-96 rounded-full bg-secondary/20 blur-3xl"></div>
@@ -162,34 +239,69 @@ const developer = {
             </motion.div>
 
             {/* Tech stack badges */}
-            <motion.div
-              variants={fadeInUp}
-              className="hidden md:flex gap-x-3 gap-y-2 flex-wrap mb-8"
-            >
-              <div className="font-semibold text-xs uppercase tracking-wider mb-2 w-full">
-                Tech Stack:
+            <motion.div variants={fadeInUp} className="hidden md:block mb-8">
+              <div className="flex items-center justify-between">
+                <div className="font-semibold text-xs uppercase tracking-wider mb-2">
+                  Tech Stack:
+                </div>
+                {techStackExpanded && (
+                  <button
+                    onClick={() => setTechStackExpanded(false)}
+                    className="flex items-center justify-center p-2 rounded-full bg-white/10 transition-all duration-300 ease-in-out hover:bg-white/20 mb-2 hover:rotate-90"
+                    aria-label="Collapse tech stack"
+                  >
+                    <RiCloseLine className="text-xs" />
+                  </button>
+                )}
               </div>
-              <span className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs">
-                React
-              </span>
-              <span className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs">
-                Next.js
-              </span>
-              <span className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs">
-                TypeScript
-              </span>
-              <span className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs">
-                Node.js
-              </span>
-              <span className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs">
-                MongoDB
-              </span>
-              <span className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs">
-                GraphQL
-              </span>
-              <span className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs">
-                AWS
-              </span>
+
+              <div
+                className={`flex flex-wrap gap-x-3 gap-y-2 transition-all duration-500 ease-in-out ${
+                  techStackExpanded
+                    ? "max-h-[500px] opacity-100 transform-gpu"
+                    : "max-h-[38px] overflow-hidden"
+                }`}
+              >
+                {/* Featured technologies (always visible) */}
+                {techStackData
+                  .filter((tech) => tech.featured)
+                  .map((tech, index) => (
+                    <span
+                      key={`featured-${tech.name}-${index}`}
+                      className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs tech-badge"
+                    >
+                      {tech.name}
+                    </span>
+                  ))}
+
+                {/* Show the "+X more" button when collapsed */}
+                {!techStackExpanded && (
+                  <button
+                    onClick={() => setTechStackExpanded(true)}
+                    className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs text-primary hover:bg-white/10 transition-all duration-300 ease-in-out flex items-center gap-x-1 cursor-pointer hover:scale-105"
+                    aria-label="Show more technologies"
+                  >
+                    <span>
+                      +{techStackData.filter((tech) => !tech.featured).length}{" "}
+                      mais
+                    </span>
+                    <RiAddLine className="text-xs" />
+                  </button>
+                )}
+
+                {/* Additional technologies (shown when expanded) */}
+                {techStackExpanded &&
+                  techStackData
+                    .filter((tech) => !tech.featured)
+                    .map((tech, index) => (
+                      <span
+                        key={`additional-${tech.name}-${index}`}
+                        className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs tech-badge"
+                      >
+                        {tech.name}
+                      </span>
+                    ))}
+              </div>
             </motion.div>
 
             {/* Social icons */}
@@ -226,7 +338,7 @@ const developer = {
                 containerStyles="animate-up-down-3"
                 icon={<RiBriefcase4Fill />}
                 endCountNum={new Date().getFullYear() - 2022}
-                badgeText="Anos de experiência"
+                badgeText="anos de experiência"
               />
             </motion.div>
 

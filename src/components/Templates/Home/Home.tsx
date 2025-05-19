@@ -5,7 +5,6 @@ import Contact from "@/components/Other/Contact/Contact";
 import FrontendExpertise from "@/components/Other/FrontendExpertise/FrontendExpertise";
 import InitialHome from "@/components/Other/InitialHome/InitialHome";
 import Reviews from "@/components/Other/Reviews/Reviews";
-import Services from "@/components/Other/Services/Services";
 import Work from "@/components/Other/Work/Work";
 
 const Home = () => {
@@ -13,7 +12,7 @@ const Home = () => {
     <AdvancedTransition>
       <InitialHome />
       <About />
-      <Services />
+      {/* <Services /> */}
       <FrontendExpertise />
       <Work />
       <BackendExpertise />

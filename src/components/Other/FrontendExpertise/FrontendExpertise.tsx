@@ -18,8 +18,19 @@ import {
   staggerContainer,
 } from "@/components/Animations/AdvancedTransition";
 
-// Componente de Card com Animação
-const FrontendCard = ({ icon, title, description, delay = 0 }) => {
+type FrontendCardProps = {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  delay?: number;
+};
+
+const FrontendCard = ({
+  icon,
+  title,
+  description,
+  delay = 0,
+}: FrontendCardProps) => {
   return (
     <motion.div
       variants={fadeInUp}
@@ -40,8 +51,8 @@ const FrontendExpertise = () => {
     triggerOnce: false,
   });
 
-  const animationRef = useRef(null);
-  const codeRef = useRef(null);
+  const animationRef = useRef<HTMLDivElement | null>(null);
+  const codeRef = useRef<HTMLPreElement | null>(null);
 
   useEffect(() => {
     if (inView) {
