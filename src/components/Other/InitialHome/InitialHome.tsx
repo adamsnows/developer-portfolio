@@ -5,12 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import {
   RiAddLine,
   RiArrowDownSLine,
-  RiBriefcase4Fill,
   RiCloseLine,
   RiDownloadFill,
   RiMailSendFill,
-  RiTeamFill,
-  RiTodoFill,
 } from "react-icons/ri";
 
 const techStackData = [
@@ -322,13 +319,12 @@ const developer = {
               <DevImg
                 alt="initial image"
                 priority
-                containerStyles="w-[510px] h-[510px] relative flex items-center"
+                containerStyles="w-[510px] h-[550px] relative flex items-center"
                 imgSrc="/people/adam-face.png"
               />
             </FloatingElement>
 
-            {/* Badges with animations */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8 }}
@@ -340,9 +336,9 @@ const developer = {
                 endCountNum={new Date().getFullYear() - 2022}
                 badgeText="anos de experiência"
               />
-            </motion.div>
+            </motion.div> */}
 
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
@@ -354,9 +350,9 @@ const developer = {
                 endCountNum={32}
                 badgeText="Projetos finalizados"
               />
-            </motion.div>
+            </motion.div> */}
 
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.2 }}
@@ -368,11 +364,11 @@ const developer = {
                 endCountNum={12}
                 badgeText="Clientes satisfeitos"
               />
-            </motion.div>
+            </motion.div> */}
 
             {/* Code block */}
-            <div className="absolute -left-20 bottom-4 z-30 max-w-[280px]">
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 shadow-2xl">
+            <div className="absolute -left-20 bottom-[-50px] z-30 ">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 shadow-2xl ms-10">
                 <div className="flex items-center gap-x-4 mb-2">
                   <div className="w-3 h-3 rounded-full bg-red-500"></div>
                   <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
