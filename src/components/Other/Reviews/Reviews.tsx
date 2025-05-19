@@ -132,7 +132,6 @@ const Reviews = () => {
         </motion.h2>
 
         <div className="relative mx-auto max-w-[1200px]">
-          {/* Destaques visuais para o carrossel */}
           <motion.div
             className="absolute -top-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
             animate={{
@@ -171,11 +170,11 @@ const Reviews = () => {
               modifier: 1.5,
               slideShadows: true,
             }}
-            // autoplay={{
-            //   delay: 7000,
-            //   disableOnInteraction: false,
-            //   pauseOnMouseEnter: true,
-            // }}
+            autoplay={{
+              delay: 7000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
             pagination={{
               clickable: true,
               dynamicBullets: true,
@@ -195,7 +194,7 @@ const Reviews = () => {
                   className="rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
                 >
                   <motion.div transition={{ duration: 0.3 }}>
-                    <Card className="border border-white/10 shadow-lg p-6 pt-5 min-h-[400px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
+                    <Card className="border border-white/10 shadow-lg p-6 min-h-[450px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
                       <CardHeader className="p-0 mt-4 mb-4">
                         <div className="flex items-center gap-x-5">
                           <div className="relative">
@@ -219,14 +218,14 @@ const Reviews = () => {
                           </div>
                         </div>
                       </CardHeader>
-                      <CardDescription className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[230px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent relative">
+                      <CardDescription className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[290px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent relative">
                         <div className="relative">
                           {formatReviewText(person.review)}
-                          <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
+                          {/* <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div> */}
                         </div>
                       </CardDescription>
 
-                      <div className="absolute top-4 left-4 opacity-30">
+                      <div className="absolute top-2 left-4 opacity-30">
                         <svg
                           width="36"
                           height="36"
@@ -242,7 +241,7 @@ const Reviews = () => {
                         </svg>
                       </div>
 
-                      <div className="absolute bottom-4 right-4 opacity-30">
+                      <div className="absolute bottom-2 right-4 opacity-30">
                         <svg
                           width="36"
                           height="36"
