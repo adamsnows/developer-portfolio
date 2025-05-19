@@ -1,0 +1,227 @@
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useRef } from "react";
+import {
+  RiCloudLine,
+  RiCodeSSlashLine,
+  RiDatabase2Line,
+  RiSecurePaymentLine,
+  RiServerLine,
+  RiTerminalBoxLine,
+} from "react-icons/ri";
+import { useInView } from "react-intersection-observer";
+
+import {
+  fadeInLeft,
+  fadeInRight,
+  fadeInUp,
+  staggerContainer,
+} from "@/components/Animations/AdvancedTransition";
+
+// Componente de Card com Animação
+const BackendCard = ({ icon, title, description, delay = 0 }) => {
+  return (
+    <motion.div
+      variants={fadeInUp}
+      transition={{ delay }}
+      className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 flex flex-col items-center text-center shadow-lg hover:bg-white/10 transition-all"
+    >
+      <div className="text-primary text-4xl mb-4">{icon}</div>
+      <h3 className="text-lg font-semibold mb-2">{title}</h3>
+      <p className="text-sm text-white/70">{description}</p>
+    </motion.div>
+  );
+};
+
+const BackendExpertise = () => {
+  const controls = useAnimation();
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: false,
+  });
+
+  const terminalRef = useRef(null);
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("animate");
+    }
+  }, [controls, inView]);
+
+  useEffect(() => {
+    if (terminalRef.current) {
+      const terminal = terminalRef.current;
+      const text = `$ node server.js
+Initializing server...
+Connecting to database...
+Connection successful!
+Setting up routes...
+API endpoints registered
+Middleware configured
+Starting server on port 3000
+Server is running on http://localhost:3000
+Ready to handle requests...`;
+
+      const lines = text.split("\n");
+      let lineIndex = 0;
+
+      terminal.innerHTML = "";
+
+      const typeNextLine = () => {
+        if (lineIndex < lines.length) {
+          const line = lines[lineIndex];
+          const lineElement = document.createElement("div");
+          terminal.appendChild(lineElement);
+
+          let charIndex = 0;
+          const typeChar = () => {
+            if (charIndex < line.length) {
+              lineElement.textContent += line[charIndex];
+              charIndex++;
+              setTimeout(typeChar, Math.random() * 50 + 10);
+            } else {
+              lineIndex++;
+              setTimeout(typeNextLine, 300);
+            }
+          };
+
+          typeChar();
+        }
+      };
+
+      setTimeout(typeNextLine, 1000);
+    }
+  }, [inView]);
+
+  return (
+    <section className="py-20 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 right-0 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl opacity-30"></div>
+        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-secondary/5 rounded-full filter blur-3xl opacity-30"></div>
+      </div>
+
+      <div className="container mx-auto">
+        <motion.div
+          ref={ref}
+          variants={staggerContainer}
+          initial="initial"
+          animate={controls}
+          className="max-w-4xl mx-auto text-center mb-16"
+        >
+          <motion.h2
+            variants={fadeInUp}
+            className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+          >
+            Expertise em Back-End
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-lg">
+            Arquiteturas robustas, seguras e escaláveis para aplicações de alto
+            desempenho
+          </motion.p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          <BackendCard
+            icon={<RiServerLine />}
+            title="API RESTful"
+            description="Desenvolvimento de APIs seguindo os melhores padrões e práticas, com documentação completa via Swagger/OpenAPI."
+            delay={0.1}
+          />
+
+          <BackendCard
+            icon={<RiDatabase2Line />}
+            title="Bancos de Dados"
+            description="Expertise em SQL e NoSQL, modelagem de dados eficiente, queries otimizadas e implementação de cache."
+            delay={0.2}
+          />
+
+          <BackendCard
+            icon={<RiSecurePaymentLine />}
+            title="Segurança"
+            description="Implementação de autenticação JWT, OAuth, proteção contra injeção SQL e outros ataques comuns."
+            delay={0.3}
+          />
+
+          <BackendCard
+            icon={<RiTerminalBoxLine />}
+            title="Microserviços"
+            description="Arquitetura distribuída, comunicação entre serviços, balanceamento de carga e resiliência de sistema."
+            delay={0.4}
+          />
+
+          <BackendCard
+            icon={<RiCloudLine />}
+            title="Cloud & DevOps"
+            description="Implantação em AWS, Azure, container com Docker, orquestração com Kubernetes, CI/CD."
+            delay={0.5}
+          />
+
+          <BackendCard
+            icon={<RiCodeSSlashLine />}
+            title="Node.js Avançado"
+            description="Domínio de Express, NestJS, processos assíncronos, streams, workers e otimização de desempenho."
+            delay={0.6}
+          />
+        </div>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          animate={controls}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        >
+          <motion.div
+            variants={fadeInLeft}
+            className="bg-black/30 rounded-lg border border-white/10 p-6 shadow-2xl overflow-hidden"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <div className="ml-2 text-xs text-white/60">server.js</div>
+            </div>
+            <pre
+              ref={terminalRef}
+              className="font-mono text-xs text-green-400 bg-black/50 p-4 rounded h-[250px] overflow-y-auto"
+            ></pre>
+          </motion.div>
+
+          <motion.div variants={fadeInRight} className="space-y-6">
+            <h3 className="text-2xl font-bold">Arquitetura de Sistema</h3>
+            <p className="text-white/80">
+              Construo sistemas back-end com foco em performance, escalabilidade
+              e segurança, utilizando as melhores práticas de engenharia de
+              software para garantir código limpo, testável e de fácil
+              manutenção.
+            </p>
+
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <span>Design patterns e princípios SOLID</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <span>Testes automatizados e TDD</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <span>Arquitetura em camadas e hexagonal</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <span>Sistemas distribuídos e escalabilidade horizontal</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                <span>Monitoramento e logging avançado</span>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default BackendExpertise;

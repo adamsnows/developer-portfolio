@@ -47,7 +47,7 @@
 }
 
 .section-title {
-  @apply text-3xl sm:text-[2.7rem] font-bold relative w-max flex items-center 
+  @apply text-3xl sm:text-[2.7rem] font-bold relative w-max flex items-center
   justify-between gap-x-3 uppercase text-quinary;
 }
 
@@ -71,4 +71,71 @@
 
 .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
   @apply static;
+}
+
+/* Novas classes de animação */
+.bg-300\% {
+  background-size: 300% 100%;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px 5px rgba(var(--primary-rgb), 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px 10px rgba(var(--primary-rgb), 0.5);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Efeito de vidro para componentes */
+.glass-effect {
+  @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg;
+}
+
+/* Estilo para código */
+.code-block {
+  @apply font-mono text-xs bg-black/50 p-4 rounded overflow-auto;
+}
+
+/* Estilo para tech badges */
+.tech-badge {
+  @apply bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs inline-flex items-center gap-1;
+}
+
+/* Animações de transição para páginas */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s;
 }
