@@ -1,11 +1,16 @@
-import Image from "next/image";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/effect-cards";
-import "swiper/css/pagination";
-import { EffectCoverflow, Pagination, Autoplay, Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
+import {
+  Autoplay,
+  EffectCoverflow,
+  Navigation,
+  Pagination,
+} from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import {
   Card,
@@ -21,7 +26,7 @@ const Reviews = () => {
     <section className="py-10 mb-12 xl:mb-20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div 
+        <motion.div
           className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl opacity-40"
           animate={{
             scale: [1, 1.2, 1],
@@ -33,7 +38,7 @@ const Reviews = () => {
             repeatType: "reverse",
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-1/3 left-0 w-80 h-80 bg-secondary/10 rounded-full filter blur-3xl opacity-40"
           animate={{
             scale: [1, 1.3, 1],
@@ -43,25 +48,25 @@ const Reviews = () => {
             duration: 10,
             repeat: Infinity,
             repeatType: "reverse",
-            delay: 1
+            delay: 1,
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute top-1/2 left-1/4 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl opacity-30"
           animate={{
             scale: [1, 1.25, 1],
             opacity: [0.2, 0.4, 0.2],
-            y: [0, -20, 0]
+            y: [0, -20, 0],
           }}
           transition={{
             duration: 12,
             repeat: Infinity,
             repeatType: "reverse",
-            delay: 2
+            delay: 2,
           }}
         />
       </div>
-      
+
       <div className="container mx-auto relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -72,7 +77,7 @@ const Reviews = () => {
         >
           FEEDBACKS
         </motion.h2>
-        
+
         <div className="relative mx-auto max-w-[1200px]">
           {/* Destaques visuais para o carrossel */}
           <motion.div
@@ -100,47 +105,45 @@ const Reviews = () => {
               delay: 1,
             }}
           />
-          
+
           <Swiper
             effect={"coverflow"}
             grabCursor={true}
             centeredSlides={true}
             slidesPerView={"auto"}
             coverflowEffect={{
-              rotate: 10,
-              stretch: 0,
-              depth: 100,
-              modifier: 2,
+              rotate: 20,
+              stretch: 25,
+              depth: 250,
+              modifier: 1.5,
               slideShadows: true,
             }}
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
+            // autoplay={{
+            //   delay: 7000,
+            //   disableOnInteraction: false,
+            //   pauseOnMouseEnter: true,
+            // }}
             pagination={{
               clickable: true,
               dynamicBullets: true,
+              horizontalClass: "swiper-pagination-horizontal",
             }}
             navigation={true}
             loop={true}
             speed={700}
             modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}
-            className="h-fit p-6 pb-16 mx-2"
+            className="h-fit rounded-xl relative z-10 p-6 pb-14 my-6 mx-4"
           >
             {reviewsData.map((person: any, index: number) => {
               return (
                 <SwiperSlide
                   key={index}
                   style={{ width: "400px", height: "auto" }}
-                  className="rounded-xl overflow-hidden"
+                  className="rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.02, y: -5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Card className="bg-secondary/20 border border-white/10 backdrop-blur-sm shadow-lg p-6 min-h-[400px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
-                      <CardHeader className="p-0 mb-6">
+                  <motion.div transition={{ duration: 0.3 }}>
+                    <Card className="border border-white/10 shadow-lg p-6 min-h-[400px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
+                      <CardHeader className="p-0 mt-4 mb-6">
                         <div className="flex items-center gap-x-5">
                           <div className="relative">
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 to-secondary/40 rounded-full blur-md opacity-75"></div>
@@ -154,26 +157,46 @@ const Reviews = () => {
                           </div>
 
                           <div className="flex flex-col">
-                            <CardTitle className="text-xl text-white">{person.name}</CardTitle>
-                            <p className="text-sm text-white/70">{person.job}</p>
+                            <CardTitle className="text-xl text-white">
+                              {person.name}
+                            </CardTitle>
+                            <p className="text-sm text-white/70">
+                              {person.job}
+                            </p>
                           </div>
                         </div>
                       </CardHeader>
-                      <CardDescription className="text-white/80 leading-relaxed text-sm overflow-y-auto max-h-[280px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
+                      <CardDescription className="text-white/80 leading-relaxed text-sm overflow-y-auto max-h-[230px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
                         {person.review}
                       </CardDescription>
-                      
+
+                      <div className="absolute top-4 left-4 opacity-20">
+                        <svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="rotate-180"
+                        >
+                          <path
+                            d="M9.5 8.5L8 14.5L4 17.5L3 16L6 13.5L7 9L9.5 8.5ZM19.5 8.5L18 14.5L14 17.5L13 16L16 13.5L17 9L19.5 8.5Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </div>
+
                       <div className="absolute bottom-4 right-4 opacity-20">
-                        <svg 
-                          width="32" 
-                          height="32" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
+                        <svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 24 24"
+                          fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path 
-                            d="M9.5 8.5L8 14.5L4 17.5L3 16L6 13.5L7 9L9.5 8.5ZM19.5 8.5L18 14.5L14 17.5L13 16L16 13.5L17 9L19.5 8.5Z" 
-                            fill="currentColor" 
+                          <path
+                            d="M9.5 8.5L8 14.5L4 17.5L3 16L6 13.5L7 9L9.5 8.5ZM19.5 8.5L18 14.5L14 17.5L13 16L16 13.5L17 9L19.5 8.5Z"
+                            fill="currentColor"
                           />
                         </svg>
                       </div>
