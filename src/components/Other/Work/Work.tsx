@@ -63,8 +63,7 @@ const Work = () => {
   }, []);
 
   return (
-    <section className="relative mb-12 xl:mb-48 py-16 overflow-hidden">
-      {/* Background decoration */}
+    <section className="relative py-4 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full filter blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
@@ -93,20 +92,19 @@ const Work = () => {
           <p className="text-sm mb-8 leading-relaxed">
             Cada projeto reflete um compromisso com a{" "}
             <span className="text-primary font-medium">inovação</span>,{" "}
-            <span className="text-secondary font-medium">eficiência</span> e uma
+            <span className="text-primary font-medium">eficiência</span> e uma
             experiência de usuário excepcional, demonstrando habilidades
             abrangentes e um entendimento profundo das necessidades de
             desenvolvimento moderno.
           </p>
 
-          {/* Skill highlights */}
           <div className="mb-8 w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <motion.div
                 variants={fadeInUp}
-                className="flex items-start p-4 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm"
+                className="flex items-start py-4 p-3 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm"
               >
-                <RiCodeBoxLine className="text-primary text-xl mt-1 mr-3" />
+                <RiCodeBoxLine className="text-primary text-xl mt-1 mr-1 w-20" />
                 <div>
                   <h3 className="font-medium mb-1">Front-End Expertise</h3>
                   <p className="text-xs text-white/70">
@@ -118,9 +116,9 @@ const Work = () => {
 
               <motion.div
                 variants={fadeInUp}
-                className="flex items-start p-4 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm"
+                className="flex items-start p-3 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm"
               >
-                <RiDatabase2Line className="text-secondary text-xl mt-1 mr-3" />
+                <RiDatabase2Line className="text-primary text-xl mt-1 mr-1 w-20" />
                 <div>
                   <h3 className="font-medium mb-1">Back-End Robusto</h3>
                   <p className="text-xs text-white/70">
@@ -133,7 +131,7 @@ const Work = () => {
           </div>
 
           <Link
-            className="mt-auto group"
+            className="mt-auto group mx-auto"
             href="/projects"
             aria-label="projetos"
           >
@@ -146,40 +144,78 @@ const Work = () => {
 
         <motion.div
           variants={fadeInRight}
-          className="xl:max-w-[780px] top-0 mt-10 xl:mt-0"
+          className="xl:max-w-[780px] top-0 mt-10 xl:mt-0 overflow-visible"
         >
-          <Swiper
-            className="h-fit"
-            effect={"coverflow"}
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={"auto"}
-            coverflowEffect={{
-              rotate: 15,
-              stretch: 0,
-              depth: 100,
-              modifier: 1,
-              slideShadows: true,
-            }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            pagination={{ clickable: true }}
-            navigation={true}
-            modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-          >
-            {workData.slice(0, 6).map((project: any, index: number) => {
-              return (
-                <SwiperSlide
-                  key={index}
-                  style={{ width: "300px", height: "auto" }}
-                >
-                  <ProjectCard project={project} />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+          <div className="relative">
+            <motion.div
+              className="absolute -top-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.2, 0.4, 0.2],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            />
+            <motion.div
+              className="absolute -bottom-20 -left-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.2, 0.3, 0.2],
+              }}
+              transition={{
+                duration: 7,
+                repeat: Infinity,
+                repeatType: "reverse",
+                delay: 1,
+              }}
+            />
+
+            <Swiper
+              className="h-fit rounded-xl relative z-10 p-6 pb-14 my-6 mx-4"
+              effect={"coverflow"}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={"auto"}
+              coverflowEffect={{
+                rotate: 20,
+                stretch: 25,
+                depth: 250,
+                modifier: 1.5,
+                slideShadows: true,
+              }}
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              pagination={{
+                clickable: true,
+                dynamicBullets: true,
+                horizontalClass: "swiper-pagination-horizontal",
+              }}
+              navigation={true}
+              loop={true}
+              speed={800}
+              modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
+            >
+              {workData.slice(0, 6).map((project: any, index: number) => {
+                return (
+                  <SwiperSlide
+                    key={index}
+                    style={{ width: "320px", height: "auto" }}
+                    className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
+                  >
+                    <motion.div transition={{ duration: 0.3 }}>
+                      <ProjectCard project={project} />
+                    </motion.div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
         </motion.div>
       </motion.div>
     </section>

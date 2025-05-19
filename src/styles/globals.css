@@ -62,7 +62,28 @@
   .swiper-pagination-bullet,
 .swiper-pagination-horizontal.swiper-pagination-bullets
   .swiper-pagination-bullet {
-  @apply bg-primary;
+  @apply bg-primary opacity-70 transition-all;
+}
+
+.swiper-pagination-bullet-active {
+  @apply opacity-100 scale-125 bg-primary !important;
+  transform-origin: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.swiper-pagination-bullet {
+  @apply backdrop-blur-md mx-1;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  @apply text-primary opacity-60 transition-all duration-300 !important;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  @apply opacity-100 scale-110 !important;
 }
 
 .swiper.swiper-initialized.swiper-horizontal {
@@ -70,7 +91,7 @@
 }
 
 .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
-  @apply static;
+  @apply absolute bottom-2 left-0 right-0 mx-auto w-full flex justify-center;
 }
 
 /* Novas classes de animação */
@@ -117,6 +138,20 @@
 /* Estilo para tech badges */
 .tech-badge {
   @apply bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs inline-flex items-center gap-1;
+}
+
+/* Estilos para melhorar o Swiper */
+.swiper-slide-active {
+  transform: translateZ(0);
+  z-index: 10;
+  transition: all 0.5s ease;
+}
+
+.swiper-slide-shadow-left,
+.swiper-slide-shadow-right {
+  border-radius: 12px;
+  opacity: 0.5 !important;
+  background-image: linear-gradient(to left, rgba(122, 144, 255, 0.15), rgba(0, 0, 0, 0.1)) !important;
 }
 
 /* Animações de transição para páginas */

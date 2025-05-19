@@ -30,7 +30,7 @@ const config: Config = {
           rgb: "122, 144, 255",
         },
         secondary: {
-          DEFAULT: "#1f2751",
+          DEFAULT: "#384261",
           foreground: "#7A90FF",
           rgb: "31, 39, 81",
         },
@@ -94,6 +94,7 @@ const config: Config = {
         },
       },
       animation: {
+        "spin-slow": "spin 15s linear infinite",
         "up-down": "upDown 5s ease-in-out infinite",
         "up-down-3": "upDownLarge 7.8s ease-in-out infinite",
         "up-down-2": "upDownLarge 7.6s ease-in-out infinite",

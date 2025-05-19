@@ -22,7 +22,7 @@ export const workData = [
     category: "front end",
     name: "Evnttz",
     description:
-      "Evnttz é uma plataforma abrangente de gestão de eventos projetada para simplificar o processo de organização e administração de eventos. Oferece recursos como venda de ingressos, gerenciamento de participantes, gamificação e análises em tempo real para aprimorar a experiência de organizadores e participantes. A plataforma utiliza tecnologias web modernas para proporcionar uma interface intuitiva e fácil de usar.",
+      "Evnttz é uma plataforma de gestão de eventos que simplifica a organização com venda de ingressos, controle de participantes, gamificação e análises em tempo real. Tudo isso em uma interface moderna e intuitiva.",
     link: "https://www.evnttz.com.br/",
     github: "/#",
   },
@@ -31,7 +31,7 @@ export const workData = [
     category: "front end",
     name: "Maestria",
     description:
-      "O sistema Maestria foi desenvolvido em colaboração estreita com advogados, priorizando a otimização da experiência do usuário. Através dessa parceria, conseguimos criar uma plataforma intuitiva e eficiente, que simplifica a busca jurisprudencial e proporciona aos nossos clientes uma jornada jurídica mais acessível e satisfatória.",
+      "O sistema Maestria foi desenvolvido com advogados para oferecer uma experiência otimizada. O resultado é uma plataforma intuitiva, que simplifica a busca por jurisprudências e torna a jornada jurídica mais acessível.",
     link: "https://site.maestrialaw.com.br/",
     github: "/#",
   },

@@ -17,6 +17,7 @@ import {
   fadeInUp,
   staggerContainer,
 } from "@/components/Animations/AdvancedTransition";
+import { setupCodeTypingAnimation } from "@/components/Other/InitialHome/syntax-highlighter";
 
 type FrontendCardProps = {
   icon: React.ReactNode;
@@ -63,99 +64,116 @@ const FrontendExpertise = () => {
   useEffect(() => {
     if (codeRef.current) {
       const code = codeRef.current;
-      const text = `import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+      const text = `<span style="color:#569CD6">export default function</span> <span style="color:#DCDCAA">AnimatedComponent</span>() {
+  <span style="color:#569CD6">const</span> [<span style="color:#4FC1FF">isVisible</span>, <span style="color:#DCDCAA">setIsVisible</span>] = <span style="color:#DCDCAA">useState</span>(<span style="color:#569CD6">false</span>);
+  <span style="color:#569CD6">const</span> <span style="color:#4FC1FF">controls</span> = <span style="color:#DCDCAA">useAnimationControls</span>();
+  <span style="color:#569CD6">const</span> <span style="color:#9CDCFE">variants</span> = {
+    <span style="color:#9CDCFE">hidden</span>: { <span style="color:#9CDCFE">opacity</span>: 0, <span style="color:#9CDCFE">y</span>: 20 },
+    <span style="color:#9CDCFE">visible</span>: {
+      <span style="color:#9CDCFE">opacity</span>: 1,
+      <span style="color:#9CDCFE">y</span>: 0,
+      <span style="color:#9CDCFE">transition</span>: {
+        <span style="color:#9CDCFE">duration</span>: 0.6,
+        <span style="color:#9CDCFE">staggerChildren</span>: 0.1
+      }
+    }
+  };
 
-export default function AnimatedComponent() {
-  const [isVisible, setIsVisible] = useState(false);
+  <span style="color:#569CD6">const</span> <span style="color:#9CDCFE">itemVariants</span> = {
+    <span style="color:#9CDCFE">hidden</span>: { <span style="color:#9CDCFE">opacity</span>: 0, <span style="color:#9CDCFE">y</span>: 20 },
+    <span style="color:#9CDCFE">visible</span>: { <span style="color:#9CDCFE">opacity</span>: 1, <span style="color:#9CDCFE">y</span>: 0 }
+  };
 
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+  <span style="color:#6A9955">// Custom hook for intersection observer</span>
+  <span style="color:#569CD6">const</span> <span style="color:#DCDCAA">useInViewAnimation</span> = (<span style="color:#9CDCFE">threshold</span> = 0.1) => {
+    <span style="color:#569CD6">const</span> [<span style="color:#4FC1FF">ref</span>, <span style="color:#4FC1FF">inView</span>] = <span style="color:#DCDCAA">useInView</span>({ <span style="color:#9CDCFE">threshold</span> });
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{
-        opacity: isVisible ? 1 : 0,
-        y: isVisible ? 0 : 20
-      }}
-      transition={{ duration: 0.6 }}
-      className="animated-container"
+    <span style="color:#DCDCAA">useEffect</span>(() => {
+      <span style="color:#569CD6">if</span> (<span style="color:#4FC1FF">inView</span>) {
+        <span style="color:#DCDCAA">controls.start</span>(<span style="color:#CE9178">'visible'</span>);
+        <span style="color:#DCDCAA">setIsVisible</span>(<span style="color:#569CD6">true</span>);
+      }
+    }, [<span style="color:#4FC1FF">inView</span>, <span style="color:#4FC1FF">controls</span>]);
+
+    <span style="color:#569CD6">return</span> <span style="color:#4FC1FF">ref</span>;
+  };
+
+  <span style="color:#569CD6">const</span> <span style="color:#4FC1FF">sectionRef</span> = <span style="color:#DCDCAA">useInViewAnimation</span>(0.25);
+
+  <span style="color:#569CD6">return</span> (
+    <motion.section
+      <span style="color:#9CDCFE">ref</span>={<span style="color:#4FC1FF">sectionRef</span>}
+      <span style="color:#9CDCFE">variants</span>={<span style="color:#9CDCFE">variants</span>}
+      <span style="color:#9CDCFE">initial</span>="hidden"
+      <span style="color:#9CDCFE">animate</span>={<span style="color:#4FC1FF">controls</span>}
+      <span style="color:#9CDCFE">className</span>="<span style="color:#CE9178">animated-container</span>"
     >
-      <h1>Animações incríveis com React!</h1>
-      <p>Criando interfaces modernas e interativas</p>
-    </motion.div>
+      <motion.h1 <span style="color:#9CDCFE">variants</span>={<span style="color:#9CDCFE">itemVariants</span>}>
+        Animações incríveis com React!
+      </motion.h1>
+      <motion.p <span style="color:#9CDCFE">variants</span>={<span style="color:#9CDCFE">itemVariants</span>}>
+        Criando interfaces modernas e interativas
+      </motion.p>
+    </motion.section>
   );
 }`;
 
-      const lines = text.split("\n");
-      let lineIndex = 0;
-
-      code.innerHTML = "";
-
-      const typeNextLine = () => {
-        if (lineIndex < lines.length) {
-          const line = lines[lineIndex];
-          const lineElement = document.createElement("div");
-          code.appendChild(lineElement);
-
-          let charIndex = 0;
-          const typeChar = () => {
-            if (charIndex < line.length) {
-              lineElement.textContent += line[charIndex];
-              charIndex++;
-              setTimeout(typeChar, Math.random() * 30 + 5);
-            } else {
-              lineIndex++;
-              setTimeout(typeNextLine, 100);
-            }
-          };
-
-          typeChar();
+      // Usar a função de destaque de sintaxe para animação
+      gsap.to(
+        {},
+        {
+          ...setupCodeTypingAnimation(codeRef, text, 5, 1),
         }
-      };
-
-      setTimeout(typeNextLine, 1000);
+      );
     }
 
     // Animação para o elemento de demonstração
     if (animationRef.current) {
       const element = animationRef.current;
 
-      // Configurar animações GSAP
+      // Configurar animações GSAP mais avançadas
       const tl = gsap.timeline({ repeat: -1 });
 
       tl.to(element, {
-        y: -20,
-        duration: 1,
+        boxShadow: "0 0 20px 5px rgba(122, 144, 255, 0.5)",
+        duration: 1.2,
         ease: "power2.inOut",
       })
         .to(element, {
-          y: 0,
-          duration: 1,
+          boxShadow: "0 0 10px 2px rgba(122, 144, 255, 0.3)",
+          duration: 1.2,
           ease: "power2.inOut",
         })
         .to(element, {
-          rotate: 360,
-          duration: 1.5,
-          ease: "power1.inOut",
-        })
-        .to(element, {
           scale: 1.1,
-          duration: 0.7,
+          duration: 0.8,
           ease: "back.out(1.7)",
         })
         .to(element, {
           scale: 1,
+          duration: 0.6,
+          ease: "power1.inOut",
+        })
+        .to(element, {
+          rotate: 10,
           duration: 0.5,
           ease: "power1.inOut",
+        })
+        .to(element, {
+          rotate: -10,
+          duration: 0.5,
+          ease: "power1.inOut",
+        })
+        .to(element, {
+          rotate: 0,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.3)",
         });
     }
   }, [inView]);
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-20 relative overflow-visible">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-0 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl opacity-30"></div>
@@ -230,7 +248,7 @@ export default function AnimatedComponent() {
           variants={staggerContainer}
           initial="initial"
           animate={controls}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12"
         >
           <motion.div
             variants={fadeInLeft}
@@ -267,15 +285,6 @@ export default function AnimatedComponent() {
                 <span>Otimização para SEO e acessibilidade</span>
               </div>
             </div>
-
-            <div className="mt-8 flex justify-center lg:justify-start">
-              <div
-                ref={animationRef}
-                className="w-16 h-16 bg-gradient-to-br from-secondary to-primary rounded-lg flex items-center justify-center text-white text-2xl shadow-lg"
-              >
-                <RiMagicLine />
-              </div>
-            </div>
           </motion.div>
 
           <motion.div
@@ -292,7 +301,7 @@ export default function AnimatedComponent() {
             </div>
             <pre
               ref={codeRef}
-              className="font-mono text-xs text-blue-400 bg-black/50 p-4 rounded h-[350px] overflow-y-auto"
+              className="text-xs text-white font-mono overflow-x-auto whitespace-pre-wrap bg-black/50 p-4 rounded-lg h-[350px]"
             ></pre>
           </motion.div>
         </motion.div>

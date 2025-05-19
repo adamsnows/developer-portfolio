@@ -17,8 +17,19 @@ import {
   staggerContainer,
 } from "@/components/Animations/AdvancedTransition";
 
-// Componente de Card com Animação
-const BackendCard = ({ icon, title, description, delay = 0 }) => {
+type BackendCardProps = {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  delay?: number;
+};
+
+const BackendCard = ({
+  icon,
+  title,
+  description,
+  delay = 0,
+}: BackendCardProps) => {
   return (
     <motion.div
       variants={fadeInUp}
@@ -39,7 +50,7 @@ const BackendExpertise = () => {
     triggerOnce: false,
   });
 
-  const terminalRef = useRef(null);
+  const terminalRef = useRef<HTMLPreElement>(null);
 
   useEffect(() => {
     if (inView) {
@@ -49,7 +60,7 @@ const BackendExpertise = () => {
 
   useEffect(() => {
     if (terminalRef.current) {
-      const terminal = terminalRef.current;
+      const terminal = terminalRef.current as HTMLPreElement;
       const text = `$ node server.js
 Initializing server...
 Connecting to database...
@@ -93,7 +104,7 @@ Ready to handle requests...`;
   }, [inView]);
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-5 pb-10 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 right-0 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl opacity-30"></div>
@@ -168,7 +179,7 @@ Ready to handle requests...`;
           variants={staggerContainer}
           initial="initial"
           animate={controls}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 "
         >
           <motion.div
             variants={fadeInLeft}

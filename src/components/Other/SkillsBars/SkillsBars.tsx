@@ -60,7 +60,7 @@ const skillsData = [
  */
 const SkillsBars = () => {
   return (
-    <SmoothScrollSection className="py-20 relative overflow-hidden">
+    <SmoothScrollSection className="py-5 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-0 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl opacity-30"></div>
         <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-secondary/5 rounded-full filter blur-3xl opacity-30"></div>

@@ -21,7 +21,7 @@ const DevImg = ({
             priority
             alt={alt}
           />
-          <div className="mt-20 absolute inset-0 w-full h-full bg-gradient-to-t from-background via-background via-20% to-transparent to-60% z-10" />
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-background via-background via-20% to-transparent to-60% z-10" />
         </div>
       ) : (
         <Image
