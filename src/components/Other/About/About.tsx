@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { RiGraduationCapFill, RiBriefcaseFill } from "react-icons/ri";
 import DevImg from "@/components/Other/DevImg/DevImg";
 import {
   Tabs,
@@ -7,9 +5,10 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/Other/UI/tabs";
+import { RiBriefcaseFill, RiGraduationCapFill } from "react-icons/ri";
 
-import { infoData, qualificationData, skillsData } from "@/data/about";
 import Icon from "@/components/Other/Icon/Icon";
+import { infoData, qualificationData, skillsData } from "@/data/about";
 
 const About = () => {
   const getData = (arr: any, title: any) => {
@@ -17,7 +16,7 @@ const About = () => {
   };
 
   return (
-    <section className="xl:h-fit pb-12 xl:py-24">
+    <section className="xl:h-fit pb-12 xl:pb-10">
       <div className="container mx-auto">
         <h2
           className="section-title mb-8 xl:mb-16 text-center

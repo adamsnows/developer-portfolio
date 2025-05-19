@@ -10,6 +10,11 @@ import {
   RiMailSendFill,
 } from "react-icons/ri";
 
+import {
+  highlightTechArray,
+  setupCodeTypingAnimation,
+} from "./syntax-highlighter";
+
 const techStackData = [
   { name: "React", category: "frontend", featured: true },
   { name: "Next.js", category: "frontend", featured: true },
@@ -83,58 +88,60 @@ const InitialHome = () => {
 
     // Simular digitação de código
     if (codeBlockRef.current) {
-      // Group tech stack by category for the code typing animation
       const techByCategory = techStackData.reduce((acc, tech) => {
         if (!acc[tech.category]) acc[tech.category] = [];
         acc[tech.category].push(tech.name);
         return acc;
       }, {} as Record<string, string[]>);
 
-      const codeText = `// Fullstack developer with diverse skills
-const developer = {
-  name: "Adam Neves",
-  skills: {
-    frontend: ${JSON.stringify(techByCategory.frontend || []).replace(
-      /"/g,
-      "'"
+      const skillsObject = {
+        frontend: techByCategory.frontend || [],
+        backend: techByCategory.backend || [],
+        database: techByCategory.database || [],
+        devOps: [
+          ...(techByCategory.devops || []),
+          ...(techByCategory.cloud || []),
+          ...(techByCategory["ci-cd"] || []),
+        ],
+        tools: techByCategory.tools || [],
+      };
+
+      const codeText = `<span style="color:#6A9955">// Fullstack developer with diverse skills</span>
+<span style="color:#569CD6">const</span> developer = {
+  <span style="color:#9CDCFE">name</span>: <span style="color:#CE9178">'Adam Neves'</span>,
+  <span style="color:#9CDCFE">skills</span>: {
+    <span style="color:#9CDCFE">frontend</span>: ${highlightTechArray(
+      skillsObject.frontend
     )},
-    backend: ${JSON.stringify(techByCategory.backend || []).replace(/"/g, "'")},
-    database: ${JSON.stringify(techByCategory.database || []).replace(
-      /"/g,
-      "'"
+    <span style="color:#9CDCFE">backend</span>: ${highlightTechArray(
+      skillsObject.backend
     )},
-    devOps: ${JSON.stringify([
-      ...(techByCategory.devops || []),
-      ...(techByCategory.cloud || []),
-      ...(techByCategory["ci-cd"] || []),
-    ]).replace(/"/g, "'")},
-    tools: ${JSON.stringify(techByCategory.tools || []).replace(/"/g, "'")}
+    <span style="color:#9CDCFE">database</span>: ${highlightTechArray(
+      skillsObject.database
+    )},
+    <span style="color:#9CDCFE">devOps</span>: ${highlightTechArray(
+      skillsObject.devOps
+    )},
+    <span style="color:#9CDCFE">tools</span>: ${highlightTechArray(
+      skillsObject.tools
+    )}
   },
-  createSolution: (problem) => {
-    return robustAndScalableSolution;
+  <span style="color:#9CDCFE">createSolution</span>: (<span style="color:#4FC1FF">problem</span>) <span style="color:#569CD6">=></span> {
+    <span style="color:#569CD6">return</span> <span style="color:#4EC9B0">robustAndScalableSolution</span>;
   }
 };`;
 
-      const codeParts = codeText.split("");
-      codeBlockRef.current.textContent = "";
-
-      gsap.to(codeBlockRef.current, {
-        duration: 6,
-        onUpdate: function () {
-          const progress = Math.floor(this.progress() * codeParts.length);
-          codeBlockRef.current!.textContent = codeParts
-            .slice(0, progress)
-            .join("");
-        },
-        delay: 1,
-      });
+      gsap.to(
+        {},
+        {
+          ...setupCodeTypingAnimation(codeBlockRef, codeText, 6, 1),
+        }
+      );
     }
   }, []);
 
-  // Animation for tech stack expansion
   useEffect(() => {
     if (techStackExpanded) {
-      // Add staggered entrance effect to tech badges when expanded
       const badges = document.querySelectorAll(".tech-badge");
       gsap.fromTo(
         badges,
@@ -149,11 +156,6 @@ const developer = {
       );
     }
   }, [techStackExpanded]);
-
-  const techStackVariants = {
-    hidden: { opacity: 0, height: 0 },
-    visible: { opacity: 1, height: "auto" },
-  };
 
   return (
     <section className="py-12 md:pt-24 xl:py-24 xl:pt-0 relative overflow-hidden">
@@ -184,7 +186,7 @@ const developer = {
 
             <h1
               ref={titleRef}
-              className="h1 mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+              className="h1 mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text "
             >
               ADAM NEVES
             </h1>
@@ -197,7 +199,7 @@ const developer = {
               <span className="text-primary font-semibold">FullStack</span> com
               um foco pronunciado e entusiasmo pela criação de soluções
               poderosas e inovadoras. Minha experiência abrange tanto o{" "}
-              <span className="text-secondary font-semibold">front-end</span>{" "}
+              <span className="text-primary font-semibold">front-end</span>{" "}
               quanto o{" "}
               <span className="text-primary font-semibold">back-end</span>,
               permitindo-me construir aplicações completas e integradas. Estou
@@ -235,7 +237,6 @@ const developer = {
               </Link>
             </motion.div>
 
-            {/* Tech stack badges */}
             <motion.div variants={fadeInUp} className="hidden md:block mb-8">
               <div className="flex items-center justify-between">
                 <div className="font-semibold text-xs uppercase tracking-wider mb-2">
@@ -271,7 +272,6 @@ const developer = {
                     </span>
                   ))}
 
-                {/* Show the "+X more" button when collapsed */}
                 {!techStackExpanded && (
                   <button
                     onClick={() => setTechStackExpanded(true)}
@@ -286,7 +286,6 @@ const developer = {
                   </button>
                 )}
 
-                {/* Additional technologies (shown when expanded) */}
                 {techStackExpanded &&
                   techStackData
                     .filter((tech) => !tech.featured)
@@ -310,7 +309,6 @@ const developer = {
             </motion.div>
           </motion.div>
 
-          {/* Image container with badges and code editor */}
           <motion.div
             variants={fadeInRight}
             className="hidden xl:flex relative"
@@ -376,7 +374,7 @@ const developer = {
                 </div>
                 <pre
                   ref={codeBlockRef}
-                  className="text-xs text-white font-mono"
+                  className="text-xs text-white font-mono overflow-x-auto whitespace-pre-wrap"
                 ></pre>
               </div>
             </div>

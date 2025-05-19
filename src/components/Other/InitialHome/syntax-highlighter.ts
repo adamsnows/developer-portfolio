@@ -1,50 +1,42 @@
-// Simple syntax highlighting utility for code block
-
-// Define color schema
 export const colors = {
-  comment: "#6A9955", // green for comments
-  keyword: "#569CD6", // blue for keywords (const, let, function, return)
-  string: "#CE9178", // orange-red for strings
-  function: "#DCDCAA", // yellow for functions
-  property: "#9CDCFE", // light blue for object properties
-  bracket: "#D4D4D4", // gray for brackets and punctuation
-  variable: "#4FC1FF", // light-blue for variables
-  number: "#B5CEA8", // light green for numbers
-  boolean: "#569CD6", // blue for booleans (same as keywords)
-  method: "#DCDCAA", // yellow for methods
-  object: "#4EC9B0", // teal for objects/classes
+  comment: "#6A9955",
+  keyword: "#569CD6",
+  string: "#CE9178",
+  function: "#DCDCAA",
+  property: "#9CDCFE",
+  bracket: "#D4D4D4",
+  variable: "#4FC1FF",
+  number: "#B5CEA8",
+  boolean: "#569CD6",
+  method: "#DCDCAA",
+  object: "#4EC9B0",
 };
 
-// Function to highlight code with simple HTML spans
 export function highlightJS(code: string): string {
-  // Replace keywords
   let highlighted = code
     .replace(
       /(const|let|var|function|return|if|else|for|while|import|export|from|default|class|extends|=>)/g,
       `<span style="color:${colors.keyword}">$1</span>`
     )
-    // Replace comments
     .replace(/(\/\/.*)/g, `<span style="color:${colors.comment}">$1</span>`)
-    // Replace strings
     .replace(
       /(['"](?:\\.|[^'\\"])*['"])/g,
       `<span style="color:${colors.string}">$1</span>`
     )
-    // Replace brackets and punctuation
     .replace(/([{}[\]()])/g, `<span style="color:${colors.bracket}">$1</span>`)
-    // Replace object properties (words followed by a colon)
     .replace(
       /(\w+)(?=\s*:)/g,
       `<span style="color:${colors.property}">$1</span>`
     )
-    // Replace numbers
     .replace(/\b(\d+)\b/g, `<span style="color:${colors.number}">$1</span>`)
-    // Replace booleans
     .replace(
       /\b(true|false)\b/g,
       `<span style="color:${colors.boolean}">$1</span>`
     )
-    // Replace function calls
+    .replace(
+      /\b(problem|robustAndScalableSolution)\b/g,
+      `<span style="color:${colors.variable}">$1</span>`
+    )
     .replace(
       /(\w+)(?=\s*\()/g,
       `<span style="color:${colors.function}">$1</span>`
@@ -53,7 +45,6 @@ export function highlightJS(code: string): string {
   return highlighted;
 }
 
-// Function to animate code typing with highlighting
 export function setupCodeTypingAnimation(
   codeBlockRef: React.RefObject<HTMLPreElement>,
   codeText: string,
@@ -62,28 +53,25 @@ export function setupCodeTypingAnimation(
 ) {
   if (!codeBlockRef.current) return;
 
-  const highlightedCode = highlightJS(codeText);
+  const highlightedCode = codeText.includes('style="color:')
+    ? codeText
+    : highlightJS(codeText);
   codeBlockRef.current.innerHTML = "";
 
-  // Extract plain text for progress calculation
   const plainText = highlightedCode.replace(/<[^>]*>/g, "");
 
-  // Track HTML accumulation
   let currentHTML = "";
 
-  // Create animation
   return {
     duration,
     onUpdate: function (this: { progress: () => number }) {
       const progress = this.progress();
       const targetLength = Math.floor(progress * plainText.length);
 
-      // Skip update if we already have enough text showing
       if (currentHTML.replace(/<[^>]*>/g, "").length >= targetLength) {
         return;
       }
 
-      // Build up the HTML string character by character
       let htmlResult = "";
       let plainCounter = 0;
       let htmlCounter = 0;
@@ -93,12 +81,10 @@ export function setupCodeTypingAnimation(
         htmlCounter < highlightedCode.length
       ) {
         if (highlightedCode[htmlCounter] === "<") {
-          // If we encounter a tag, include the entire tag
           const tagEnd = highlightedCode.indexOf(">", htmlCounter) + 1;
           htmlResult += highlightedCode.substring(htmlCounter, tagEnd);
           htmlCounter = tagEnd;
         } else {
-          // Add one character and count it towards plain text
           htmlResult += highlightedCode[htmlCounter];
           htmlCounter++;
           plainCounter++;
@@ -114,16 +100,22 @@ export function setupCodeTypingAnimation(
   };
 }
 
-// Helper to highlight tech arrays
 export function highlightTechArray(array: string[]): string {
   if (!array.length) return "[]";
 
-  return `[<span style="color:${colors.string}">'${array.join(
-    `'</span>, <span style="color:${colors.string}">'`
-  )}'</span>]`;
+  let result = "[";
+
+  for (let i = 0; i < array.length; i++) {
+    result += `<span style="color:${colors.string}">'${array[i]}'</span>`;
+    if (i < array.length - 1) {
+      result += ", ";
+    }
+  }
+
+  result += "]";
+  return result;
 }
 
-// Highlight a JS object with proper syntax highlighting
 export function highlightJSObject(obj: Record<string, any>): string {
   const lines: string[] = [];
   lines.push("{");
