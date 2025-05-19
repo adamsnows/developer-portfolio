@@ -1,4 +1,4 @@
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -29,7 +29,7 @@ const FloatingElement: React.FC<FloatingElementProps> = ({
     }
   }, [controls, inView]);
 
-  const floatingVariants = {
+  const floatingVariants: Variants = {
     initial: {
       y: 0,
     },
@@ -39,7 +39,7 @@ const FloatingElement: React.FC<FloatingElementProps> = ({
         delay,
         duration,
         repeat: Infinity,
-        repeatType: "loop",
+        repeatType: "loop" as const,
         ease: "easeInOut",
       },
     },
