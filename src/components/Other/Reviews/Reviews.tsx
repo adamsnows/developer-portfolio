@@ -21,10 +21,63 @@ import {
 
 import { reviewsData } from "@/data/reviews";
 
+const formatReviewText = (text: string) => {
+  const highlightKeywords = (text: string) => {
+    const keywords = [
+      "excelente",
+      "incrível",
+      "talentoso",
+      "habilidade",
+      "profissional",
+      "comunicação",
+      "conhecimento",
+      "inovadoras",
+      "proativo",
+      "dedicado",
+      "capacitado",
+    ];
+
+    const regex = new RegExp(`\\b(${keywords.join("|")})\\b`, "gi");
+
+    return text.split(" ").map((word, i) => {
+      const cleanWord = word.replace(/[.,!?;:]/g, "").toLowerCase();
+      if (keywords.includes(cleanWord)) {
+        return (
+          <span key={i} className="text-primary font-medium">
+            {word}{" "}
+          </span>
+        );
+      }
+      return word + " ";
+    });
+  };
+
+  if (text.length > 100 && !text.includes("\n")) {
+    const sentences = text.split(/(?<=[.!?])\s+/);
+
+    const paragraphs = [];
+    for (let i = 0; i < sentences.length; i += 2) {
+      const paragraph = sentences.slice(i, i + 2).join(" ");
+      paragraphs.push(paragraph);
+    }
+
+    return paragraphs.map((p, index) => (
+      <p key={index} className={index !== 0 ? "mt-3" : ""}>
+        {highlightKeywords(p)}
+      </p>
+    ));
+  }
+
+  return text.split("\n").map((paragraph, index) => (
+    <p key={index} className={index !== 0 ? "mt-3" : ""}>
+      {highlightKeywords(paragraph)}
+    </p>
+  ));
+};
+
 const Reviews = () => {
   return (
     <section className="py-10 mb-12 xl:mb-20 relative overflow-hidden">
-      {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl opacity-40"
@@ -75,7 +128,7 @@ const Reviews = () => {
           viewport={{ once: false, amount: 0.3 }}
           className="section-title mb-12 text-center mx-auto bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-300%"
         >
-          FEEDBACKS
+          LINKEDIN FEEDBACKS
         </motion.h2>
 
         <div className="relative mx-auto max-w-[1200px]">
@@ -142,8 +195,8 @@ const Reviews = () => {
                   className="rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
                 >
                   <motion.div transition={{ duration: 0.3 }}>
-                    <Card className="border border-white/10 shadow-lg p-6 min-h-[400px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
-                      <CardHeader className="p-0 mt-4 mb-6">
+                    <Card className="border border-white/10 shadow-lg p-6 pt-5 min-h-[400px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
+                      <CardHeader className="p-0 mt-4 mb-4">
                         <div className="flex items-center gap-x-5">
                           <div className="relative">
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 to-secondary/40 rounded-full blur-md opacity-75"></div>
@@ -166,18 +219,21 @@ const Reviews = () => {
                           </div>
                         </div>
                       </CardHeader>
-                      <CardDescription className="text-white/80 leading-relaxed text-sm overflow-y-auto max-h-[230px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
-                        {person.review}
+                      <CardDescription className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[230px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent relative">
+                        <div className="relative">
+                          {formatReviewText(person.review)}
+                          <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
+                        </div>
                       </CardDescription>
 
-                      <div className="absolute top-4 left-4 opacity-20">
+                      <div className="absolute top-4 left-4 opacity-30">
                         <svg
-                          width="32"
-                          height="32"
+                          width="36"
+                          height="36"
                           viewBox="0 0 24 24"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="rotate-180"
+                          className="rotate-180 text-primary"
                         >
                           <path
                             d="M9.5 8.5L8 14.5L4 17.5L3 16L6 13.5L7 9L9.5 8.5ZM19.5 8.5L18 14.5L14 17.5L13 16L16 13.5L17 9L19.5 8.5Z"
@@ -186,13 +242,14 @@ const Reviews = () => {
                         </svg>
                       </div>
 
-                      <div className="absolute bottom-4 right-4 opacity-20">
+                      <div className="absolute bottom-4 right-4 opacity-30">
                         <svg
-                          width="32"
-                          height="32"
+                          width="36"
+                          height="36"
                           viewBox="0 0 24 24"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
+                          className="text-secondary"
                         >
                           <path
                             d="M9.5 8.5L8 14.5L4 17.5L3 16L6 13.5L7 9L9.5 8.5ZM19.5 8.5L18 14.5L14 17.5L13 16L16 13.5L17 9L19.5 8.5Z"

@@ -14,7 +14,7 @@ const DevImg = ({
       {priority ? (
         <div className="relative w-full h-full">
           <Image
-            className={`${containerStylesImage} z-0 mt-10`}
+            className={`${containerStylesImage} z-0 -mt-10`}
             src={imgSrc}
             width={500}
             height={500}
