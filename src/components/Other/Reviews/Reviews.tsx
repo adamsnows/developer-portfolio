@@ -228,7 +228,6 @@ const Reviews = () => {
               dynamicBullets: true,
               horizontalClass: "swiper-pagination-horizontal",
             }}
-            navigation={true}
             loop={true}
             speed={700}
             modules={[EffectCoverflow, Pagination, Autoplay, Navigation]}

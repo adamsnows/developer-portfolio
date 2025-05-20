@@ -295,7 +295,6 @@ const DevToPosts = () => {
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
               }}
-              navigation={true}
               loop={true}
               speed={800}
               modules={[EffectCoverflow, Navigation, Autoplay]}

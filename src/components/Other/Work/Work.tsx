@@ -196,7 +196,6 @@ const Work = () => {
                 dynamicBullets: true,
                 horizontalClass: "swiper-pagination-horizontal",
               }}
-              navigation={true}
               loop={true}
               speed={800}
               modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
