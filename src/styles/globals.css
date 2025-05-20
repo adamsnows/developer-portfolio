@@ -174,3 +174,51 @@
   opacity: 0;
   transition: opacity 0.3s;
 }
+
+/* Estilos para barra de rolagem personalizada */
+pre::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: rgba(122, 144, 255, 0.5);
+  border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(122, 144, 255, 0.7);
+}
+
+pre::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Estilos específicos para o código de exemplo */
+.code-example::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.code-example::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.code-example::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgba(122, 144, 255, 0.5), rgba(94, 234, 212, 0.5));
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.code-example::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgba(122, 144, 255, 0.7), rgba(94, 234, 212, 0.7));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}

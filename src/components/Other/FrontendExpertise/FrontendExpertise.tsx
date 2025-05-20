@@ -122,7 +122,7 @@ const FrontendExpertise = () => {
   useEffect(() => {
     if (codeRef.current && inView && !animationInitializedRef.current) {
       const code = codeRef.current;
-      
+
       // Usar a função de destaque de sintaxe para animação
       gsap.to(
         {},
@@ -130,7 +130,7 @@ const FrontendExpertise = () => {
           ...setupCodeTypingAnimation(codeRef, codeText, 5, 1),
         }
       );
-      
+
       // Marcar como inicializado para evitar renderização duplicada
       animationInitializedRef.current = true;
     }
@@ -297,7 +297,7 @@ const FrontendExpertise = () => {
 
           <motion.div
             variants={fadeInRight}
-            className="bg-black/30 rounded-lg border border-white/10 p-6 shadow-2xl overflow-hidden order-1 lg:order-2"
+            className="bg-white/10 background-blur-sm rounded-lg border border-white/10 p-6 shadow-2xl overflow-hidden order-1 lg:order-2"
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -309,7 +309,7 @@ const FrontendExpertise = () => {
             </div>
             <pre
               ref={codeRef}
-              className="text-xs text-white font-mono overflow-x-auto whitespace-pre-wrap bg-black/50 p-4 rounded-lg h-[350px]"
+              className="text-xs text-white font-mono overflow-x-auto whitespace-pre-wrap  p-4 rounded-lg h-[350px]"
             ></pre>
           </motion.div>
         </motion.div>
