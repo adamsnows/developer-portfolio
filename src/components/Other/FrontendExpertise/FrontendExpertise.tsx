@@ -1,6 +1,6 @@
 import { motion, useAnimation } from "framer-motion";
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   RiCodeSSlashLine,
   RiLayout2Line,
@@ -54,6 +54,7 @@ const FrontendExpertise = () => {
 
   const animationRef = useRef<HTMLDivElement | null>(null);
   const codeRef = useRef<HTMLPreElement | null>(null);
+  const animationInitializedRef = useRef(false);
 
   useEffect(() => {
     if (inView) {
@@ -61,10 +62,9 @@ const FrontendExpertise = () => {
     }
   }, [controls, inView]);
 
-  useEffect(() => {
-    if (codeRef.current) {
-      const code = codeRef.current;
-      const text = `<span style="color:#569CD6">export default function</span> <span style="color:#DCDCAA">AnimatedComponent</span>() {
+  // Código texto memoizado para prevenir recriação em re-renderizações
+  const codeText = useMemo(() => {
+    return `<span style="color:#569CD6">export default function</span> <span style="color:#DCDCAA">AnimatedComponent</span>() {
   <span style="color:#569CD6">const</span> [<span style="color:#4FC1FF">isVisible</span>, <span style="color:#DCDCAA">setIsVisible</span>] = <span style="color:#DCDCAA">useState</span>(<span style="color:#569CD6">false</span>);
   <span style="color:#569CD6">const</span> <span style="color:#4FC1FF">controls</span> = <span style="color:#DCDCAA">useAnimationControls</span>();
   <span style="color:#569CD6">const</span> <span style="color:#9CDCFE">variants</span> = {
@@ -117,14 +117,22 @@ const FrontendExpertise = () => {
     </motion.section>
   );
 }`;
+  }, []);
 
+  useEffect(() => {
+    if (codeRef.current && inView && !animationInitializedRef.current) {
+      const code = codeRef.current;
+      
       // Usar a função de destaque de sintaxe para animação
       gsap.to(
         {},
         {
-          ...setupCodeTypingAnimation(codeRef, text, 5, 1),
+          ...setupCodeTypingAnimation(codeRef, codeText, 5, 1),
         }
       );
+      
+      // Marcar como inicializado para evitar renderização duplicada
+      animationInitializedRef.current = true;
     }
 
     // Animação para o elemento de demonstração
@@ -170,7 +178,7 @@ const FrontendExpertise = () => {
           ease: "elastic.out(1, 0.3)",
         });
     }
-  }, [inView]);
+  }, [inView, codeText]);
 
   return (
     <section className="py-20 relative overflow-visible">

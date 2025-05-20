@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   RiAddLine,
   RiArrowDownSLine,
@@ -63,8 +63,7 @@ const InitialHome = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const codeBlockRef = useRef<HTMLPreElement>(null);
   const [techStackExpanded, setTechStackExpanded] = useState(false);
-  const [animationInitialized, setAnimationInitialized] = useState(false);
-  const [animationAttempts, setAnimationAttempts] = useState(0);
+  const animationInitializedRef = useRef(false);
 
   useEffect(() => {
     if (titleRef.current) {
@@ -90,8 +89,8 @@ const InitialHome = () => {
     }
   }, []);
 
-  // Generate the code text for the animation
-  const generateCodeText = useCallback(() => {
+  // Generate the code text for the animation - memoized to prevent re-creation
+  const codeText = useMemo(() => {
     const techByCategory = techStackData.reduce((acc, tech) => {
       if (!acc[tech.category]) acc[tech.category] = [];
       acc[tech.category].push(tech.name);
@@ -136,80 +135,62 @@ const InitialHome = () => {
 };`;
   }, []);
 
-  // Generate the code text once
-  const codeText = generateCodeText();
-
-  // Efeito para iniciar a animação do código quando o componente montar
+  // Simple and reliable animation initialization
   useEffect(() => {
-    // Só executar no cliente
-    if (typeof window === "undefined") return;
+    // Only run on client and once
+    if (typeof window === "undefined" || animationInitializedRef.current)
+      return;
 
-    let initialTimeout: NodeJS.Timeout;
-    let retryInterval: NodeJS.Timeout;
-    let maxTimeoutId: NodeJS.Timeout;
-
-    // Função para tentar inicializar a animação
-    const tryInitAnimation = () => {
-      if (codeBlockRef.current && !animationInitialized) {
-        try {
-          // Set a direct text first to make sure the element has content
-          if (codeBlockRef.current.innerHTML === "") {
-            codeBlockRef.current.innerHTML = "// Starting animation...";
+    // Add minimal required styles
+    const addStyles = () => {
+      const styleId = "code-animation-styles";
+      if (!document.getElementById(styleId)) {
+        const style = document.createElement("style");
+        style.id = styleId;
+        style.textContent = `
+          .code-block {
+            transition: color 0.3s ease;
           }
+        `;
+        document.head.appendChild(style);
+      }
+    };
 
-          // Start animation with GSAP
+    addStyles();
+
+    // Use a single timeout with adequate delay
+    const animationTimeout = setTimeout(() => {
+      if (codeBlockRef.current) {
+        try {
+          // Initialize with a single animation call
           gsap.to(
             {},
             {
-              ...setupCodeTypingAnimation(codeBlockRef, codeText, 5, 0.5),
+              ...setupCodeTypingAnimation(codeBlockRef, codeText, 6, 0.5),
+              ease: "power1.inOut",
               onComplete: () => {
-                setAnimationInitialized(true);
                 console.log("Animation completed successfully");
               },
             }
           );
 
-          setAnimationAttempts((prev) => prev + 1);
-          return true;
+          // Mark as initialized to prevent re-runs
+          animationInitializedRef.current = true;
         } catch (error) {
-          console.error("Error initializing animation:", error);
-          return false;
+          console.error("Animation error:", error);
+
+          // Simple fallback if animation fails
+          if (codeBlockRef.current) {
+            codeBlockRef.current.innerHTML = codeText;
+          }
         }
       }
-      return false;
-    };
-
-    // Tentativa inicial após um pequeno delay
-    initialTimeout = setTimeout(() => {
-      const success = tryInitAnimation();
-
-      // Se não tiver sucesso, tenta novamente com intervalos
-      if (!success) {
-        retryInterval = setInterval(() => {
-          if (tryInitAnimation() || animationAttempts >= 10) {
-            clearInterval(retryInterval);
-          }
-        }, 300); // Tenta a cada 300ms
-
-        // Limpa o intervalo após 8 segundos se não conseguir inicializar
-        maxTimeoutId = setTimeout(() => {
-          clearInterval(retryInterval);
-
-          // If we still don't have animation, just set the content directly
-          if (!animationInitialized && codeBlockRef.current) {
-            codeBlockRef.current.innerHTML = codeText;
-            setAnimationInitialized(true);
-          }
-        }, 8000);
-      }
-    }, 800); // Give more time for the component to fully render
+    }, 800);
 
     return () => {
-      clearTimeout(initialTimeout);
-      clearInterval(retryInterval);
-      clearTimeout(maxTimeoutId);
+      clearTimeout(animationTimeout);
     };
-  }, [codeText, animationInitialized, animationAttempts]);
+  }, [codeText]);
 
   useEffect(() => {
     if (techStackExpanded) {
@@ -443,15 +424,18 @@ const InitialHome = () => {
                 </div>
                 <ClientOnly
                   fallback={
-                    <div className="h-[150px] w-full flex items-center justify-center text-xs text-white/50 font-mono">
+                    <div className="h-[260px] w-full flex items-center justify-center text-xs text-white/50 font-mono">
                       Loading code block...
                     </div>
                   }
                 >
-                  <pre
-                    ref={codeBlockRef}
-                    className="text-xs text-white font-mono overflow-x-auto whitespace-pre-wrap h-auto"
-                  ></pre>
+                  <div className="code-container relative h-[260px]">
+                    <pre
+                      ref={codeBlockRef}
+                      className="text-xs text-white font-mono overflow-x-auto whitespace-pre-wrap h-full w-full"
+                      style={{ willChange: "contents" }}
+                    ></pre>
+                  </div>
                 </ClientOnly>
               </div>
             </div>

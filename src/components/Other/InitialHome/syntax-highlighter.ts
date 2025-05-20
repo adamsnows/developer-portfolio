@@ -62,61 +62,72 @@ export function setupCodeTypingAnimation(
   }
 
   try {
+    // Make sure we have highlighted code
     const highlightedCode = codeText.includes('style="color:')
       ? codeText
       : highlightJS(codeText);
 
-    // Clear the content or set a placeholder
-    codeBlockRef.current.innerHTML = "";
-
+    // Get the plain text without HTML tags for length calculation
     const plainText = highlightedCode.replace(/<[^>]*>/g, "");
-    let currentHTML = "";
+
+    // Initialize an empty string to store the current display text
+    let currentText = "";
 
     return {
       duration,
+      ease: "power1.inOut", // Smoother easing
       onUpdate: function (this: { progress: () => number }) {
         try {
           const progress = this.progress();
           const targetLength = Math.floor(progress * plainText.length);
 
-          if (currentHTML.replace(/<[^>]*>/g, "").length >= targetLength) {
-            return;
+          // Simple character counting approach
+          if (targetLength === currentText.length) {
+            return; // No change needed
           }
 
-          let htmlResult = "";
-          let plainCounter = 0;
-          let htmlCounter = 0;
+          // Collect all characters up to the target point
+          let textCount = 0;
+          let resultHTML = "";
+          let inTag = false;
+          let currentTag = "";
 
-          while (
-            plainCounter < targetLength &&
-            htmlCounter < highlightedCode.length
-          ) {
-            if (highlightedCode[htmlCounter] === "<") {
-              const tagEnd = highlightedCode.indexOf(">", htmlCounter) + 1;
-              if (tagEnd <= 0) {
-                // Safety check for malformed HTML
-                htmlCounter++;
-                continue;
-              }
-              htmlResult += highlightedCode.substring(htmlCounter, tagEnd);
-              htmlCounter = tagEnd;
+          // Process each character in the highlighted code
+          for (let i = 0; i < highlightedCode.length; i++) {
+            const char = highlightedCode[i];
+
+            if (char === "<") {
+              inTag = true;
+              currentTag += char;
+            } else if (char === ">") {
+              inTag = false;
+              currentTag += char;
+              resultHTML += currentTag;
+              currentTag = "";
+            } else if (inTag) {
+              currentTag += char;
             } else {
-              htmlResult += highlightedCode[htmlCounter];
-              htmlCounter++;
-              plainCounter++;
+              resultHTML += char;
+              textCount++;
+
+              // Stop when we've reached our target length
+              if (textCount >= targetLength) {
+                break;
+              }
             }
           }
 
-          currentHTML = htmlResult;
-          if (codeBlockRef.current) {
-            codeBlockRef.current.innerHTML = htmlResult;
+          // Only update if we have content and a reference
+          if (codeBlockRef.current && resultHTML) {
+            codeBlockRef.current.innerHTML = resultHTML;
+            currentText = resultHTML;
           }
         } catch (error) {
-          console.error("Error during animation update:", error);
+          console.error("Animation update error:", error);
         }
       },
       onComplete: function () {
-        // Ensure the full code is displayed at the end
+        // Set final content
         if (codeBlockRef.current) {
           codeBlockRef.current.innerHTML = highlightedCode;
         }
@@ -126,17 +137,9 @@ export function setupCodeTypingAnimation(
   } catch (error) {
     console.error("Error setting up animation:", error);
 
-    // Fallback to just setting the content directly
+    // Simple fallback
     if (codeBlockRef.current) {
-      setTimeout(() => {
-        if (codeBlockRef.current) {
-          try {
-            codeBlockRef.current.innerHTML = codeText;
-          } catch (err) {
-            console.error("Error in fallback code setting:", err);
-          }
-        }
-      }, 100);
+      codeBlockRef.current.innerHTML = codeText;
     }
 
     return {
