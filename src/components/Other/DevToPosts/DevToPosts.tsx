@@ -175,16 +175,22 @@ const DevToPosts = () => {
   // Atualiza o Swiper quando os posts são carregados ou quando o swiperInstance muda
   useEffect(() => {
     if (swiperInstance && !isLoading && posts.length > 0) {
-      // Pequeno timeout para garantir que o DOM está atualizado
-      setTimeout(() => {
-        swiperInstance.update();
-        swiperInstance.slideToLoop(initialSlide, 0, false);
-      }, 100);
+      // Maior timeout para garantir que o DOM está totalmente renderizado
+      const timer = setTimeout(() => {
+        try {
+          swiperInstance.update();
+          swiperInstance.slideToLoop(initialSlide, 0, false);
+        } catch (e) {
+          console.warn("Erro ao atualizar o swiper:", e);
+        }
+      }, 300);
+
+      return () => clearTimeout(timer);
     }
   }, [swiperInstance, posts, isLoading, initialSlide]);
 
   return (
-    <section className="relative  pt-[170px] overflow-hidden">
+    <section className="relative pt-[170px] overflow-visible">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full filter blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
@@ -195,11 +201,11 @@ const DevToPosts = () => {
         variants={staggerContainer}
         initial="initial"
         animate={controls}
-        className="container pb-[100px] -mb-10 mx-auto xl:flex xl:flex-row-reverse xl:justify-between relative z-10"
+        className="container pb-[100px] -mb-10 mx-auto xl:flex xl:flex-row-reverse xl:justify-between relative z-10 overflow-visible"
       >
         <motion.div
           variants={fadeInUp}
-          className="max-w-[400px] mx-auto my-auto
+          className="max-w-[400px] mx-auto mb-8 xl:mb-0
           xl:mx-0 text-center xl:text-right xl:h-fit
           flex flex-col justify-center items-center xl:justify-center
           xl:items-end"
@@ -224,7 +230,7 @@ const DevToPosts = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-row-reverse items-start p-3 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm"
+                className="flex flex-row-reverse items-start p-3 py-4 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm"
               >
                 <RiArticleLine className="text-secondary text-xl mt-1 ml-1 w-20" />
                 <div className="text-right">
@@ -238,7 +244,7 @@ const DevToPosts = () => {
 
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-row-reverse items-start p-3 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm"
+                className="flex flex-row-reverse items-start p-3 py-4 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm"
               >
                 <RiArticleLine className="text-secondary text-xl mt-1 ml-1 w-20" />
                 <div className="text-right">
@@ -268,9 +274,9 @@ const DevToPosts = () => {
 
         <motion.div
           variants={fadeInLeft}
-          className="xl:max-w-[780px] top-0 mt-10 xl:mt-0 overflow-visible"
+          className="xl:max-w-[800px] lg:max-w-[700px] md:max-w-[600px] sm:max-w-[500px] max-w-full mt-10 xl:mt-0 overflow-visible"
         >
-          <div className="relative z-0">
+          <div className="relative z-0 overflow-visible">
             <motion.div
               className="absolute -top-20 -left-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
               animate={{
@@ -302,7 +308,8 @@ const DevToPosts = () => {
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
-              slidesPerView={"auto"}
+              slidesPerView={3}
+              spaceBetween={10}
               initialSlide={initialSlide}
               coverflowEffect={{
                 rotate: 20,
@@ -316,19 +323,36 @@ const DevToPosts = () => {
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
               }}
-              pagination={{
-                clickable: true,
-                dynamicBullets: true,
-                horizontalClass: "swiper-pagination-horizontal",
+              breakpoints={{
+                320: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 30,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+                },
               }}
               loop={true}
               speed={800}
               modules={[EffectCoverflow, Navigation, Pagination, Autoplay]}
-              onSwiper={(swiper) => setSwiperInstance(swiper)}
+              onSwiper={(swiper) => {
+                if (swiper && typeof window !== "undefined") {
+                  setTimeout(() => setSwiperInstance(swiper), 100);
+                }
+              }}
             >
               {isLoading ? (
                 <SwiperSlide
-                  style={{ width: "320px", height: "auto" }}
+                  style={{ width: "400px", height: "auto" }}
                   className="flex items-center justify-center"
                 >
                   <div className="flex flex-col items-center justify-center h-64 bg-slate-800 border border-slate-700 rounded-xl p-6">
@@ -340,7 +364,7 @@ const DevToPosts = () => {
                 </SwiperSlide>
               ) : error ? (
                 <SwiperSlide
-                  style={{ width: "320px", height: "auto" }}
+                  style={{ width: "350px", height: "auto" }}
                   className="flex items-center justify-center"
                 >
                   <div className="flex flex-col items-center justify-center h-64 bg-slate-800 border border-slate-700 rounded-xl p-6 text-center">
@@ -354,8 +378,8 @@ const DevToPosts = () => {
                 posts.map((post: Post, index: number) => (
                   <SwiperSlide
                     key={index}
-                    style={{ width: "320px", height: "auto" }}
-                    className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
+                    style={{ width: "350px", height: "auto" }}
+                    className="rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
                   >
                     <Link
                       href={post.url}
