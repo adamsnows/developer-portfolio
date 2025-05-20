@@ -1,18 +1,14 @@
 import { motion, useAnimation } from "framer-motion";
 import gsap from "gsap";
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import {
-  Autoplay,
-  EffectCoverflow,
-  Navigation,
-  Pagination,
-} from "swiper/modules";
+import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import {
@@ -22,6 +18,7 @@ import {
 } from "@/components/Animations/AdvancedTransition";
 import { Button } from "@/components/Other/UI/button";
 import { devtoPostsData } from "@/data/devtoPosts";
+import { fetchDevtoPosts } from "@/services/devto";
 import {
   RiArrowRightLine,
   RiArticleLine,
@@ -29,14 +26,42 @@ import {
   RiMessageLine,
 } from "react-icons/ri";
 
-const DevToPostCard = ({ post }: { post: any }) => {
+// Definindo a interface para os posts
+interface Post {
+  title: string;
+  cover: string;
+  tags: string[];
+  date: string;
+  reactions: number;
+  comments: number;
+  url: string;
+  excerpt: string;
+}
+
+const DevToPostCard = ({ post }: { post: Post }) => {
   return (
-    <div className="bg-white/15  backdrop-blur-md border border-white/20 rounded-xl overflow-hidden h-full shadow-xl">
+    <div className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden h-full shadow-xl">
       <div className="relative h-40 overflow-hidden">
-        <img
-          src={post.cover}
+        <Image
+          src={post.cover || "/projects/devto-default.png"}
           alt={post.title}
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+          width={500}
+          height={200}
+          onError={(e) => {
+            // Se a imagem falhar, substituir pela imagem padrão
+            const target = e.target as HTMLImageElement;
+            target.onerror = null; // Prevenir loop infinito
+            target.src = "/projects/devto-default.png";
+            console.log(
+              "Erro ao carregar imagem, usando fallback:",
+              post.cover
+            );
+          }}
+          unoptimized={
+            post.cover?.includes("dev.to") ||
+            post.cover?.includes("amazonaws.com")
+          }
         />
         <div className="absolute top-3 left-3 flex gap-2">
           {post.tags.slice(0, 2).map((tag: string, idx: number) => (
@@ -49,8 +74,8 @@ const DevToPostCard = ({ post }: { post: any }) => {
           ))}
         </div>
       </div>
-      <div className="p-4 bg-white/15 backdrop-blur-lg relative z-10">
-        <h3 className="font-semibold mb-2 text-sm h-10 line-clamp-2">
+      <div className="p-4 bg-slate-800 relative z-10">
+        <h3 className="font-semibold mb-2 text-sm h-10 line-clamp-2 text-white">
           {post.title}
         </h3>
         <p className="text-xs text-gray-300 mb-3 h-12 line-clamp-2">
@@ -83,6 +108,10 @@ const DevToPosts = () => {
 
   const titleRef = useRef<HTMLHeadingElement>(null);
 
+  const [posts, setPosts] = useState<Post[]>(devtoPostsData);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     if (inView) {
       controls.start("animate");
@@ -105,6 +134,30 @@ const DevToPosts = () => {
         }
       );
     }
+  }, []);
+
+  // Efeito para buscar os posts do DEV.TO
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const fetchedPosts = await fetchDevtoPosts("adamsnows");
+        if (fetchedPosts.length > 0) {
+          setPosts(fetchedPosts);
+        }
+      } catch (err) {
+        console.error("Erro ao buscar posts do DEV.TO:", err);
+        setError(
+          "Não foi possível carregar os artigos. Usando dados locais como fallback."
+        );
+        // Mantém os dados locais como fallback
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPosts();
   }, []);
 
   return (
@@ -132,7 +185,7 @@ const DevToPosts = () => {
             ref={titleRef}
             className="section-title mb-4 bg-gradient-to-r from-secondary via-primary to-secondary bg-clip-text text-transparent bg-300%"
           >
-            ARTIGOS DEV.TO
+            PUBLICAÇÕES
           </h2>
           <p className="text-sm mb-8 leading-relaxed">
             Compartilho meus conhecimentos e experiências através de artigos no{" "}
@@ -222,7 +275,7 @@ const DevToPosts = () => {
             />
 
             <Swiper
-              className="h-fit rounded-xl relative z-30 p-6 pb-14 my-6 mx-4"
+              className="h-fit rounded-xl relative z-30 p-6 pb-14 my-6 mx-auto px-10 md:px-16"
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
@@ -239,22 +292,44 @@ const DevToPosts = () => {
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
               }}
-              pagination={{
-                clickable: true,
-                dynamicBullets: true,
-                horizontalClass: "swiper-pagination-horizontal",
-              }}
               navigation={true}
               loop={true}
               speed={800}
-              modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
+              modules={[EffectCoverflow, Navigation, Autoplay]}
             >
-              {devtoPostsData.map((post: any, index: number) => {
-                return (
+              {isLoading ? (
+                // Loading indicator
+                <SwiperSlide
+                  style={{ width: "320px", height: "auto" }}
+                  className="flex items-center justify-center"
+                >
+                  <div className="flex flex-col items-center justify-center h-64 bg-slate-800 border border-slate-700 rounded-xl p-6">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mb-4"></div>
+                    <p className="text-sm text-white/70">
+                      Carregando artigos...
+                    </p>
+                  </div>
+                </SwiperSlide>
+              ) : error ? (
+                // Error message
+                <SwiperSlide
+                  style={{ width: "320px", height: "auto" }}
+                  className="flex items-center justify-center"
+                >
+                  <div className="flex flex-col items-center justify-center h-64 bg-slate-800 border border-slate-700 rounded-xl p-6 text-center">
+                    <p className="text-sm text-red-400 mb-2">{error}</p>
+                    <p className="text-xs text-white/70">
+                      Usando dados de exemplo como fallback.
+                    </p>
+                  </div>
+                </SwiperSlide>
+              ) : (
+                // Actual posts
+                posts.map((post: Post, index: number) => (
                   <SwiperSlide
                     key={index}
                     style={{ width: "320px", height: "auto" }}
-                    className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-secondary/20"
+                    className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 mx-auto"
                   >
                     <Link
                       href={post.url}
@@ -270,8 +345,8 @@ const DevToPosts = () => {
                       </motion.div>
                     </Link>
                   </SwiperSlide>
-                );
-              })}
+                ))
+              )}
             </Swiper>
           </div>
         </motion.div>

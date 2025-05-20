@@ -1,7 +1,7 @@
 export const devtoPostsData = [
   {
     title: "Criando uma aplicação React com TypeScript",
-    cover: "/projects/devto-react.jpg",
+    cover: "/projects/devto-default.png",
     tags: ["React", "TypeScript", "Frontend"],
     date: "2023-10-15",
     reactions: 125,
@@ -12,7 +12,7 @@ export const devtoPostsData = [
   },
   {
     title: "Como melhorar a performance em aplicações Next.js",
-    cover: "/projects/devto-nextjs.jpg",
+    cover: "/projects/devto-default.png",
     tags: ["Next.js", "Performance", "Frontend"],
     date: "2023-11-03",
     reactions: 98,
@@ -23,7 +23,7 @@ export const devtoPostsData = [
   },
   {
     title: "Implementando autenticação JWT com Node.js e Express",
-    cover: "/projects/devto-jwt.jpg",
+    cover: "/projects/devto-default.png",
     tags: ["Node.js", "JWT", "Backend"],
     date: "2023-12-21",
     reactions: 144,
@@ -34,7 +34,7 @@ export const devtoPostsData = [
   },
   {
     title: "Animações avançadas com Framer Motion",
-    cover: "/projects/devto-framer.jpg",
+    cover: "/projects/devto-default.png",
     tags: ["Animations", "React", "Framer Motion"],
     date: "2024-01-08",
     reactions: 186,
@@ -45,7 +45,7 @@ export const devtoPostsData = [
   },
   {
     title: "Arquitetura de microsserviços com NestJS",
-    cover: "/projects/devto-nestjs.jpg",
+    cover: "/projects/devto-default.png",
     tags: ["NestJS", "Microservices", "Architecture"],
     date: "2024-02-15",
     reactions: 112,
@@ -56,7 +56,7 @@ export const devtoPostsData = [
   },
   {
     title: "Testes automatizados com Jest e React Testing Library",
-    cover: "/projects/devto-testing.jpg",
+    cover: "/projects/devto-default.png",
     tags: ["Testing", "Jest", "React"],
     date: "2024-03-10",
     reactions: 93,

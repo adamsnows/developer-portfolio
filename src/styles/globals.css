@@ -81,6 +81,14 @@
   @apply text-primary opacity-60 transition-all duration-300 !important;
 }
 
+.swiper-button-prev {
+  @apply left-2 md:left-4 !important;
+}
+
+.swiper-button-next {
+  @apply right-2 md:right-4 !important;
+}
+
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
   @apply opacity-100 scale-110 !important;
