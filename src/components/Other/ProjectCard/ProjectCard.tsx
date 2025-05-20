@@ -18,11 +18,17 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
            flex items-center justify-center bg-secondary/40 bg-work_project_bg xl:bg-no-repeat overflow-hidden xl:bg-contain"
         >
           <Image
-            className="absolute shadow-2xl translate-y-1/2 -translate-x-1/2 top-0 left-1/2 w-[300px] h-[135px] object-cover"
+            className="absolute shadow-2xl translate-y-1/2 -translate-x-1/2 top-0 left-1/2"
             src={project.image}
             width={300}
-            height={300}
-            alt="Project Image"
+            height={135}
+            alt={`${project.name} Project Image`}
+            style={{ 
+              width: "300px", 
+              height: "135px",
+              objectFit: "contain"
+            }}
+            unoptimized={true}
           />
           <div className="flex gap-x-4">
             {project.link && (

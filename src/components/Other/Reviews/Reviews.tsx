@@ -211,6 +211,7 @@ const Reviews = () => {
             grabCursor={true}
             centeredSlides={true}
             slidesPerView={"auto"}
+            slidesPerGroup={1} // Adding slidesPerGroup to fix the loop warning
             coverflowEffect={{
               rotate: 20,
               stretch: 0,
@@ -252,6 +253,7 @@ const Reviews = () => {
                               height={80}
                               alt={`Foto de ${person.name}`}
                               className="rounded-full relative border-2 border-white/20"
+                              style={{ width: "80px", height: "80px", objectFit: "cover" }}
                             />
                           </div>
 

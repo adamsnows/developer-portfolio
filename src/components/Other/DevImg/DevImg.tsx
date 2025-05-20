@@ -20,7 +20,7 @@ const DevImg = ({
             height={500}
             priority
             alt={alt}
-            style={{ willChange: "auto" }}
+            style={{ willChange: "auto", width: "auto", height: "auto" }}
           />
           <div
             className="absolute inset-0 w-full h-full bg-gradient-to-t from-background via-background via-0% to-transparent to-60% z-10 pointer-events-none transition-none"
@@ -34,7 +34,7 @@ const DevImg = ({
           width={500}
           height={500}
           alt={alt}
-          style={{ willChange: "auto" }}
+          style={{ willChange: "auto", width: "auto", height: "auto" }}
         />
       )}
     </div>

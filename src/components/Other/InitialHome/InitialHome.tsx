@@ -10,10 +10,7 @@ import {
   RiMailSendFill,
 } from "react-icons/ri";
 
-import {
-  highlightTechArray,
-  setupCodeTypingAnimation,
-} from "./syntax-highlighter";
+import { highlightTechArray } from "./syntax-highlighter";
 
 const techStackData = [
   { name: "React", category: "frontend", featured: true },
@@ -162,12 +159,65 @@ const InitialHome = () => {
     const animationTimeout = setTimeout(() => {
       if (codeBlockRef.current) {
         try {
-          // Initialize with a single animation call
+          // Initialize with a safer animation configuration
           gsap.to(
             {},
             {
-              ...setupCodeTypingAnimation(codeBlockRef, codeText, 6, 0.5),
+              duration: 6,
               ease: "power1.inOut",
+              onUpdate: function (this: { progress: () => number }) {
+                // Simple fallback in case setupCodeTypingAnimation fails
+                try {
+                  // Manually implement the typing animation to avoid issues
+                  if (codeBlockRef.current) {
+                    const progress = this.progress();
+                    const textLength = codeText.replace(/<[^>]*>/g, "").length;
+                    const currentLength = Math.floor(progress * textLength);
+
+                    // Create simplified typing effect
+                    let plainTextCount = 0;
+                    let displayHTML = "";
+                    let inTag = false;
+                    let currentTag = "";
+
+                    for (let i = 0; i < codeText.length; i++) {
+                      const char = codeText[i];
+
+                      if (char === "<") {
+                        inTag = true;
+                        currentTag += char;
+                      } else if (char === ">") {
+                        inTag = false;
+                        currentTag += char;
+                        displayHTML += currentTag;
+                        currentTag = "";
+                      } else if (inTag) {
+                        currentTag += char;
+                      } else {
+                        displayHTML += char;
+                        plainTextCount++;
+
+                        if (plainTextCount >= currentLength) {
+                          break;
+                        }
+                      }
+                    }
+
+                    codeBlockRef.current.innerHTML = displayHTML;
+                  }
+                } catch (err) {
+                  console.warn("Animation step error, using fallback:", err);
+                  if (codeBlockRef.current && !codeBlockRef.current.innerHTML) {
+                    codeBlockRef.current.innerHTML = codeText;
+                  }
+                }
+              },
+              onComplete: function () {
+                // Make sure the final state is set
+                if (codeBlockRef.current) {
+                  codeBlockRef.current.innerHTML = codeText;
+                }
+              },
             }
           );
 
@@ -369,6 +419,7 @@ const InitialHome = () => {
                 alt="initial image"
                 priority
                 containerStyles="w-[510px] h-[520px] relative flex items-center"
+                containerStylesImage="w-full h-auto"
                 imgSrc="/people/adam-face.png"
               />
             </FloatingElement>

@@ -53,6 +53,7 @@ const DevToPostCard = ({ post }: { post: Post }) => {
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
           width={500}
           height={200}
+          style={{ width: "100%", height: "100%" }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.onerror = null;
@@ -221,7 +222,7 @@ const DevToPosts = () => {
         variants={staggerContainer}
         initial="initial"
         animate={controls}
-        className="container pb-[100px] -mb-10 mx-auto xl:flex xl:flex-row-reverse xl:justify-between relative z-10 overflow-hidden px-4 md:px-6 lg:px-8"
+        className="container pt-10 -mt-10 pb-[100px] -mb-10 mx-auto xl:flex xl:flex-row-reverse xl:justify-between relative z-10 overflow-hidden px-4 md:px-6 lg:px-8"
       >
         <motion.div
           variants={fadeInUp}
@@ -331,6 +332,7 @@ const DevToPosts = () => {
               slidesPerView={3}
               spaceBetween={10}
               initialSlide={initialSlide}
+              slidesPerGroup={1} // Adding slidesPerGroup to fix the loop warning
               coverflowEffect={{
                 rotate: 20,
                 stretch: 25,

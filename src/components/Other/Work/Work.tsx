@@ -195,6 +195,7 @@ const Work = () => {
               grabCursor={true}
               centeredSlides={true}
               slidesPerView={"auto"}
+              slidesPerGroup={1} // Adding slidesPerGroup to fix the loop warning
               coverflowEffect={{
                 rotate: 20,
                 stretch: 25,
