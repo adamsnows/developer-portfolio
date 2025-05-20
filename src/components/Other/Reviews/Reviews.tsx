@@ -65,7 +65,7 @@ const ReviewContent = ({ review }: ReviewContentProps) => {
       <div
         ref={contentRef}
         onScroll={handleScroll}
-        className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[400px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent"
+        className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[380px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent"
       >
         <ClientOnly
           fallback={<div className="text-white/70">Carregando feedback...</div>}
