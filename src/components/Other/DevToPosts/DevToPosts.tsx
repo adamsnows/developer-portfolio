@@ -279,12 +279,20 @@ const DevToPosts = () => {
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
-              slidesPerView={"auto"}
+              slidesPerView={1}
+              breakpoints={{
+                640: { slidesPerView: 1.5 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 2.5 },
+              }}
+              spaceBetween={10}
+              initialSlide={Math.floor(posts.length / 2)}
+              loopedSlides={posts.length}
               coverflowEffect={{
-                rotate: 15,
-                stretch: 20,
-                depth: 300,
-                modifier: 2.5,
+                rotate: 5,
+                stretch: 0,
+                depth: 100,
+                modifier: 1.5,
                 slideShadows: true,
               }}
               autoplay={{
