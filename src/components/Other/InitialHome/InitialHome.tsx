@@ -168,9 +168,6 @@ const InitialHome = () => {
             {
               ...setupCodeTypingAnimation(codeBlockRef, codeText, 6, 0.5),
               ease: "power1.inOut",
-              onComplete: () => {
-                console.log("Animation completed successfully");
-              },
             }
           );
 
