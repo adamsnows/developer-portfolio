@@ -86,7 +86,13 @@ const DevToPostCard = ({ post }: { post: Post }) => {
           {post.excerpt}
         </p>
         <div className="flex justify-between items-center text-xs text-gray-400">
-          <span>{new Date(post.date).toLocaleDateString()}</span>
+          <span>
+            {new Date(post.date).toLocaleDateString("pt-BR", {
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+            })}
+          </span>
           <div className="flex gap-3">
             <div className="flex items-center gap-1">
               <RiHeart3Fill className="text-red-500" />
@@ -117,6 +123,22 @@ const DevToPosts = () => {
   const [error, setError] = useState<string | null>(null);
   const [initialSlide, setInitialSlide] = useState<number>(1);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Verificar inicialmente
+    checkMobile();
+
+    // Adicionar listener para mudanças de tamanho
+    window.addEventListener("resize", checkMobile);
+
+    // Limpar o listener
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     if (inView) {
@@ -188,7 +210,7 @@ const DevToPosts = () => {
   }, [swiperInstance, posts, isLoading, initialSlide]);
 
   return (
-    <section className="relative xl:pt-[170px] overflow-visible">
+    <section className="relative xl:pt-[170px] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full filter blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
@@ -199,7 +221,7 @@ const DevToPosts = () => {
         variants={staggerContainer}
         initial="initial"
         animate={controls}
-        className="container pb-[100px] -mb-10 mx-auto xl:flex xl:flex-row-reverse xl:justify-between relative z-10 overflow-visible"
+        className="container pb-[100px] -mb-10 mx-auto xl:flex xl:flex-row-reverse xl:justify-between relative z-10 overflow-hidden px-4 md:px-6 lg:px-8"
       >
         <motion.div
           variants={fadeInUp}
@@ -272,11 +294,11 @@ const DevToPosts = () => {
 
         <motion.div
           variants={fadeInLeft}
-          className="xl:max-w-[800px] lg:max-w-[700px] md:max-w-[600px] sm:max-w-[500px] max-w-full mt-10 xl:mt-0 overflow-visible"
+          className="xl:max-w-[800px] lg:max-w-[700px] md:max-w-[600px] sm:max-w-[500px] max-w-full mt-10 xl:mt-0 overflow-hidden"
         >
-          <div className="relative z-0 overflow-visible">
+          <div className="relative z-0 overflow-hidden">
             <motion.div
-              className="absolute -top-20 -left-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
+              className="absolute top-0 left-0 md:-top-20 md:-left-20 w-64 md:w-80 h-64 md:h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.2, 0.4, 0.2],
@@ -302,7 +324,7 @@ const DevToPosts = () => {
             />
 
             <Swiper
-              className="h-fit rounded-xl relative z-30 p-6 pb-14 my-6 mx-4"
+              className="h-fit rounded-xl relative z-30 p-6 pb-14 my-6 mx-auto w-full"
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
@@ -350,10 +372,13 @@ const DevToPosts = () => {
             >
               {isLoading ? (
                 <SwiperSlide
-                  style={{ width: "400px", height: "auto" }}
-                  className="flex items-center justify-center"
+                  className="flex items-center justify-center mx-auto"
+                  style={{
+                    width: isMobile ? "280px" : "350px",
+                    height: "auto",
+                  }}
                 >
-                  <div className="flex flex-col items-center justify-center h-64 bg-slate-800 border border-slate-700 rounded-xl p-6">
+                  <div className="flex flex-col items-center justify-center h-64 bg-slate-800 border border-slate-700 rounded-xl p-6 w-full">
                     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mb-4"></div>
                     <p className="text-sm text-white/70">
                       Carregando artigos...
@@ -362,10 +387,13 @@ const DevToPosts = () => {
                 </SwiperSlide>
               ) : error ? (
                 <SwiperSlide
-                  style={{ width: "350px", height: "auto" }}
-                  className="flex items-center justify-center"
+                  className="flex items-center justify-center mx-auto"
+                  style={{
+                    width: isMobile ? "280px" : "350px",
+                    height: "auto",
+                  }}
                 >
-                  <div className="flex flex-col items-center justify-center h-64 bg-slate-800 border border-slate-700 rounded-xl p-6 text-center">
+                  <div className="flex flex-col items-center justify-center h-64 bg-slate-800 border border-slate-700 rounded-xl p-6 text-center w-full">
                     <p className="text-sm text-red-400 mb-2">{error}</p>
                     <p className="text-xs text-white/70">
                       Usando dados de exemplo como fallback.
@@ -376,14 +404,17 @@ const DevToPosts = () => {
                 posts.map((post: Post, index: number) => (
                   <SwiperSlide
                     key={index}
-                    style={{ width: "350px", height: "auto" }}
-                    className="rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
+                    className="rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 mx-auto"
+                    style={{
+                      width: isMobile ? "280px" : "350px",
+                      height: "auto",
+                    }}
                   >
                     <Link
                       href={post.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block relative z-10"
+                      className="block relative z-10 w-full"
                     >
                       <motion.div
                         transition={{ duration: 0.3 }}

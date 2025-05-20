@@ -1,7 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import gsap from "gsap";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -37,6 +37,22 @@ const Work = () => {
   });
 
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Verificar inicialmente
+    checkMobile();
+
+    // Adicionar listener para mudanças de tamanho
+    window.addEventListener("resize", checkMobile);
+
+    // Limpar o listener
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     if (inView) {
@@ -74,7 +90,7 @@ const Work = () => {
         variants={staggerContainer}
         initial="initial"
         animate={controls}
-        className="lg:container mx-auto xl:flex xl:justify-between relative z-10"
+        className="lg:container mx-auto xl:flex xl:justify-between relative z-10 px-4 md:px-6 lg:px-8"
       >
         <motion.div
           variants={fadeInUp}
@@ -144,11 +160,11 @@ const Work = () => {
 
         <motion.div
           variants={fadeInRight}
-          className="xl:max-w-[780px] top-0 mt-10 xl:mt-0 overflow-visible"
+          className="xl:max-w-[780px] top-0 mt-10 xl:mt-0 overflow-hidden"
         >
-          <div className="relative">
+          <div className="relative overflow-hidden">
             <motion.div
-              className="absolute top-0 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
+              className="absolute top-0 right-0 md:-right-20 w-64 md:w-80 h-64 md:h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.2, 0.4, 0.2],
@@ -174,7 +190,7 @@ const Work = () => {
             />
 
             <Swiper
-              className="h-fit rounded-xl relative z-10 p-6 pb-14 my-6 mx-4"
+              className="h-fit rounded-xl relative z-10 p-6 pb-14 my-6 mx-auto w-full"
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
@@ -204,8 +220,11 @@ const Work = () => {
                 return (
                   <SwiperSlide
                     key={index}
-                    style={{ width: "320px", height: "auto" }}
-                    className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
+                    className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 mx-auto"
+                    style={{
+                      width: isMobile ? "280px" : "320px",
+                      height: "auto",
+                    }}
                   >
                     <motion.div transition={{ duration: 0.3 }}>
                       <ProjectCard project={project} />
