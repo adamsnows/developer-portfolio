@@ -48,10 +48,11 @@ const BackendExpertise = () => {
   const controls = useAnimation();
   const { ref, inView } = useInView({
     threshold: 0.2,
-    triggerOnce: false,
+    triggerOnce: true,
   });
 
   const terminalRef = useRef<HTMLPreElement>(null);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
     if (inView) {
@@ -60,7 +61,8 @@ const BackendExpertise = () => {
   }, [controls, inView]);
 
   useEffect(() => {
-    if (terminalRef.current) {
+    if (inView && terminalRef.current && !hasAnimated.current) {
+      hasAnimated.current = true;
       const terminal = terminalRef.current as HTMLPreElement;
       const text = `$ node server.js
 Initializing server...
@@ -184,7 +186,7 @@ Ready to handle requests...`;
         >
           <motion.div
             variants={fadeInLeft}
-            className="bg-black/30 rounded-lg border border-white/10 p-6 shadow-2xl overflow-hidden"
+            className="bg-white/10 rounded-lg border border-white/10 p-6 shadow-2xl overflow-hidden"
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -195,7 +197,7 @@ Ready to handle requests...`;
             <ClientOnly>
               <pre
                 ref={terminalRef}
-                className="font-mono text-xs text-green-400 bg-black/50 p-4 rounded h-[250px] overflow-y-auto"
+                className="font-mono text-xs text-green-400 bg-black/70 p-4 rounded h-[250px] overflow-y-auto"
               ></pre>
             </ClientOnly>
           </motion.div>
