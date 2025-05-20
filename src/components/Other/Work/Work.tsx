@@ -63,7 +63,7 @@ const Work = () => {
   }, []);
 
   return (
-    <section className="relative pb-[100px] pt-[170px] overflow-hidden">
+    <section className="relative pt-[100px] overflow-hidden -mt-20">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 rounded-full filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full filter blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
@@ -148,7 +148,7 @@ const Work = () => {
         >
           <div className="relative">
             <motion.div
-              className="absolute -top-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
+              className="absolute top-0 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.2, 0.4, 0.2],
@@ -160,7 +160,7 @@ const Work = () => {
               }}
             />
             <motion.div
-              className="absolute -bottom-20 -left-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
+              className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
               animate={{
                 scale: [1, 1.3, 1],
                 opacity: [0.2, 0.3, 0.2],

@@ -1,5 +1,6 @@
 import AdvancedTransition from "@/components/Animations/AdvancedTransition";
 import BackendExpertise from "@/components/Other/BackendExpertise/BackendExpertise";
+import DevToPosts from "@/components/Other/DevToPosts/DevToPosts";
 import FrontendExpertise from "@/components/Other/FrontendExpertise/FrontendExpertise";
 import InitialHome from "@/components/Other/InitialHome/InitialHome";
 import Reviews from "@/components/Other/Reviews/Reviews";
@@ -11,6 +12,7 @@ const Home = () => {
       <InitialHome />
       {/* <About /> */}
       {/* <Services /> */}
+      <DevToPosts />
       <Work />
       <FrontendExpertise />
       <BackendExpertise />

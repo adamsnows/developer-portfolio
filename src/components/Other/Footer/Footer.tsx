@@ -1,4 +1,6 @@
 import Socials from "@/components/Other/Socials/Socials";
+import Link from "next/link";
+import { RiGithubFill } from "react-icons/ri";
 
 const Footer = () => {
   return (
@@ -9,9 +11,18 @@ const Footer = () => {
             containerStyles="flex gap-x-6 mx-auto xl:mx-0 mb-4"
             iconsStyles="text-white/70 text-[20px] hover:text-primary transition-all"
           />
-          <div className="text-muted-foreground">
+          <div className="text-muted-foreground mb-3">
             Direitos autorais &copy; Adam Neves. Todos os direitos reservados
           </div>
+          <Link
+            href="https://github.com/adamsnows/my-portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-white/50 hover:text-primary transition-all text-sm"
+          >
+            <RiGithubFill className="text-lg" />
+            Ver código no GitHub
+          </Link>
         </div>
       </div>
     </footer>
