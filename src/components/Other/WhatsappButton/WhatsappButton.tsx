@@ -19,7 +19,7 @@ const WhatsappButton = () => {
         animation: "pulse 2s infinite",
       }}
     >
-      <FaWhatsapp className="text-4xl ms-[3px]" />
+      <FaWhatsapp className="text-4xl ms-[2px]" />
       <style jsx>{`
         @keyframes pulse {
           0% {
