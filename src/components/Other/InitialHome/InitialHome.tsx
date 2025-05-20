@@ -210,7 +210,7 @@ const InitialHome = () => {
   }, [techStackExpanded]);
 
   return (
-    <section className="py-12 md:pt-24 xl:py-24 xl:pt-0 mb-10 relative overflow-hidden">
+    <section className="py-12 md:pt-24 xl:py-24 xl:pt-0 mb-10 relative">
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0 opacity-20">
         <div className="absolute top-16 left-16 w-64 h-64 rounded-full bg-primary/20 blur-3xl"></div>
         <div className="absolute bottom-16 right-16 w-96 h-96 rounded-full bg-secondary/20 blur-3xl"></div>
@@ -363,11 +363,15 @@ const InitialHome = () => {
             variants={fadeInRight}
             className="hidden xl:flex relative"
           >
-            <FloatingElement className="w-full" duration={3} distance={10}>
+            <FloatingElement
+              className="w-full overflow-hidden"
+              duration={10}
+              distance={50}
+            >
               <DevImg
                 alt="initial image"
                 priority
-                containerStyles="w-[510px] h-[550px] relative flex items-center"
+                containerStyles="w-[510px] h-[520px] relative flex items-center"
                 imgSrc="/people/adam-face.png"
               />
             </FloatingElement>
@@ -415,7 +419,7 @@ const InitialHome = () => {
             </motion.div> */}
 
             {/* Code block */}
-            <div className="absolute -left-20 bottom-[-90px] z-30 ">
+            <div className="absolute -left-20 bottom-[-220px] z-30 ">
               <div className="h-[310px] w-[550px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 shadow-2xl ms-10">
                 <div className="flex items-center gap-x-4 mb-2">
                   <div className="w-3 h-3 rounded-full bg-red-500"></div>

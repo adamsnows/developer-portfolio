@@ -19,7 +19,7 @@ const FloatingElement: React.FC<FloatingElementProps> = ({
 }) => {
   const controls = useAnimation();
   const { ref, inView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.2,
   });
 
@@ -39,8 +39,9 @@ const FloatingElement: React.FC<FloatingElementProps> = ({
         delay,
         duration,
         repeat: Infinity,
-        repeatType: "loop" as const,
+        repeatType: "mirror" as const,
         ease: "easeInOut",
+        repeatDelay: 0.1,
       },
     },
   };
@@ -48,7 +49,7 @@ const FloatingElement: React.FC<FloatingElementProps> = ({
   return (
     <motion.div
       ref={ref}
-      className={`floating-element ${className}`}
+      className={`floating-element overflow-hidden ${className}`}
       initial="initial"
       animate={controls}
       variants={floatingVariants}
