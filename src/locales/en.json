@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "greeting": "Hi, I'm Adam Neves",
+      "title": "Full Stack Developer",
+      "subtitle": "TypeScript & Python",
+      "cta": "Contact me"
+    },
+    "about": {
+      "title": "ABOUT ME",
+      "description": "Full-stack developer specialized in TypeScript and Python, with a strong focus on creating high-performance web applications. With experience in various frameworks and technologies, I develop scalable solutions that combine clean code, elegant design, and excellent user experience."
+    },
+    "work": {
+      "title": "LATEST PROJECTS",
+      "subtitle": "Selected work from my portfolio",
+      "viewAll": "View all projects"
+    },
+    "expertise": {
+      "frontend": {
+        "title": "Frontend",
+        "description": "Creating intuitive and responsive user interfaces with modern technologies"
+      },
+      "backend": {
+        "title": "Backend",
+        "description": "Developing robust and scalable server-side applications and APIs"
+      }
+    },
+    "reviews": {
+      "title": "LINKEDIN FEEDBACKS",
+      "loading": "Loading feedback..."
+    }
+  },
+  "projects": {
+    "title": "PROJECTS",
+    "subtitle": "A selection of my recent work",
+    "viewProject": "View project"
+  },
+  "contact": {
+    "title": "CONTACT",
+    "subtitle": "Get in touch",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send message",
+      "success": "Message sent successfully!",
+      "error": "Error sending message. Please try again."
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 Adam Neves. All rights reserved."
+  },
+  "whatsapp": {
+    "message": "Hello! I saw your portfolio and would like to talk."
+  }
+}

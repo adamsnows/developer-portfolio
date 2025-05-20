@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import "swiper/css/navigation";
@@ -16,6 +17,68 @@ import ClientOnly from "@/components/Animations/ClientOnly";
 import { Card, CardHeader, CardTitle } from "@/components/Other/UI/card";
 
 import { reviewsData } from "@/data/reviews";
+
+interface ReviewContentProps {
+  review: string;
+}
+
+const ReviewContent = ({ review }: ReviewContentProps) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [needsFade, setNeedsFade] = useState(false);
+  const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (contentRef.current) {
+        const hasOverflow =
+          contentRef.current.scrollHeight > contentRef.current.clientHeight;
+        setNeedsFade(hasOverflow && !isScrolledToBottom);
+      }
+    };
+
+    // Check on initial render
+    checkOverflow();
+
+    // Re-check on window resize
+    window.addEventListener("resize", checkOverflow);
+
+    return () => {
+      window.removeEventListener("resize", checkOverflow);
+    };
+  }, [review, isScrolledToBottom]);
+
+  const handleScroll = () => {
+    if (contentRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = contentRef.current;
+      // Consideramos "no fim" quando estamos a 10px ou menos do fim
+      const isBottom = Math.abs(scrollHeight - scrollTop - clientHeight) <= 10;
+      setIsScrolledToBottom(isBottom);
+      setNeedsFade(
+        contentRef.current.scrollHeight > contentRef.current.clientHeight &&
+          !isBottom
+      );
+    }
+  };
+
+  return (
+    <div className="relative">
+      <div
+        ref={contentRef}
+        onScroll={handleScroll}
+        className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[390px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent"
+      >
+        <ClientOnly
+          fallback={<div className="text-white/70">Carregando feedback...</div>}
+        >
+          {formatReviewText(review)}
+        </ClientOnly>
+      </div>
+      {needsFade && (
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#050816] to-transparent pointer-events-none"></div>
+      )}
+    </div>
+  );
+};
 
 const formatReviewText = (text: string) => {
   const keywords = [
@@ -203,17 +266,7 @@ const Reviews = () => {
                           </div>
                         </div>
                       </CardHeader>
-                      <div className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[390px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
-                        <ClientOnly
-                          fallback={
-                            <div className="text-white/70">
-                              Carregando feedback...
-                            </div>
-                          }
-                        >
-                          {formatReviewText(person.review)}
-                        </ClientOnly>
-                      </div>
+                      <ReviewContent review={person.review} />
 
                       <div className="absolute top-2 left-4 opacity-30">
                         <svg

@@ -1,0 +1,260 @@
+{
+  "nav": {
+    "home": "Início",
+    "projects": "Projetos",
+    "contact": "Contato"
+  },
+  "home": {
+    "hero": {
+      "greeting": "Olá, eu sou Adam Neves",
+      "title": "Desenvolvedor Full Stack",
+      "subtitle": "TypeScript & Python",
+      "cta": "Contate-me"
+    },
+    "about": {
+      "title": "SOBRE MIM",
+      "description": "Desenvolvedor full-stack especializado em TypeScript e Python, com forte foco na criação de aplicações web de alta performance. Com experiência em diversos frameworks e tecnologias, desenvolvo soluções escaláveis que combinam código limpo, design elegante e excelente experiência do usuário."
+    },
+    "work": {
+      "title": "ÚLTIMOS PROJETOS",
+      "subtitle": "Trabalhos selecionados do meu portfólio",
+      "viewAll": "Ver todos os projetos"
+    },
+    "expertise": {
+      "frontend": {
+        "title": "Frontend",
+        "description": "Criando interfaces de usuário intuitivas e responsivas com tecnologias modernas",
+        "headline": "Experiência visual impactante",
+        "description_extended": "Meu foco é criar interfaces que não apenas funcionem perfeitamente, mas também encantem os usuários com animações fluidas, design responsivo e alta performance.",
+        "feature_list": {
+          "item1": "Interfaces interativas e responsivas",
+          "item2": "Animações avançadas e micro-interações",
+          "item3": "Arquitetura de componentes escalável",
+          "item4": "Aplicações Web Progressivas (PWA)",
+          "item5": "Otimização de SEO e acessibilidade"
+        },
+        "editor_filename": "AnimatedComponent.tsx",
+        "cards": {
+          "layout": {
+            "title": "UI/UX Design",
+            "description": "Criação de interfaces envolventes e intuitivas baseadas em princípios de usabilidade e design moderno."
+          },
+          "development": {
+            "title": "Desenvolvimento de Componentes",
+            "description": "Criação de componentes reutilizáveis com React, otimizando performance e manutenibilidade."
+          },
+          "animation": {
+            "title": "Animações Avançadas",
+            "description": "Implementação de animações fluidas e interativas que elevam a experiência do usuário a um novo nível."
+          },
+          "responsive": {
+            "title": "Design Responsivo",
+            "description": "Interfaces que se adaptam perfeitamente a qualquer dispositivo, garantindo uma experiência consistente."
+          },
+          "performance": {
+            "title": "Performance",
+            "description": "Otimização de carregamento, renderização e interatividade para sites rápidos e eficientes."
+          },
+          "css": {
+            "title": "CSS Avançado",
+            "description": "Domínio de Tailwind CSS, Styled Components, CSS Modules, animações e transições personalizadas."
+          }
+        }
+      },
+      "backend": {
+        "title": "Backend",
+        "description": "Desenvolvendo aplicações robustas e escaláveis do lado do servidor e APIs",
+        "headline": "Arquitetura de Sistemas",
+        "description_extended": "Construo sistemas back-end com foco em performance, escalabilidade e segurança, utilizando as melhores práticas de engenharia de software para garantir código limpo, testável e facilmente manutenível.",
+        "feature_list": {
+          "item1": "Padrões de design e princípios SOLID",
+          "item2": "Testes automatizados e TDD",
+          "item3": "Arquitetura em camadas e hexagonal",
+          "item4": "Sistemas distribuídos e escalabilidade horizontal",
+          "item5": "Monitoramento e logging avançados"
+        },
+        "editor_filename": "server.js",
+        "terminal_text": "$ node server.js\nInicializando servidor...\nConectando ao banco de dados...\nConexão bem-sucedida!\nConfigurando rotas...\nEndpoints da API registrados\nMiddleware configurado\nIniciando servidor na porta 3000\nServidor rodando em http://localhost:3000\nPronto para receber requisições...",
+        "cards": {
+          "api": {
+            "title": "Design de API",
+            "description": "APIs RESTful e GraphQL com autenticação avançada, tratamento de erros e documentação."
+          },
+          "database": {
+            "title": "Bancos de Dados",
+            "description": "Design de banco de dados, otimização, migrações, implementação de ORM e ajuste de performance."
+          },
+          "security": {
+            "title": "Segurança",
+            "description": "Implementação de autenticação JWT, OAuth, proteção contra injeção SQL e outros ataques comuns."
+          },
+          "microservices": {
+            "title": "Microsserviços",
+            "description": "Arquitetura distribuída, comunicação entre serviços, balanceamento de carga e resiliência de sistemas."
+          },
+          "cloud": {
+            "title": "Cloud & DevOps",
+            "description": "Implantação em AWS, Azure, conteinerização com Docker, orquestração com Kubernetes, CI/CD."
+          },
+          "nodejs": {
+            "title": "Node.js Avançado",
+            "description": "Domínio de Express, NestJS, processos assíncronos, streams, workers e otimização de performance."
+          }
+        }
+      }
+    },
+    "reviews": {
+      "title": "FEEDBACKS DO LINKEDIN",
+      "loading": "Carregando feedbacks..."
+    }
+  },
+  "projects": {
+    "title": "PROJETOS",
+    "subtitle": "Uma seleção dos meus trabalhos recentes",
+    "viewProject": "Ver projeto",
+    "categories": {
+      "frontend": "front end",
+      "backend": "back end",
+      "fullstack": "full stack"
+    }
+  },
+  "contact": {
+    "title": "CONTATO",
+    "subtitle": "Entre em contato",
+    "form": {
+      "name": "Nome",
+      "email": "Email",
+      "message": "Mensagem",
+      "submit": "Enviar mensagem",
+      "success": "Mensagem enviada com sucesso!",
+      "error": "Erro ao enviar mensagem. Por favor, tente novamente."
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Adam Neves. Todos os direitos reservados."
+  },
+  "whatsapp": {
+    "message": "Olá! Vi seu portfólio e gostaria de conversar."
+  },
+  "work_projects": [
+    {
+      "name": "SMVZap Extension",
+      "category": "full stack",
+      "description": "Projeto extremamente desafiador, onde pude desenvolver uma extensão para Chrome que permite a inclusão de ferramentas poderosas para vendedores como mensagens em massa, mensagens agendadas, mensagens automáticas, etc."
+    },
+    {
+      "name": "SMV Flow",
+      "category": "full stack",
+      "description": "Painel administrativo para controle interno de inúmeros processos dentro da empresa Super Megavendas, bem como controle de usuários, permissões, etc."
+    },
+    {
+      "name": "Evnttz",
+      "category": "front end",
+      "description": "Evnttz é uma plataforma de gestão de eventos que simplifica a organização com venda de ingressos, controle de participantes, gamificação e análises em tempo real. Tudo isso em uma interface moderna e intuitiva."
+    },
+    {
+      "name": "Maestria",
+      "category": "front end",
+      "description": "O sistema Maestria foi desenvolvido com advogados para oferecer uma experiência otimizada. O resultado é uma plataforma intuitiva que simplifica a busca por jurisprudência e torna a jornada jurídica mais acessível."
+    },
+    {
+      "name": "Migtech Hub",
+      "category": "front end",
+      "description": "Você é um profissional de saúde que deseja fazer a transição de carreira em um novo país? Nossa equipe oferece suporte completo, desde a revalidação do diploma até a colocação profissional. Com uma abordagem personalizada, garantimos uma transição suave para o mercado americano."
+    },
+    {
+      "name": "Vivalá",
+      "category": "front end",
+      "description": "Nosso objetivo é transformar o Brasil no maior destino de turismo sustentável do mundo, criando expedições que sejam transformadoras para os viajantes, as comunidades e o planeta."
+    },
+    {
+      "name": "JA Brasil (Admin Panel)",
+      "category": "front end",
+      "description": "Somos uma das organizações sociais mais influentes do mundo e atuamos no Brasil há quatro décadas, beneficiando mais de 5 milhões de jovens em todas as regiões do país. Estamos focados na ampliação da educação empreendedora e no desenvolvimento econômico do país."
+    },
+    {
+      "name": "Gastrobox",
+      "category": "full stack",
+      "description": "Site de delivery de comida com sistema de gestão de pedidos e cardápio."
+    },
+    {
+      "name": "SMVZap Clients",
+      "category": "back end",
+      "description": "A API SMVZap é uma API robusta e multifuncional projetada para gerenciar e controlar aspectos cruciais de um sistema de usuários, incluindo tempo premium, criação e gerenciamento de contas e definição de tipo de usuário. Esta API fornece endpoints que permitem integração com o front-end do SMVZap."
+    }
+  ],
+  "portfolio_projects": [
+    {
+      "name": "Portfolio Open Source",
+      "category": "front end",
+      "description": "Este é um portfólio desenvolvido para beneficiar desenvolvedores que ainda não têm seu portfólio ou desenvolvedores que desejam um portfólio."
+    },
+    {
+      "name": "YRprey",
+      "category": "front end",
+      "description": "Um site modelo que simula várias vulnerabilidades e falhas de segurança, desafiando os desenvolvedores a testar suas habilidades na detecção e correção desses problemas em sistemas web."
+    },
+    {
+      "name": "Dogma",
+      "category": "front end",
+      "description": "Um site dedicado à construtora, fornecendo informações sobre serviços, projetos concluídos e contatos."
+    },
+    {
+      "name": "User crud",
+      "category": "back end",
+      "description": "Este é um CRUD de usuário que visa facilitar o acesso com funcionalidades básicas de usuário e login."
+    },
+    {
+      "name": "Scanner CNAB",
+      "category": "full stack",
+      "description": "Esta é a aplicação Scanner CNBA - Que visa facilitar a leitura de documentos CNAB.txt"
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Christian Alex Soares Gall de Oliveira",
+      "job": "Desenvolvedor de Software",
+      "review": "Eu gostaria de expressar minha mais alta recomendação. Durante o tempo em que trabalhei com ele fiquei impressionado com sua habilidade e capacidade de unir o grupo em torno de objetivos em comuns.\n\nUm conhecimento profundo em desenvolvimento em várias stacks e usa esse conhecimento para propor soluções inovadoras e eficientes. Projetos incríveis.\n\nAlém disso, é extremamente proativo e sempre busca maneiras de melhorar o processo de desenvolvimento e otimizar o trabalho em equipe. Tem uma personalidade alegre e contagiante que inspira os outros a seguir em frente e alcançar resultados juntos.\n\nEm resumo, acredito que é um incansável desenvolvedor full-stack talentoso, e estou confiante de que continuará a se destacar em sua carreira. Eu recomendo sem reservas para qualquer equipe que busque um desenvolvedor altamente capacitado e dedicado."
+    },
+    {
+      "name": "Tsunode (Gabriel Tsunoda)",
+      "job": "Desenvolvedor de Software",
+      "review": "Adam é um excelente profissional e consigo falar isso com total autoria, já que tive o prazer de liderar ele durante sua experiência de monitor front-end na Kenzie Academy.\n\nAlém das habilidades técnicas que ele adquiria com facilidade, deixo meu destaque pela paixão que esse cara tem pela comunidade, por ajudar pessoas e a vontade gigante de criar algo, um talento.\n\nAdam criou uma comunidade nomeada 'Os campeões(ãs)', e vem ajudado a galera desde então. Não posso deixar de destacar o período que fui instrutor dele, e o grupo do projeto no qual ele fazia parte nos surpreendeu com um projeto incrível, usando tecnologias além das que tínhamos ensinado, mostrando claramente que tinham proatividade e sede por aprender.\n\nBom, se você leu até aqui, acredito que nesse momento já está chamando o Adam para bater aquele papo, para convidar ele para entrar no seu time, eu não perderia por nada!"
+    },
+    {
+      "name": "José Cássio",
+      "job": "Desenvolvedor de Software @Super Megavendas",
+      "review": "Tive o privilégio de ter Adam como meu tech leader, conseguindo transmitir conhecimentos que com certeza levarei por toda minha jornada. Obtive muito conhecimento enquanto trabalhei ao seu lado e serei eternamente grato por isso. Nunca existiu problema complicado o suficiente que não tivesse uma solução. 'Não existe nada impossível, basta querer'."
+    },
+    {
+      "name": "Cláudio Bittencourt",
+      "job": "Sócio e COO @Super Megavendas",
+      "review": "Excelente profissional, organizado, muito criativo e proativo."
+    },
+    {
+      "name": "Vagner Mengali",
+      "job": "Desenvolvedor de Software",
+      "review": "Adam é um desenvolvedor excepcional. Sempre demonstrou habilidades técnicas notáveis, destacando-se em lógica de programação e mantendo-se atualizado com as últimas tendências.\n\nSua proatividade e disposição para ajudar colegas são evidentes, contribuindo para melhorias contínuas nos processos da equipe. Adam é não apenas um profissional talentoso, mas também um colega de equipe exemplar, com habilidades interpessoais notáveis que criam um ambiente de trabalho positivo.\n\nSua expertise em User Experience (UX) resultou em interfaces intuitivas e agradáveis em nossos projetos. Em resumo, Adam é uma adição valiosa para qualquer equipe de desenvolvimento, e estou confiante de que continuará a ter um impacto positivo em seus futuros desafios profissionais."
+    }
+  ],
+  "keywords": {
+    "highlight": [
+      "excelente",
+      "incrível",
+      "talentoso",
+      "habilidade",
+      "profissional",
+      "comunicação",
+      "conhecimento",
+      "inovadoras",
+      "proativo",
+      "dedicado",
+      "capacitado"
+    ]
+  },
+  "meta": {
+    "title": "Adam Neves - Desenvolvedor Full Stack | Portfólio",
+    "description": "Desenvolvedor full-stack especializado em TypeScript e Python, com forte foco na criação de aplicações web de alta performance com tecnologias modernas.",
+    "keywords": "Full-stack, Desenvolvedor, TypeScript, Python, React, Node.js"
+  }
+}
