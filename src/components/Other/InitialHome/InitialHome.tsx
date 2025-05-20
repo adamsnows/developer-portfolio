@@ -285,7 +285,7 @@ const InitialHome = () => {
 
             <h1
               ref={titleRef}
-              className="text-[50px] xl:text-[60px] font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text"
+              className="text-[45px] xl:text-[60px] font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text"
             >
               ADAM NEVES
             </h1>

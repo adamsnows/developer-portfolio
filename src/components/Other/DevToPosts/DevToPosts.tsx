@@ -30,6 +30,7 @@ import {
   RiArticleLine,
   RiHeart3Fill,
   RiMessageLine,
+  RiRefreshLine,
 } from "react-icons/ri";
 
 interface Post {
@@ -121,6 +122,7 @@ const DevToPosts = () => {
 
   const [posts, setPosts] = useState<Post[]>(devtoPostsData);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false); // Estado separado para animação de refresh
   const [error, setError] = useState<string | null>(null);
   const [initialSlide, setInitialSlide] = useState<number>(1);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
@@ -165,32 +167,53 @@ const DevToPosts = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const fetchedPosts = await fetchDevtoPosts("adamsnows");
-        if (fetchedPosts.length > 0) {
-          setPosts(fetchedPosts);
-          // Definir o slide inicial como 1 (o segundo post) para garantir que sempre haja um slide à esquerda
-          const initialSlideNumber = Math.min(
-            Math.max(fetchedPosts.length > 3 ? 1 : 0, 1),
-            fetchedPosts.length - 1
-          );
-          setInitialSlide(initialSlideNumber);
-        }
-      } catch (err) {
-        console.error("Erro ao buscar posts do DEV.TO:", err);
-        setError(
-          "Não foi possível carregar os artigos. Usando dados locais como fallback."
+  const fetchPosts = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      console.log("Fetching fresh DEV.to posts...");
+      const fetchedPosts = await fetchDevtoPosts("adamsnows");
+      console.log(`Fetched ${fetchedPosts.length} posts from DEV.TO`);
+
+      if (fetchedPosts.length > 0) {
+        setPosts(fetchedPosts);
+        // Definir o slide inicial como 1 (o segundo post) para garantir que sempre haja um slide à esquerda
+        const initialSlideNumber = Math.min(
+          Math.max(fetchedPosts.length > 3 ? 1 : 0, 1),
+          fetchedPosts.length - 1
         );
-      } finally {
-        setIsLoading(false);
+        setInitialSlide(initialSlideNumber);
+      }
+    } catch (err) {
+      console.error("Erro ao buscar posts do DEV.TO:", err);
+      setError(
+        "Não foi possível carregar os artigos. Usando dados locais como fallback."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Effect that runs on mount and when document visibility changes
+  useEffect(() => {
+    // Fetch posts on initial load
+    fetchPosts();
+
+    // Set up visibility change listener to refetch when tab becomes visible again
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        console.log("Tab became visible, refetching posts...");
+        fetchPosts();
       }
     };
 
-    fetchPosts();
+    // Add event listener for visibility change
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // Clean up the event listener
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   // Atualiza o Swiper quando os posts são carregados ou quando o swiperInstance muda
@@ -279,18 +302,34 @@ const DevToPosts = () => {
             </div>
           </div>
 
-          <Link
-            className="mt-auto group mx-auto"
-            href="https://dev.to/adamsnows"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="dev.to articles"
-          >
-            <Button className="gap-x-2 text-white">
-              VER NO DEV.TO{" "}
-              <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                fetchPosts();
+              }}
+              variant="outline"
+              size="icon"
+              className="h-9 w-9 rounded-full border-primary/30 text-primary hover:bg-primary/10 hover:text-white mr-2"
+              title="Atualizar posts"
+              aria-label="Atualizar posts"
+            >
+              <RiRefreshLine className={`${isLoading ? "animate-spin" : ""}`} />
             </Button>
-          </Link>
+
+            <Link
+              className="group"
+              href="https://dev.to/adamsnows"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="dev.to articles"
+            >
+              <Button className="gap-x-2 text-white">
+                VER NO DEV.TO{" "}
+                <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+          </div>
         </motion.div>
 
         <motion.div
