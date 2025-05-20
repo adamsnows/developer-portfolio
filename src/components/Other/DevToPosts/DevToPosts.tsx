@@ -15,7 +15,6 @@ import {
   Pagination,
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import type { SwiperClass } from "swiper/types";
 
 import {
   fadeInLeft,
@@ -116,9 +115,7 @@ const DevToPosts = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [initialSlide, setInitialSlide] = useState<number>(1);
-  const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(
-    null
-  );
+  const [swiperInstance, setSwiperInstance] = useState<null>(null);
 
   useEffect(() => {
     if (inView) {
@@ -390,7 +387,6 @@ const DevToPosts = () => {
                       <motion.div
                         transition={{ duration: 0.3 }}
                         className="z-20 relative"
-                        whileHover={{ scale: 1.03 }}
                       >
                         <DevToPostCard post={post} />
                       </motion.div>
