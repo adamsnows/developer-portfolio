@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <>
       <Seo
-        description="Descubra um ponto de partida dinâmico para explorar meu mundo de desenvolvimento de software, com insights sobre minhas habilidades, experiência e abordagem única para resolver desafios tecnológicos."
+        description="Desenvolvedor TypeScript e Python especializado em criar soluções web modernas e eficientes. Com experiência em React, Next.js e desenvolvimento full-stack, transformo ideias em projetos inovadores com código limpo e boas práticas."
         title="AN | SOFTWARE ENGINEER"
       />
       <Home />
