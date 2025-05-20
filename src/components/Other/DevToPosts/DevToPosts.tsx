@@ -15,6 +15,7 @@ import {
   Pagination,
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 
 import {
   fadeInLeft,
@@ -115,7 +116,7 @@ const DevToPosts = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [initialSlide, setInitialSlide] = useState<number>(1);
-  const [swiperInstance, setSwiperInstance] = useState<null>(null);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   useEffect(() => {
     if (inView) {
