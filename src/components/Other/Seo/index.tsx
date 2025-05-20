@@ -1,21 +1,21 @@
-import Head from "next/head";
 import { SeoInterface } from "@/interfaces/SeoInterface";
+import Head from "next/head";
 
 const Seo = ({ title, description }: SeoInterface) => {
   return (
     <Head>
       <meta name="author" content="Adam Neves" />
       <meta name="keywords" content="Javascript" />
-      <link rel="fluid-icon" href="/favicon.webp" title="Adam Neves" />
-      <link rel="icon" type="svg+xml" href="/favicon.webp" />
+      <link rel="fluid-icon" href="/ts.png" title="Adam Neves" />
+      <link rel="icon" type="image/png" href="/ts.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>{title}</title>
-      <link rel="shortcut icon" href="/favicon.webp" type="x-icon" />
-      <link rel="icon" href="/favicon32x32.webp" sizes="32x32" />
-      <link rel="icon" href="/favicon48x48.webp" sizes="48x48" />
-      <link rel="icon" href="/favicon96x96.webp" sizes="96x96" />
-      <link rel="icon" href="/favicon144x144.webp" sizes="144x144" />
-      <link rel="icon" href="/favicon512x512.webp" sizes="512x512" />
+      <link rel="shortcut icon" href="/ts.png" type="image/png" />
+      <link rel="icon" href="/ts.png" sizes="32x32" />
+      <link rel="icon" href="/ts.png" sizes="48x48" />
+      <link rel="icon" href="/ts.png" sizes="96x96" />
+      <link rel="icon" href="/ts.png" sizes="144x144" />
+      <link rel="icon" href="/ts.png" sizes="512x512" />
       <meta name="description" content={description} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />

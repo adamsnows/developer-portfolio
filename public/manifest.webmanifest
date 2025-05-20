@@ -11,38 +11,38 @@
   "start_url": "/",
   "icons": [
     {
-      "src": "/favicon521x512.png",
+      "src": "/ts.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "/favicon32x32.webp",
+      "src": "/ts.png",
       "sizes": "32x32",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "/favicon48x48.webp",
+      "src": "/ts.png",
       "sizes": "48x48",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "/favicon96x96.webp",
+      "src": "/ts.png",
       "sizes": "96x96",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "/favicon144x144.webp",
+      "src": "/ts.png",
       "sizes": "144x144",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "/favicon521x512.webp",
+      "src": "/ts.png",
       "sizes": "512x512",
-      "type": "image/webp",
+      "type": "image/png",
       "purpose": "maskable any"
     }
   ],

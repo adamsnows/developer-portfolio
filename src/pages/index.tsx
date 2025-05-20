@@ -6,7 +6,7 @@ const HomePage = () => {
     <>
       <Seo
         description="Descubra um ponto de partida dinâmico para explorar meu mundo de desenvolvimento de software, com insights sobre minhas habilidades, experiência e abordagem única para resolver desafios tecnológicos."
-        title="NEVES | SOFTWARE ENGINEER"
+        title="AN | SOFTWARE ENGINEER"
       />
       <Home />
     </>
