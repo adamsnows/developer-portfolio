@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import { RiGithubFill, RiExternalLinkFill } from "react-icons/ri";
 
 import { Card, CardHeader } from "@/components/Other/UI/card";
 import { Badge } from "@/components/Other/UI/badge";
+import SafeImage from "@/components/Other/SafeImage/SafeImage";
 
 import { ProjectCardInterface } from "@/interfaces/ProjectInterface";
 
@@ -17,15 +17,13 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
           className="relative w-full h-72
            flex items-center justify-center bg-secondary/40 bg-work_project_bg xl:bg-no-repeat overflow-hidden xl:bg-contain"
         >
-          <Image
+          <SafeImage
             className="absolute shadow-2xl translate-y-1/2 -translate-x-1/2 top-0 left-1/2"
             src={project.image}
             width={300}
             height={135}
             alt={`${project.name} Project Image`}
-            style={{ 
-              width: "300px", 
-              height: "135px",
+            customStyle={{ 
               objectFit: "contain"
             }}
             unoptimized={true}

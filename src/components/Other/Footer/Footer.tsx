@@ -11,7 +11,7 @@ const Footer = () => {
             containerStyles="flex gap-x-6 mx-auto xl:mx-0 mb-4"
             iconsStyles="text-white/70 text-[20px] hover:text-primary transition-all"
           />
-          <div className="text-muted-foreground mb-3">
+          <div className="text-center lg:text-start text-muted-foreground mb-3">
             Direitos autorais &copy; Adam Neves. Todos os direitos reservados
           </div>
           <Link

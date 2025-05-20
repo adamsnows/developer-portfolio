@@ -204,7 +204,7 @@ Ready to handle requests...`;
 
           <motion.div variants={fadeInRight} className="space-y-6">
             <h3 className="text-2xl font-bold">Arquitetura de Sistema</h3>
-            <p className="text-white/80">
+            <p className="text-white/80 text-justify">
               Construo sistemas back-end com foco em performance, escalabilidade
               e segurança, utilizando as melhores práticas de engenharia de
               software para garantir código limpo, testável e de fácil

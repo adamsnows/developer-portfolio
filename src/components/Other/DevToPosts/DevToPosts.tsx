@@ -237,7 +237,7 @@ const DevToPosts = () => {
           >
             PUBLICAÇÕES
           </h2>
-          <p className="text-sm mb-8 leading-relaxed">
+          <p className="text-justify text-sm mb-8 leading-relaxed">
             Compartilho meus conhecimentos e experiências através de artigos no{" "}
             <span className="text-primary font-medium">DEV.TO</span>, abordando
             temas relevantes sobre{" "}

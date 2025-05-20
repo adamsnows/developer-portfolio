@@ -265,7 +265,7 @@ const FrontendExpertise = () => {
             <h3 className="text-2xl font-bold">
               Experiência visual impactante
             </h3>
-            <p className="text-white/80">
+            <p className="text-justify text-white/80">
               Meu foco é criar interfaces que não apenas funcionem
               perfeitamente, mas que também encantem os usuários com animações
               fluidas, design responsivo e alta performance.
