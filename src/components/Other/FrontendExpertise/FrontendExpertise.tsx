@@ -297,7 +297,7 @@ const FrontendExpertise = () => {
 
           <motion.div
             variants={fadeInRight}
-            className="bg-white/10 background-blur-sm rounded-lg border border-white/10 p-6 shadow-2xl overflow-hidden order-1 lg:order-2"
+            className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/10 p-6 shadow-2xl overflow-hidden order-1 lg:order-2"
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -309,7 +309,7 @@ const FrontendExpertise = () => {
             </div>
             <pre
               ref={codeRef}
-              className="text-xs text-white font-mono overflow-x-auto whitespace-pre-wrap  p-4 rounded-lg h-[350px]"
+              className="text-xs text-white font-mono overflow-x-auto whitespace-pre-wrap p-4 rounded-lg h-[350px] code-example bg-black/70"
             ></pre>
           </motion.div>
         </motion.div>
