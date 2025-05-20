@@ -265,7 +265,7 @@ const DevToPosts = () => {
             rel="noopener noreferrer"
             aria-label="dev.to articles"
           >
-            <Button className="gap-x-2">
+            <Button className="gap-x-2 text-white">
               VER NO DEV.TO{" "}
               <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
             </Button>

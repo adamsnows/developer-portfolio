@@ -125,7 +125,7 @@ const formatReviewText = (text: string) => {
 
 const Reviews = () => {
   return (
-    <section className="pt-[170px] pb-20 xl:mb-20 relative overflow-hidden">
+    <section className="pt-[100px] pb-20  relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl opacity-40"
