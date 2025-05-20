@@ -8,8 +8,14 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Autoplay, EffectCoverflow, Navigation } from "swiper/modules";
+import {
+  Autoplay,
+  EffectCoverflow,
+  Navigation,
+  Pagination,
+} from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { SwiperClass } from "swiper/types";
 
 import {
   fadeInLeft,
@@ -109,6 +115,10 @@ const DevToPosts = () => {
   const [posts, setPosts] = useState<Post[]>(devtoPostsData);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [initialSlide, setInitialSlide] = useState<number>(1);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(
+    null
+  );
 
   useEffect(() => {
     if (inView) {
@@ -142,6 +152,12 @@ const DevToPosts = () => {
         const fetchedPosts = await fetchDevtoPosts("adamsnows");
         if (fetchedPosts.length > 0) {
           setPosts(fetchedPosts);
+          // Definir o slide inicial como 1 (o segundo post) para garantir que sempre haja um slide à esquerda
+          const initialSlideNumber = Math.min(
+            Math.max(fetchedPosts.length > 3 ? 1 : 0, 1),
+            fetchedPosts.length - 1
+          );
+          setInitialSlide(initialSlideNumber);
         }
       } catch (err) {
         console.error("Erro ao buscar posts do DEV.TO:", err);
@@ -155,6 +171,17 @@ const DevToPosts = () => {
 
     fetchPosts();
   }, []);
+
+  // Atualiza o Swiper quando os posts são carregados ou quando o swiperInstance muda
+  useEffect(() => {
+    if (swiperInstance && !isLoading && posts.length > 0) {
+      // Pequeno timeout para garantir que o DOM está atualizado
+      setTimeout(() => {
+        swiperInstance.update();
+        swiperInstance.slideToLoop(initialSlide, 0, false);
+      }, 100);
+    }
+  }, [swiperInstance, posts, isLoading, initialSlide]);
 
   return (
     <section className="relative  pt-[170px] overflow-hidden">
@@ -271,22 +298,16 @@ const DevToPosts = () => {
             />
 
             <Swiper
-              className="h-fit rounded-xl relative z-30 p-6 pb-14 my-6 mx-auto px-10 md:px-16"
+              className="h-fit rounded-xl relative z-30 p-6 pb-14 my-6 mx-4"
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
-              slidesPerView={1}
-              breakpoints={{
-                640: { slidesPerView: 1.5 },
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 2.5 },
-              }}
-              spaceBetween={10}
-              initialSlide={Math.floor(posts.length / 2)}
+              slidesPerView={"auto"}
+              initialSlide={initialSlide}
               coverflowEffect={{
-                rotate: 5,
-                stretch: 0,
-                depth: 100,
+                rotate: 20,
+                stretch: 25,
+                depth: 250,
                 modifier: 1.5,
                 slideShadows: true,
               }}
@@ -295,9 +316,15 @@ const DevToPosts = () => {
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
               }}
+              pagination={{
+                clickable: true,
+                dynamicBullets: true,
+                horizontalClass: "swiper-pagination-horizontal",
+              }}
               loop={true}
               speed={800}
-              modules={[EffectCoverflow, Navigation, Autoplay]}
+              modules={[EffectCoverflow, Navigation, Pagination, Autoplay]}
+              onSwiper={(swiper) => setSwiperInstance(swiper)}
             >
               {isLoading ? (
                 <SwiperSlide
@@ -328,7 +355,7 @@ const DevToPosts = () => {
                   <SwiperSlide
                     key={index}
                     style={{ width: "320px", height: "auto" }}
-                    className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 mx-auto"
+                    className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
                   >
                     <Link
                       href={post.url}
@@ -339,6 +366,7 @@ const DevToPosts = () => {
                       <motion.div
                         transition={{ duration: 0.3 }}
                         className="z-20 relative"
+                        whileHover={{ scale: 1.03 }}
                       >
                         <DevToPostCard post={post} />
                       </motion.div>
