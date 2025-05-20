@@ -29,6 +29,8 @@ Este é um portfólio profissional desenvolvido com tecnologias modernas para ap
 
 - **Next.js**: Framework React com renderização do lado do servidor
 - **TypeScript**: Tipagem estática para código mais seguro e manutenível
+- **GitHub Actions**: Automação de CI/CD para deploy contínuo
+- **Vercel**: Plataforma de hospedagem com integração ao CI/CD
 - **Tailwind CSS**: Estilização rápida e responsiva com classes utilitárias
 - **GSAP**: Biblioteca de animação avançada para efeitos visuais
 - **Framer Motion**: Animações de componentes React
@@ -79,12 +81,23 @@ Para executar este projeto localmente, siga as instruções abaixo:
    http://localhost:3000/
    ```
 
+## Deploy e CI/CD
+
+Este projeto está configurado com CI/CD automatizado usando GitHub Actions para deploy na Vercel:
+
+1. Cada push para as branches `main` ou `master` aciona um deploy de produção
+2. Cada pull request gera um deploy de preview
+
+Para informações detalhadas sobre a configuração do CI/CD, consulte [README do CI/CD](./.github/CI_CD_README.md).
+
 ## Soluções Técnicas Implementadas
 
 - **Prevenção de Erros de Hidratação**: Uso de componentes ClientOnly para garantir compatibilidade entre renderização no servidor e cliente
 - **Animação de Código Dinâmico**: Sistema robusto para animação de código com retry e fallback
 - **Componentes Reutilizáveis**: Estrutura modular para manutenção eficiente
 - **Otimização de Imagens**: Uso do sistema de otimização de imagens do Next.js
+- **CI/CD Automatizado**: Workflow GitHub Actions para deploy automatizado na Vercel
+- **Gerenciamento de Dependências**: Configuração personalizada para lidar com dependências complexas
 
 ## Contribuição
 
@@ -163,12 +176,23 @@ To run this project locally, follow these instructions:
    http://localhost:3000/
    ```
 
+## Deployment and CI/CD
+
+This project is configured with automated CI/CD using GitHub Actions for deployment to Vercel:
+
+1. Every push to the `main` or `master` branch triggers a production deployment
+2. Every pull request generates a preview deployment
+
+For detailed information on the CI/CD setup, see [CI/CD README](./.github/CI_CD_README.md).
+
 ## Technical Solutions Implemented
 
 - **Hydration Error Prevention**: Use of ClientOnly components to ensure compatibility between server and client rendering
 - **Dynamic Code Animation**: Robust system for code animation with retry and fallback mechanisms
 - **Reusable Components**: Modular structure for efficient maintenance
 - **Image Optimization**: Use of Next.js image optimization system
+- **Automated CI/CD**: GitHub Actions workflow for automated deployment to Vercel
+- **Dependency Management**: Custom configuration to handle complex library dependencies
 
 ## Contribution
 

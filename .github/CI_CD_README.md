@@ -60,3 +60,25 @@ As seguintes soluções foram implementadas:
 1. Uso da flag `--legacy-peer-deps` durante a instalação
 2. Aplicação de overrides no package.json para garantir compatibilidade com React 18
 3. Configuração otimizada para garantir builds consistentes em ambiente CI/CD
+
+### Pacote Critters e Otimização CSS
+
+Para resolver erros relacionados ao módulo "critters" durante o build, foram implementadas as seguintes soluções:
+
+1. O pacote `critters` foi adicionado como dependência de desenvolvimento
+2. A otimização CSS foi desativada no `next.config.mjs` para evitar problemas durante o build
+3. O arquivo `vercel.json` foi configurado para instalar explicitamente o pacote durante o deploy
+
+### Otimização de Memória
+
+Para resolver problemas de memória durante o build, foi implementada a seguinte solução:
+
+1. Configuração `NODE_OPTIONS='--max_old_space_size=4096'` adicionada ao comando de build
+
+### Arquivos de Configuração Adicionais
+
+Foram adicionados vários arquivos para garantir um deploy consistente:
+
+1. `.nvmrc`: Especifica a versão exata do Node.js (18.18.0)
+2. `.npmrc`: Configurações do npm para garantir instalação consistente de dependências
+3. `vercel.json`: Configurações personalizadas para o deploy na Vercel
