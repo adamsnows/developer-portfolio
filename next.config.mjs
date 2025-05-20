@@ -2,6 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  poweredByHeader: false,
+  experimental: {
+    optimizeCss: true,
+    esmExternals: 'loose',
+  },
   images: {
     remotePatterns: [
       {

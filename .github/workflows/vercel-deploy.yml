@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '18.18.0'
           cache: 'npm'
-          
+
       - name: Apply dependency fixes
         run: |
           sudo apt-get update
@@ -29,14 +29,21 @@ jobs:
           jq -s '.[0] * .[1]' package.json package.fix.json > package.combined.json
           mv package.combined.json package.json
 
+      - name: Setup .npmrc
+        run: |
+          echo "legacy-peer-deps=true" >> .npmrc
+          echo "node-linker=hoisted" >> .npmrc
+          echo "prefer-dedupe=true" >> .npmrc
+          echo "strict-peer-dependencies=false" >> .npmrc
+
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps || (npm cache clean --force && npm install --legacy-peer-deps)
+        run: npm install --legacy-peer-deps --no-audit --no-fund
 
       - name: Run linting
         run: npm run lint
 
       - name: Build project
-        run: npm run build
+        run: NODE_OPTIONS='--max_old_space_size=4096' npm run build
 
       - name: Deploy to Vercel (Production)
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
@@ -45,7 +52,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
+          vercel-args: '--prod --force'
           working-directory: ./
 
       - name: Deploy to Vercel (Preview)

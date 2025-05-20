@@ -54,7 +54,7 @@ Para que o CI/CD funcione corretamente, você precisa adicionar as seguintes sec
 
 ### Conflitos de Dependências React
 
-O workflow está configurado para lidar com conflitos de dependências entre o React 18 e bibliotecas que possam requerer versões diferentes (como o `@react-three/fiber` que pode exigir React 19). 
+O workflow está configurado para lidar com conflitos de dependências entre o React 18 e bibliotecas que possam requerer versões diferentes (como o `@react-three/fiber` que pode exigir React 19).
 
 As seguintes soluções foram implementadas:
 1. Uso da flag `--legacy-peer-deps` durante a instalação

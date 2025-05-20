@@ -1,11 +1,11 @@
 {
-  "author": "v-a-g-n-e-r-m-e-n-g-a-l-i",
-  "name": "developer-blue-portfolio",
+  "author": "adamsnows",
+  "name": "snows-portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "NODE_OPTIONS='--max_old_space_size=4096' next build",
     "start": "next start",
     "lint": "next lint"
   },
