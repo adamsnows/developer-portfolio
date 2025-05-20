@@ -62,7 +62,7 @@ const formatReviewText = (text: string) => {
 
 const Reviews = () => {
   return (
-    <section className="py-10 mb-12 xl:mb-20 relative overflow-hidden">
+    <section className="pt-[170px] pb-20 xl:mb-20 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl opacity-40"
@@ -179,7 +179,7 @@ const Reviews = () => {
                   className="rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
                 >
                   <motion.div transition={{ duration: 0.3 }}>
-                    <Card className="border border-white/10 shadow-lg p-6 min-h-[450px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
+                    <Card className="border border-white/10 shadow-lg p-6 min-h-[550px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
                       <CardHeader className="p-0 mt-4 mb-4">
                         <div className="flex items-center gap-x-5">
                           <div className="relative">
@@ -203,7 +203,7 @@ const Reviews = () => {
                           </div>
                         </div>
                       </CardHeader>
-                      <div className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[290px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
+                      <div className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[390px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
                         <ClientOnly
                           fallback={
                             <div className="text-white/70">
