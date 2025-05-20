@@ -1,5 +1,4 @@
 import AdvancedTransition from "@/components/Animations/AdvancedTransition";
-import About from "@/components/Other/About/About";
 import BackendExpertise from "@/components/Other/BackendExpertise/BackendExpertise";
 import Contact from "@/components/Other/Contact/Contact";
 import FrontendExpertise from "@/components/Other/FrontendExpertise/FrontendExpertise";
@@ -11,7 +10,7 @@ const Home = () => {
   return (
     <AdvancedTransition>
       <InitialHome />
-      <About />
+      {/* <About /> */}
       {/* <Services /> */}
       <Work />
       <FrontendExpertise />
