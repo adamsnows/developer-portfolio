@@ -51,53 +51,101 @@ export function setupCodeTypingAnimation(
   duration: number = 6,
   delay: number = 1
 ) {
-  if (!codeBlockRef.current) return;
+  if (!codeBlockRef.current) {
+    console.warn("Code block reference is not available yet");
+    return {
+      duration,
+      delay,
+      onUpdate: () => {},
+      onComplete: () => {},
+    };
+  }
 
-  const highlightedCode = codeText.includes('style="color:')
-    ? codeText
-    : highlightJS(codeText);
-  codeBlockRef.current.innerHTML = "";
+  try {
+    const highlightedCode = codeText.includes('style="color:')
+      ? codeText
+      : highlightJS(codeText);
 
-  const plainText = highlightedCode.replace(/<[^>]*>/g, "");
+    // Clear the content or set a placeholder
+    codeBlockRef.current.innerHTML = "";
 
-  let currentHTML = "";
+    const plainText = highlightedCode.replace(/<[^>]*>/g, "");
+    let currentHTML = "";
 
-  return {
-    duration,
-    onUpdate: function (this: { progress: () => number }) {
-      const progress = this.progress();
-      const targetLength = Math.floor(progress * plainText.length);
+    return {
+      duration,
+      onUpdate: function (this: { progress: () => number }) {
+        try {
+          const progress = this.progress();
+          const targetLength = Math.floor(progress * plainText.length);
 
-      if (currentHTML.replace(/<[^>]*>/g, "").length >= targetLength) {
-        return;
-      }
+          if (currentHTML.replace(/<[^>]*>/g, "").length >= targetLength) {
+            return;
+          }
 
-      let htmlResult = "";
-      let plainCounter = 0;
-      let htmlCounter = 0;
+          let htmlResult = "";
+          let plainCounter = 0;
+          let htmlCounter = 0;
 
-      while (
-        plainCounter < targetLength &&
-        htmlCounter < highlightedCode.length
-      ) {
-        if (highlightedCode[htmlCounter] === "<") {
-          const tagEnd = highlightedCode.indexOf(">", htmlCounter) + 1;
-          htmlResult += highlightedCode.substring(htmlCounter, tagEnd);
-          htmlCounter = tagEnd;
-        } else {
-          htmlResult += highlightedCode[htmlCounter];
-          htmlCounter++;
-          plainCounter++;
+          while (
+            plainCounter < targetLength &&
+            htmlCounter < highlightedCode.length
+          ) {
+            if (highlightedCode[htmlCounter] === "<") {
+              const tagEnd = highlightedCode.indexOf(">", htmlCounter) + 1;
+              if (tagEnd <= 0) {
+                // Safety check for malformed HTML
+                htmlCounter++;
+                continue;
+              }
+              htmlResult += highlightedCode.substring(htmlCounter, tagEnd);
+              htmlCounter = tagEnd;
+            } else {
+              htmlResult += highlightedCode[htmlCounter];
+              htmlCounter++;
+              plainCounter++;
+            }
+          }
+
+          currentHTML = htmlResult;
+          if (codeBlockRef.current) {
+            codeBlockRef.current.innerHTML = htmlResult;
+          }
+        } catch (error) {
+          console.error("Error during animation update:", error);
         }
-      }
+      },
+      onComplete: function () {
+        // Ensure the full code is displayed at the end
+        if (codeBlockRef.current) {
+          codeBlockRef.current.innerHTML = highlightedCode;
+        }
+      },
+      delay,
+    };
+  } catch (error) {
+    console.error("Error setting up animation:", error);
 
-      currentHTML = htmlResult;
-      if (codeBlockRef.current) {
-        codeBlockRef.current.innerHTML = htmlResult;
-      }
-    },
-    delay,
-  };
+    // Fallback to just setting the content directly
+    if (codeBlockRef.current) {
+      setTimeout(() => {
+        if (codeBlockRef.current) {
+          try {
+            codeBlockRef.current.innerHTML = codeText;
+          } catch (err) {
+            console.error("Error in fallback code setting:", err);
+          }
+        }
+      }, 100);
+    }
+
+    return {
+      duration: 0.1,
+      delay: 0.1,
+      onUpdate: () => {},
+      onComplete: () => {},
+    };
+  }
 }
 
 export function highlightTechArray(array: string[]): string {

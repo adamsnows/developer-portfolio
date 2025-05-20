@@ -16,6 +16,7 @@ import {
   fadeInUp,
   staggerContainer,
 } from "@/components/Animations/AdvancedTransition";
+import ClientOnly from "@/components/Animations/ClientOnly";
 
 type BackendCardProps = {
   icon: React.ReactNode;
@@ -191,10 +192,12 @@ Ready to handle requests...`;
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
               <div className="ml-2 text-xs text-white/60">server.js</div>
             </div>
-            <pre
-              ref={terminalRef}
-              className="font-mono text-xs text-green-400 bg-black/50 p-4 rounded h-[250px] overflow-y-auto"
-            ></pre>
+            <ClientOnly>
+              <pre
+                ref={terminalRef}
+                className="font-mono text-xs text-green-400 bg-black/50 p-4 rounded h-[250px] overflow-y-auto"
+              ></pre>
+            </ClientOnly>
           </motion.div>
 
           <motion.div variants={fadeInRight} className="space-y-6">

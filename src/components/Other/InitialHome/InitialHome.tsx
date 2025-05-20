@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   RiAddLine,
   RiArrowDownSLine,
@@ -52,6 +52,7 @@ import {
   fadeInUp,
   staggerContainer,
 } from "@/components/Animations/AdvancedTransition";
+import ClientOnly from "@/components/Animations/ClientOnly";
 import FloatingElement from "@/components/Animations/FloatingElement";
 import Badge from "@/components/Other/Bagde/Badge";
 import DevImg from "@/components/Other/DevImg/DevImg";
@@ -62,6 +63,8 @@ const InitialHome = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const codeBlockRef = useRef<HTMLPreElement>(null);
   const [techStackExpanded, setTechStackExpanded] = useState(false);
+  const [animationInitialized, setAnimationInitialized] = useState(false);
+  const [animationAttempts, setAnimationAttempts] = useState(0);
 
   useEffect(() => {
     if (titleRef.current) {
@@ -85,28 +88,29 @@ const InitialHome = () => {
         delay: 0.5,
       });
     }
+  }, []);
 
-    // Simular digitação de código
-    if (codeBlockRef.current) {
-      const techByCategory = techStackData.reduce((acc, tech) => {
-        if (!acc[tech.category]) acc[tech.category] = [];
-        acc[tech.category].push(tech.name);
-        return acc;
-      }, {} as Record<string, string[]>);
+  // Generate the code text for the animation
+  const generateCodeText = useCallback(() => {
+    const techByCategory = techStackData.reduce((acc, tech) => {
+      if (!acc[tech.category]) acc[tech.category] = [];
+      acc[tech.category].push(tech.name);
+      return acc;
+    }, {} as Record<string, string[]>);
 
-      const skillsObject = {
-        frontend: techByCategory.frontend || [],
-        backend: techByCategory.backend || [],
-        database: techByCategory.database || [],
-        devOps: [
-          ...(techByCategory.devops || []),
-          ...(techByCategory.cloud || []),
-          ...(techByCategory["ci-cd"] || []),
-        ],
-        tools: techByCategory.tools || [],
-      };
+    const skillsObject = {
+      frontend: techByCategory.frontend || [],
+      backend: techByCategory.backend || [],
+      database: techByCategory.database || [],
+      devOps: [
+        ...(techByCategory.devops || []),
+        ...(techByCategory.cloud || []),
+        ...(techByCategory["ci-cd"] || []),
+      ],
+      tools: techByCategory.tools || [],
+    };
 
-      const codeText = `<span style="color:#6A9955">// Fullstack developer with diverse skills</span>
+    return `<span style="color:#6A9955">// Fullstack developer with diverse skills</span>
 <span style="color:#569CD6">const</span> developer = {
   <span style="color:#9CDCFE">name</span>: <span style="color:#CE9178">'Adam Neves'</span>,
   <span style="color:#9CDCFE">skills</span>: {
@@ -130,15 +134,82 @@ const InitialHome = () => {
     <span style="color:#569CD6">return</span> <span style="color:#4EC9B0">robustAndScalableSolution</span>;
   }
 };`;
-
-      gsap.to(
-        {},
-        {
-          ...setupCodeTypingAnimation(codeBlockRef, codeText, 5, 1),
-        }
-      );
-    }
   }, []);
+
+  // Generate the code text once
+  const codeText = generateCodeText();
+
+  // Efeito para iniciar a animação do código quando o componente montar
+  useEffect(() => {
+    // Só executar no cliente
+    if (typeof window === "undefined") return;
+
+    let initialTimeout: NodeJS.Timeout;
+    let retryInterval: NodeJS.Timeout;
+    let maxTimeoutId: NodeJS.Timeout;
+
+    // Função para tentar inicializar a animação
+    const tryInitAnimation = () => {
+      if (codeBlockRef.current && !animationInitialized) {
+        try {
+          // Set a direct text first to make sure the element has content
+          if (codeBlockRef.current.innerHTML === "") {
+            codeBlockRef.current.innerHTML = "// Starting animation...";
+          }
+
+          // Start animation with GSAP
+          gsap.to(
+            {},
+            {
+              ...setupCodeTypingAnimation(codeBlockRef, codeText, 5, 0.5),
+              onComplete: () => {
+                setAnimationInitialized(true);
+                console.log("Animation completed successfully");
+              },
+            }
+          );
+
+          setAnimationAttempts((prev) => prev + 1);
+          return true;
+        } catch (error) {
+          console.error("Error initializing animation:", error);
+          return false;
+        }
+      }
+      return false;
+    };
+
+    // Tentativa inicial após um pequeno delay
+    initialTimeout = setTimeout(() => {
+      const success = tryInitAnimation();
+
+      // Se não tiver sucesso, tenta novamente com intervalos
+      if (!success) {
+        retryInterval = setInterval(() => {
+          if (tryInitAnimation() || animationAttempts >= 10) {
+            clearInterval(retryInterval);
+          }
+        }, 300); // Tenta a cada 300ms
+
+        // Limpa o intervalo após 8 segundos se não conseguir inicializar
+        maxTimeoutId = setTimeout(() => {
+          clearInterval(retryInterval);
+
+          // If we still don't have animation, just set the content directly
+          if (!animationInitialized && codeBlockRef.current) {
+            codeBlockRef.current.innerHTML = codeText;
+            setAnimationInitialized(true);
+          }
+        }, 8000);
+      }
+    }, 800); // Give more time for the component to fully render
+
+    return () => {
+      clearTimeout(initialTimeout);
+      clearInterval(retryInterval);
+      clearTimeout(maxTimeoutId);
+    };
+  }, [codeText, animationInitialized, animationAttempts]);
 
   useEffect(() => {
     if (techStackExpanded) {
@@ -274,7 +345,7 @@ const InitialHome = () => {
                 {!techStackExpanded && (
                   <button
                     onClick={() => setTechStackExpanded(true)}
-                    className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs text-primary hover:bg-white/10 transition-all duration-300 ease-in-out flex items-center gap-x-1 cursor-pointer hover:scale-105"
+                    className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs text-primary hover:bg-white/10 transition-all duration-300 ease-in-out flex items-center gap-x-1 cursor-pointer"
                     aria-label="Show more technologies"
                   >
                     <span>
@@ -364,16 +435,24 @@ const InitialHome = () => {
 
             {/* Code block */}
             <div className="absolute -left-20 bottom-[-90px] z-30 ">
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 shadow-2xl ms-10">
+              <div className="h-[310px] w-[550px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 shadow-2xl ms-10">
                 <div className="flex items-center gap-x-4 mb-2">
                   <div className="w-3 h-3 rounded-full bg-red-500"></div>
                   <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                   <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
-                <pre
-                  ref={codeBlockRef}
-                  className="text-xs text-white font-mono overflow-x-auto whitespace-pre-wrap"
-                ></pre>
+                <ClientOnly
+                  fallback={
+                    <div className="h-[150px] w-full flex items-center justify-center text-xs text-white/50 font-mono">
+                      Loading code block...
+                    </div>
+                  }
+                >
+                  <pre
+                    ref={codeBlockRef}
+                    className="text-xs text-white font-mono overflow-x-auto whitespace-pre-wrap h-auto"
+                  ></pre>
+                </ClientOnly>
               </div>
             </div>
           </motion.div>

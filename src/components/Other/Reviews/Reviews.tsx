@@ -12,67 +12,52 @@ import {
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/Other/UI/card";
+import ClientOnly from "@/components/Animations/ClientOnly";
+import { Card, CardHeader, CardTitle } from "@/components/Other/UI/card";
 
 import { reviewsData } from "@/data/reviews";
 
 const formatReviewText = (text: string) => {
-  const highlightKeywords = (text: string) => {
-    const keywords = [
-      "excelente",
-      "incrível",
-      "talentoso",
-      "habilidade",
-      "profissional",
-      "comunicação",
-      "conhecimento",
-      "inovadoras",
-      "proativo",
-      "dedicado",
-      "capacitado",
-    ];
+  const keywords = [
+    "excelente",
+    "incrível",
+    "talentoso",
+    "habilidade",
+    "profissional",
+    "comunicação",
+    "conhecimento",
+    "inovadoras",
+    "proativo",
+    "dedicado",
+    "capacitado",
+  ];
 
-    const regex = new RegExp(`\\b(${keywords.join("|")})\\b`, "gi");
+  const paragraphs = text.includes("\n") ? text.split("\n") : [text];
 
-    return text.split(" ").map((word, i) => {
+  const content = paragraphs.map((paragraph, paragraphIndex) => {
+    const highlightedWords = paragraph.split(" ").map((word, wordIndex) => {
       const cleanWord = word.replace(/[.,!?;:]/g, "").toLowerCase();
       if (keywords.includes(cleanWord)) {
         return (
-          <span key={i} className="text-primary font-medium">
+          <span
+            key={`${paragraphIndex}-${wordIndex}`}
+            className="text-primary font-medium"
+          >
             {word}{" "}
           </span>
         );
       }
-      return word + " ";
+      return <span key={`${paragraphIndex}-${wordIndex}`}>{word} </span>;
     });
-  };
 
-  if (text.length > 100 && !text.includes("\n")) {
-    const sentences = text.split(/(?<=[.!?])\s+/);
+    return (
+      <div key={paragraphIndex} className={paragraphIndex !== 0 ? "mt-3" : ""}>
+        {highlightedWords}
+      </div>
+    );
+  });
 
-    const paragraphs = [];
-    for (let i = 0; i < sentences.length; i += 2) {
-      const paragraph = sentences.slice(i, i + 2).join(" ");
-      paragraphs.push(paragraph);
-    }
-
-    return paragraphs.map((p, index) => (
-      <p key={index} className={index !== 0 ? "mt-3" : ""}>
-        {highlightKeywords(p)}
-      </p>
-    ));
-  }
-
-  return text.split("\n").map((paragraph, index) => (
-    <p key={index} className={index !== 0 ? "mt-3" : ""}>
-      {highlightKeywords(paragraph)}
-    </p>
-  ));
+  return <>{content}</>;
 };
 
 const Reviews = () => {
@@ -218,12 +203,17 @@ const Reviews = () => {
                           </div>
                         </div>
                       </CardHeader>
-                      <CardDescription className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[290px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent relative">
-                        <div className="relative">
+                      <div className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[290px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
+                        <ClientOnly
+                          fallback={
+                            <div className="text-white/70">
+                              Carregando feedback...
+                            </div>
+                          }
+                        >
                           {formatReviewText(person.review)}
-                          {/* <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div> */}
-                        </div>
-                      </CardDescription>
+                        </ClientOnly>
+                      </div>
 
                       <div className="absolute top-2 left-4 opacity-30">
                         <svg
