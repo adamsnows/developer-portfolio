@@ -37,7 +37,9 @@ jobs:
           echo "strict-peer-dependencies=false" >> .npmrc
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps --no-audit --no-fund
+        run: |
+          npm install --legacy-peer-deps --no-audit --no-fund
+          npm install --save-dev critters
 
       - name: Run linting
         run: npm run lint

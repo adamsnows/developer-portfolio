@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
   poweredByHeader: false,
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false,
     esmExternals: 'loose',
   },
   images: {
