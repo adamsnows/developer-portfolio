@@ -1,12 +1,9 @@
 <h1 align="center">
-   Developer Blue Portfolio
+   Portfolio de Desenvolvedor - Adam Neves
 </h1>
 
-<div align="center">
-   <img src='https://github.com/vagnermengali/developer-blue-portfolio/blob/main/public/perfomace.webp'/>
-</div>
 
-[![Banner](https://github.com/vagnermengali/developer-blue-portfolio/blob/main/public/portfolio-blue.webp)](https://developer-blue-portfolio-vagnermengali.vercel.app/)
+![Banner](/public/portfolio-blue.png)
 
 <div align="center">
    <a href="#documentação-em-português">Leia em Português |</a>
@@ -17,27 +14,32 @@
 
 # Documentação em português
 
-Este é um portfólio desenvolvido para beneficiar desenvolvedores que ainda não têm seu portfólio ou desenvolvedores que desejam um portfólio já pronto. Foi criado para fins de estudo utilizando as seguintes tecnologias: Next.js, Tailwind CSS, @emailjs/browser,
-Swiper, Sonner, React Hook Form, Framer Motion, React Countup, TypeScript e Radix UI.
+Este é um portfólio profissional desenvolvido com tecnologias modernas para apresentar minhas habilidades, projetos e experiência como desenvolvedor full stack. O site apresenta uma interface interativa com animações fluidas, código dinâmico e design responsivo.
+
+## Características Principais
+
+- **Design Responsivo**: Adaptado para todos os dispositivos, de smartphones a desktops
+- **Animações Interativas**: Utilizando GSAP e Framer Motion para transições e efeitos visuais
+- **Código Dinâmico**: Visualização de código com sintaxe destacada e efeito de digitação
+- **Tecnologias Destacadas**: Exibição das tecnologias dominadas com filtragem por categoria
+- **Avaliações**: Seção mostrando feedback de clientes e colegas
+- **Formulário de Contato**: Integração para contato direto
 
 ## Tecnologias Utilizadas
 
-- **Next.js**: Um framework React para construir aplicações web.
-- **Tailwind CSS**: Um framework CSS de utilidade em primeiro lugar para desenvolvimento rápido e flexível.
-- **@emailjs/browser**: Uma biblioteca JavaScript para enviar e-mails diretamente do navegador.
-- **Swiper**: Uma biblioteca de slides moderna para construir carrosséis e sliders.
-- **Sonner**: (Inserir breve descrição da tecnologia, se aplicável)
-- **React Hook Form**: Uma biblioteca para formulários em React, com suporte a hooks.
-- **Framer Motion**: Uma biblioteca de animação para React.
-- **React Countup**: Um componente React para criar animações de contagem.
-- **TypeScript**: Um superset do JavaScript que adiciona tipagem estática ao código.
-- **Radix UI**: Uma biblioteca de componentes acessíveis e estilizados, projetada para ser altamente modular e fácil de usar em suas aplicações React.
+- **Next.js**: Framework React com renderização do lado do servidor
+- **TypeScript**: Tipagem estática para código mais seguro e manutenível
+- **Tailwind CSS**: Estilização rápida e responsiva com classes utilitárias
+- **GSAP**: Biblioteca de animação avançada para efeitos visuais
+- **Framer Motion**: Animações de componentes React
+- **React Icons**: Conjunto de ícones para interfaces modernas
+- **ClientOnly**: Componente para renderização exclusiva no cliente (resolução de problemas de hidratação)
 
 ## Rotas Disponíveis
 
-- **/** : Página inicial do portfólio.
-- **/projects**: Página com projetos concluídos.
-- **/contact**: Página de contato.
+- **/** : Página inicial com apresentação e demonstração de habilidades
+- **/projects**: Portfólio de projetos realizados
+- **/contact**: Formulário de contato e informações para conexão
 
 ## Instalação
 
@@ -46,52 +48,47 @@ Para executar este projeto localmente, siga as instruções abaixo:
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/vagnermengali/developer-blue-portfolio.git
-
+   git clone https://github.com/yourusername/dev-portfolio.git
    ```
 
 2. Acesse o diretório do projeto:
 
    ```bash
-   cd developer-blue-portfolio
-
+   cd dev-portfolio
    ```
 
 3. Instale as dependências:
 
    ```bash
+   npm install
+   # ou
    yarn install
-
    ```
 
 4. Inicie o servidor de desenvolvimento:
 
    ```bash
+   npm run dev
+   # ou
    yarn dev
-
    ```
 
-5. Acesse a aplicação no seu navegador através da rota:
+5. Acesse a aplicação no seu navegador:
 
-   ```bash
+   ```
    http://localhost:3000/
    ```
 
-Acesse a aplicação no seu navegador através do seguinte endereço: [http://localhost:3000/](http://localhost:3000/). Explore os arquivos do projeto usando seu editor de código preferido e faça quaisquer alterações necessárias.
+## Soluções Técnicas Implementadas
 
-## Configurando o Formulário de Contato por E-mail
-
-Siga [este tutorial](https://www.youtube.com/watch?v=Zbg1BHOVzRg) para aprender como configurar um formulário de contato por e-mail usando JavaScript.
-
-## Implantação
-
-Este projeto está disponível em: [https://developer-blue-portfolio-vagnermengali.vercel.app/](https://developer-blue-portfolio-vagnermengali.vercel.app/)
+- **Prevenção de Erros de Hidratação**: Uso de componentes ClientOnly para garantir compatibilidade entre renderização no servidor e cliente
+- **Animação de Código Dinâmico**: Sistema robusto para animação de código com retry e fallback
+- **Componentes Reutilizáveis**: Estrutura modular para manutenção eficiente
+- **Otimização de Imagens**: Uso do sistema de otimização de imagens do Next.js
 
 ## Contribuição
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir um PR ou relatar problemas.
-
-Se este projeto foi útil para você, considere deixar uma estrela (⭐) no repositório para apoiar o desenvolvimento.
+Sugestões e contribuições são bem-vindas! Sinta-se à vontade para abrir um PR ou reportar problemas.
 
 ## Licença
 
@@ -101,81 +98,81 @@ Este projeto está sob a [Licença MIT](https://opensource.org/licenses/MIT).
 
 # Documentation in English
 
-This is a portfolio developed to benefit developers who don't yet have their portfolio or developers who want a ready-made portfolio. It was created for study purposes using the following technologies: Next.js, Tailwind CSS, @emailjs/browser,
-Swiper, Sonner, React Hook Form, Framer Motion, React Countup, TypeScript and Radix UI.
+This is a professional portfolio developed with modern technologies to showcase my skills, projects, and experience as a full stack developer. The website features an interactive interface with fluid animations, dynamic code display, and responsive design.
+
+## Key Features
+
+- **Responsive Design**: Adapted for all devices, from smartphones to desktops
+- **Interactive Animations**: Using GSAP and Framer Motion for transitions and visual effects
+- **Dynamic Code Display**: Code visualization with syntax highlighting and typing effect
+- **Featured Technologies**: Display of mastered technologies with category filtering
+- **Reviews**: Section showing feedback from clients and colleagues
+- **Contact Form**: Integration for direct communication
 
 ## Technologies Used
 
-- **Next.js**: A React framework for building web applications.
-- **Tailwind CSS**: A utility-first CSS framework for rapid and flexible development.
-- **@emailjs/browser**: A JavaScript library for sending emails directly from the browser.
-- **Swiper**: A modern slide library for building carousels and sliders.
-- **Sonner**: (Insert brief description of the technology, if applicable)
-- **React Hook Form**: A library for forms in React, with hooks support.
-- **Framer Motion**: An animation library for React.
-- **React Countup**: A React component for creating counting animations.
-- **TypeScript**: A superset of JavaScript that adds static typing to the code.
-- **Radix UI**: A library of accessible and styled components, designed to be highly modular and easy to use in your React applications.
+- **Next.js**: React framework with server-side rendering
+- **TypeScript**: Static typing for safer and more maintainable code
+- **Tailwind CSS**: Rapid and responsive styling with utility classes
+- **GSAP**: Advanced animation library for visual effects
+- **Framer Motion**: React component animations
+- **React Icons**: Icon set for modern interfaces
+- **ClientOnly**: Component for exclusive client-side rendering (hydration issue resolution)
 
 ## Available Routes
 
-- **/** : Portfolio's home page.
-- **/projects**: Page with completed projects.
-- **/contact**: Contact page.
+- **/** : Home page with introduction and skills demonstration
+- **/projects**: Portfolio of completed projects
+- **/contact**: Contact form and connection information
 
 ## Installation
 
-To run this project locally, follow the instructions below:
+To run this project locally, follow these instructions:
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/vagnermengali/developer-blue-portfolio.git
-
+   git clone https://github.com/yourusername/dev-portfolio.git
    ```
 
-2. Access the project directory:
+2. Navigate to the project directory:
 
    ```bash
-   cd developer-blue-portfolio
-
+   cd dev-portfolio
    ```
 
-3. Install the dependencies:
+3. Install dependencies:
 
    ```bash
+   npm install
+   # or
    yarn install
-
    ```
 
 4. Start the development server:
 
    ```bash
+   npm run dev
+   # or
    yarn dev
-
    ```
 
-5. Access the application in your browser through the route:
+5. Access the application in your browser:
 
-   ```bash
+   ```
    http://localhost:3000/
    ```
 
-Access the application in your browser through the following address: [http://localhost:3000/](http://localhost:3000/). Explore the project files using your preferred code editor and make any necessary changes.
+## Technical Solutions Implemented
 
-## Setting up the Email Contact Form
-
-Follow [this tutorial](https://www.youtube.com/watch?v=Zbg1BHOVzRg) to learn how to set up an email contact form using JavaScript.
-
-## Deploy
-
-This project is available at: [https://developer-blue-portfolio-vagnermengali.vercel.app/](https://developer-blue-portfolio-vagnermengali.vercel.app/)
+- **Hydration Error Prevention**: Use of ClientOnly components to ensure compatibility between server and client rendering
+- **Dynamic Code Animation**: Robust system for code animation with retry and fallback mechanisms
+- **Reusable Components**: Modular structure for efficient maintenance
+- **Image Optimization**: Use of Next.js image optimization system
 
 ## Contribution
 
-Contributions are welcome! Feel free to open a PR or report issues.
-
-If this project has been helpful to you, consider leaving a star (⭐) on the repository to support development.
+Suggestions and contributions are welcome! Feel free to open a PR or report issues.
 
 ## License
 
@@ -184,5 +181,6 @@ This project is under the [MIT License](https://opensource.org/licenses/MIT).
 ---
 
 <div align="center">
-   <span>Created by </span><a href="https://github.com/vagnermengali">Vagner Mengali</a>
+   <span>Developed by </span><a href="https://github.com/adamsnows">Adam Neves</a><br/>
+   <span>Based on the original template by </span><a href="https://github.com/vagnermengali/developer-blue-portfolio">Vagner Mengali</a>
 </div>
