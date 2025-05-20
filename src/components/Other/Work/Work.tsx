@@ -187,7 +187,7 @@ const Work = () => {
                 slideShadows: true,
               }}
               autoplay={{
-                delay: 3500,
+                delay: 7000,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
               }}

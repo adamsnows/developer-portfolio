@@ -26,7 +26,6 @@ import {
   RiMessageLine,
 } from "react-icons/ri";
 
-// Definindo a interface para os posts
 interface Post {
   title: string;
   cover: string;
@@ -49,9 +48,8 @@ const DevToPostCard = ({ post }: { post: Post }) => {
           width={500}
           height={200}
           onError={(e) => {
-            // Se a imagem falhar, substituir pela imagem padrão
             const target = e.target as HTMLImageElement;
-            target.onerror = null; // Prevenir loop infinito
+            target.onerror = null;
             target.src = "/projects/devto-default.png";
             console.log(
               "Erro ao carregar imagem, usando fallback:",
@@ -136,7 +134,6 @@ const DevToPosts = () => {
     }
   }, []);
 
-  // Efeito para buscar os posts do DEV.TO
   useEffect(() => {
     const fetchPosts = async () => {
       setIsLoading(true);
@@ -151,7 +148,6 @@ const DevToPosts = () => {
         setError(
           "Não foi possível carregar os artigos. Usando dados locais como fallback."
         );
-        // Mantém os dados locais como fallback
       } finally {
         setIsLoading(false);
       }
@@ -287,7 +283,6 @@ const DevToPosts = () => {
               }}
               spaceBetween={10}
               initialSlide={Math.floor(posts.length / 2)}
-              loopedSlides={posts.length}
               coverflowEffect={{
                 rotate: 5,
                 stretch: 0,
@@ -296,7 +291,7 @@ const DevToPosts = () => {
                 slideShadows: true,
               }}
               autoplay={{
-                delay: 3500,
+                delay: 7000,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
               }}
@@ -306,7 +301,6 @@ const DevToPosts = () => {
               modules={[EffectCoverflow, Navigation, Autoplay]}
             >
               {isLoading ? (
-                // Loading indicator
                 <SwiperSlide
                   style={{ width: "320px", height: "auto" }}
                   className="flex items-center justify-center"
@@ -319,7 +313,6 @@ const DevToPosts = () => {
                   </div>
                 </SwiperSlide>
               ) : error ? (
-                // Error message
                 <SwiperSlide
                   style={{ width: "320px", height: "auto" }}
                   className="flex items-center justify-center"
@@ -332,7 +325,6 @@ const DevToPosts = () => {
                   </div>
                 </SwiperSlide>
               ) : (
-                // Actual posts
                 posts.map((post: Post, index: number) => (
                   <SwiperSlide
                     key={index}

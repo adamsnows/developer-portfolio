@@ -1,7 +1,7 @@
 interface DevtoPost {
   id: number;
   title: string;
-  description: string; // Será usado como excerpt
+  description: string;
   published_at: string;
   tag_list: string[];
   url: string;
@@ -40,9 +40,7 @@ export const fetchDevtoPosts = async (
 
     const posts: DevtoPost[] = await response.json();
 
-    // Transformar para o formato usado no seu app
     return posts.map((post) => {
-      // Verificando se a URL da imagem parece válida (deve ser uma URL ou começar com /)
       const isValidImageUrl =
         post.cover_image &&
         (post.cover_image.startsWith("http") ||
@@ -63,6 +61,6 @@ export const fetchDevtoPosts = async (
     });
   } catch (error) {
     console.error("Error fetching DEV.to articles:", error);
-    return []; // Retorna array vazio em caso de erro
+    return [];
   }
 };

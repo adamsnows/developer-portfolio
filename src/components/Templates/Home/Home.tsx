@@ -10,14 +10,11 @@ const Home = () => {
   return (
     <AdvancedTransition>
       <InitialHome />
-      {/* <About /> */}
-      {/* <Services /> */}
       <DevToPosts />
       <Work />
       <FrontendExpertise />
       <BackendExpertise />
       <Reviews />
-      {/* <Contact /> */}
     </AdvancedTransition>
   );
 };
