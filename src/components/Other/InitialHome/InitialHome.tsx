@@ -238,14 +238,14 @@ const InitialHome = () => {
 
             <h1
               ref={titleRef}
-              className="text-2xl xl:h1 mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text "
+              className="text-[50px] xl:text-[60px] font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text"
             >
               ADAM NEVES
             </h1>
 
             <motion.p
               variants={fadeInUp}
-              className="max-w-[490px] mx-auto xl:mx-0 text-sm mb-5 leading-relaxed"
+              className="max-w-[500px] mx-auto xl:mx-0 text-sm mb-5 leading-relaxed text-justify"
             >
               Desenvolvimento{" "}
               <span className="text-primary font-semibold">FullStack</span> com
