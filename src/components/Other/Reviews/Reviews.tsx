@@ -168,7 +168,7 @@ const Reviews = () => {
         />
       </div>
 
-      <div className="container mx-auto relative z-10">
+      <div className="lg:container mx-auto relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -213,9 +213,9 @@ const Reviews = () => {
             slidesPerView={"auto"}
             coverflowEffect={{
               rotate: 20,
-              stretch: 25,
-              depth: 250,
-              modifier: 1.5,
+              stretch: 0,
+              depth: 200,
+              modifier: 1,
               slideShadows: true,
             }}
             autoplay={{
@@ -237,7 +237,7 @@ const Reviews = () => {
               return (
                 <SwiperSlide
                   key={index}
-                  style={{ width: "400px", height: "auto" }}
+                  style={{ width: "320px", height: "auto" }}
                   className="rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
                 >
                   <motion.div transition={{ duration: 0.3 }}>

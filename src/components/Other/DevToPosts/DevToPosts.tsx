@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
@@ -15,7 +16,6 @@ import {
   Pagination,
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper";
 
 import {
   fadeInLeft,
@@ -188,7 +188,7 @@ const DevToPosts = () => {
   }, [swiperInstance, posts, isLoading, initialSlide]);
 
   return (
-    <section className="relative pt-[170px] overflow-visible">
+    <section className="relative xl:pt-[170px] overflow-visible">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full filter blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>

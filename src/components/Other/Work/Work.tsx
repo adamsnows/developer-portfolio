@@ -74,11 +74,11 @@ const Work = () => {
         variants={staggerContainer}
         initial="initial"
         animate={controls}
-        className="container mx-auto xl:flex xl:justify-between relative z-10"
+        className="lg:container mx-auto xl:flex xl:justify-between relative z-10"
       >
         <motion.div
           variants={fadeInUp}
-          className="max-w-[400px] mx-auto my-auto
+          className="px-8 lg:px-0 max-w-[400px] mx-auto my-auto
           xl:mx-0 text-center xl:text-left xl:h-fit
           flex flex-col justify-center items-center xl:justify-center
           xl:items-start"
