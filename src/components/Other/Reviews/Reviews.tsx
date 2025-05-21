@@ -65,7 +65,7 @@ const ReviewContent = ({ review }: ReviewContentProps) => {
       <div
         ref={contentRef}
         onScroll={handleScroll}
-        className="text-white/90 leading-relaxed text-sm overflow-y-auto max-h-[380px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent"
+        className="text-white/90 leading-relaxed text-sm overflow-y-auto h-[280px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent"
       >
         <ClientOnly
           fallback={<div className="text-white/70">Carregando feedback...</div>}
@@ -242,7 +242,7 @@ const Reviews = () => {
                   className="rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
                 >
                   <motion.div transition={{ duration: 0.3 }}>
-                    <Card className="border border-white/10 shadow-lg p-6 min-h-[550px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
+                    <Card className="border border-white/10 shadow-lg p-6 max-h-[450px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
                       <CardHeader className="p-0 mt-4 mb-4">
                         <div className="flex items-center gap-x-5">
                           <div className="relative">
@@ -253,7 +253,11 @@ const Reviews = () => {
                               height={80}
                               alt={`Foto de ${person.name}`}
                               className="rounded-full relative border-2 border-white/20"
-                              style={{ width: "80px", height: "80px", objectFit: "cover" }}
+                              style={{
+                                width: "80px",
+                                height: "80px",
+                                objectFit: "cover",
+                              }}
                             />
                           </div>
 

@@ -2,7 +2,7 @@ import { motion, useAnimation } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
@@ -167,16 +167,32 @@ const DevToPosts = () => {
     }
   }, []);
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
+    // Inicia ambos os estados de loading e refreshing
     setIsLoading(true);
+    setIsRefreshing(true);
     setError(null);
+    
+    // Registra o tempo de início para garantir animação mínima de 1 segundo
+    const startTime = Date.now();
+    
     try {
       console.log("Fetching fresh DEV.to posts...");
       const fetchedPosts = await fetchDevtoPosts("adamsnows");
       console.log(`Fetched ${fetchedPosts.length} posts from DEV.TO`);
 
       if (fetchedPosts.length > 0) {
+        // Animação suave para atualizar os posts
+        const oldPostsLength = posts.length;
+        
+        // Atualiza os posts
         setPosts(fetchedPosts);
+        
+        // Feedback visual sobre a atualização
+        if (oldPostsLength !== fetchedPosts.length) {
+          console.log(`Posts atualizados: ${oldPostsLength} → ${fetchedPosts.length}`);
+        }
+        
         // Definir o slide inicial como 1 (o segundo post) para garantir que sempre haja um slide à esquerda
         const initialSlideNumber = Math.min(
           Math.max(fetchedPosts.length > 3 ? 1 : 0, 1),
@@ -190,9 +206,23 @@ const DevToPosts = () => {
         "Não foi possível carregar os artigos. Usando dados locais como fallback."
       );
     } finally {
+      // Calcula quanto tempo se passou desde o início da requisição
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = Math.max(0, 1000 - elapsedTime); // Garante pelo menos 1 segundo de animação
+      
+      // Finaliza o loading imediatamente
       setIsLoading(false);
+      
+      // Mas mantém a animação de refresh por pelo menos 1 segundo
+      if (remainingTime > 0) {
+        setTimeout(() => {
+          setIsRefreshing(false);
+        }, remainingTime);
+      } else {
+        setIsRefreshing(false);
+      }
     }
-  };
+  }, [posts.length]);
 
   // Effect that runs on mount and when document visibility changes
   useEffect(() => {
@@ -214,7 +244,7 @@ const DevToPosts = () => {
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [fetchPosts]);
 
   // Atualiza o Swiper quando os posts são carregados ou quando o swiperInstance muda
   useEffect(() => {
@@ -303,19 +333,46 @@ const DevToPosts = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4">
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                fetchPosts();
-              }}
-              variant="outline"
-              size="icon"
-              className="h-9 w-9 rounded-full border-primary/30 text-primary hover:bg-primary/10 hover:text-white mr-2"
-              title="Atualizar posts"
-              aria-label="Atualizar posts"
+            <motion.div 
+              className="relative"
+              whileTap={{ scale: 0.95 }}
+              initial={{ scale: 1 }}
+              animate={isRefreshing ? { scale: [1, 1.05, 1] } : {}}
+              transition={{ duration: 0.3 }}
             >
-              <RiRefreshLine className={`${isLoading ? "animate-spin" : ""}`} />
-            </Button>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (!isRefreshing) {
+                    fetchPosts();
+                  }
+                }}
+                variant="outline"
+                size="icon"
+                className={`h-9 w-9 rounded-full transition-all duration-300 ${
+                  isRefreshing 
+                    ? "border-primary bg-primary/10 text-white shadow-md shadow-primary/20" 
+                    : "border-primary/30 text-primary hover:bg-primary/10 hover:text-white"
+                } mr-2 relative overflow-hidden`}
+                title="Atualizar posts"
+                aria-label="Atualizar posts"
+                disabled={isRefreshing}
+              >
+                <RiRefreshLine 
+                  className={`transition-all duration-300 ${isRefreshing ? "animate-spin" : ""}`}
+                  style={{ animationDuration: isRefreshing ? "1.2s" : "0s" }}
+                />
+                
+                {isRefreshing && (
+                  <motion.span 
+                    className="absolute inset-0 bg-primary/10 rounded-full"
+                    initial={{ scale: 0, opacity: 0.8 }}
+                    animate={{ scale: 1.5, opacity: 0 }}
+                    transition={{ duration: 1, repeat: Infinity, repeatType: "loop" }}
+                  />
+                )}
+              </Button>
+            </motion.div>
 
             <Link
               className="group"
