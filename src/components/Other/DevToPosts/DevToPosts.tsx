@@ -172,27 +172,24 @@ const DevToPosts = () => {
     setIsLoading(true);
     setIsRefreshing(true);
     setError(null);
-    
+
     // Registra o tempo de início para garantir animação mínima de 1 segundo
     const startTime = Date.now();
-    
+
     try {
-      console.log("Fetching fresh DEV.to posts...");
       const fetchedPosts = await fetchDevtoPosts("adamsnows");
-      console.log(`Fetched ${fetchedPosts.length} posts from DEV.TO`);
 
       if (fetchedPosts.length > 0) {
         // Animação suave para atualizar os posts
         const oldPostsLength = posts.length;
-        
+
         // Atualiza os posts
         setPosts(fetchedPosts);
-        
+
         // Feedback visual sobre a atualização
         if (oldPostsLength !== fetchedPosts.length) {
-          console.log(`Posts atualizados: ${oldPostsLength} → ${fetchedPosts.length}`);
         }
-        
+
         // Definir o slide inicial como 1 (o segundo post) para garantir que sempre haja um slide à esquerda
         const initialSlideNumber = Math.min(
           Math.max(fetchedPosts.length > 3 ? 1 : 0, 1),
@@ -209,10 +206,10 @@ const DevToPosts = () => {
       // Calcula quanto tempo se passou desde o início da requisição
       const elapsedTime = Date.now() - startTime;
       const remainingTime = Math.max(0, 1000 - elapsedTime); // Garante pelo menos 1 segundo de animação
-      
+
       // Finaliza o loading imediatamente
       setIsLoading(false);
-      
+
       // Mas mantém a animação de refresh por pelo menos 1 segundo
       if (remainingTime > 0) {
         setTimeout(() => {
@@ -232,7 +229,6 @@ const DevToPosts = () => {
     // Set up visibility change listener to refetch when tab becomes visible again
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
-        console.log("Tab became visible, refetching posts...");
         fetchPosts();
       }
     };
@@ -333,7 +329,7 @@ const DevToPosts = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4">
-            <motion.div 
+            <motion.div
               className="relative"
               whileTap={{ scale: 0.95 }}
               initial={{ scale: 1 }}
@@ -350,25 +346,31 @@ const DevToPosts = () => {
                 variant="outline"
                 size="icon"
                 className={`h-9 w-9 rounded-full transition-all duration-300 ${
-                  isRefreshing 
-                    ? "border-primary bg-primary/10 text-white shadow-md shadow-primary/20" 
+                  isRefreshing
+                    ? "border-primary bg-primary/10 text-white shadow-md shadow-primary/20"
                     : "border-primary/30 text-primary hover:bg-primary/10 hover:text-white"
                 } mr-2 relative overflow-hidden`}
                 title="Atualizar posts"
                 aria-label="Atualizar posts"
                 disabled={isRefreshing}
               >
-                <RiRefreshLine 
-                  className={`transition-all duration-300 ${isRefreshing ? "animate-spin" : ""}`}
+                <RiRefreshLine
+                  className={`transition-all duration-300 ${
+                    isRefreshing ? "animate-spin" : ""
+                  }`}
                   style={{ animationDuration: isRefreshing ? "1.2s" : "0s" }}
                 />
-                
+
                 {isRefreshing && (
-                  <motion.span 
+                  <motion.span
                     className="absolute inset-0 bg-primary/10 rounded-full"
                     initial={{ scale: 0, opacity: 0.8 }}
                     animate={{ scale: 1.5, opacity: 0 }}
-                    transition={{ duration: 1, repeat: Infinity, repeatType: "loop" }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                    }}
                   />
                 )}
               </Button>
