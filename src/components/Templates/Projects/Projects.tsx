@@ -1,7 +1,13 @@
-import { motion, useAnimation } from "framer-motion";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
+import {
+  RiCodeSSlashLine,
+  RiDatabase2Line,
+  RiLayoutGridLine,
+  RiStackLine,
+} from "react-icons/ri";
 import { useInView } from "react-intersection-observer";
 
 import AdvancedTextAnimation from "@/components/Animations/AdvancedTextAnimation";
@@ -26,14 +32,14 @@ if (typeof window !== "undefined") {
 }
 
 const uniqueCategories: string[] = [
-  "todos os projetos",
+  "Todos",
   ...Array.from(new Set(workData.map((item) => item.category))),
 ];
 
 const Projects = () => {
   const [categories] = useState(uniqueCategories);
-  const [category, setCategory] = useState("todos os projetos");
-  const [activeTab, setActiveTab] = useState("todos os projetos");
+  const [category, setCategory] = useState("Todos");
+  const [activeTab, setActiveTab] = useState("Todos");
   const [isChanging, setIsChanging] = useState(false);
   const controls = useAnimation();
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -46,9 +52,7 @@ const Projects = () => {
 
   // Filtrar projetos com base na categoria selecionada
   const filteredProjects = workData.filter((project) => {
-    return category === "todos os projetos"
-      ? project
-      : project.category === category;
+    return category === "Todos" ? project : project.category === category;
   });
 
   // Efeito para animar o título quando estiver visível
@@ -77,15 +81,17 @@ const Projects = () => {
     }
   }, []);
 
-  // Efeito para animar os cards de projeto com scroll
+  // Efeito para animar os cards de projeto com scroll - apenas uma vez na montagem
   useEffect(() => {
     if (gridRef.current && typeof window !== "undefined") {
+      // Armazena as animações criadas para depois limpá-las se necessário
+      const animations: gsap.core.Tween[] = [];
       const projectCards = gridRef.current.querySelectorAll(
         ".project-card-container"
       );
 
       projectCards.forEach((card, index) => {
-        gsap.fromTo(
+        const animation = gsap.fromTo(
           card,
           {
             y: 50,
@@ -103,21 +109,49 @@ const Projects = () => {
             },
           }
         );
+        animations.push(animation);
       });
+
+      // Limpeza para evitar animações duplicadas
+      return () => {
+        animations.forEach((anim) => {
+          if (anim.scrollTrigger) {
+            anim.scrollTrigger.kill();
+          }
+          anim.kill();
+        });
+      };
     }
-  }, [category, filteredProjects]);
+  }, []);
+
+  // Estado para controlar a animação de pulso da categoria ativa
+  const [pulseEffect, setPulseEffect] = useState(false);
+
+  // Efeito para animar o pulso periodicamente na categoria selecionada
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPulseEffect(true);
+      const timeout = setTimeout(() => setPulseEffect(false), 1000);
+      return () => clearTimeout(timeout);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Função para lidar com a mudança de categoria
   const handleCategoryChange = (newCategory: string) => {
     if (newCategory === category) return;
 
     setIsChanging(true);
+    setPulseEffect(true); // Ativar pulso ao mudar de categoria
 
     // Após um breve intervalo, mude a categoria e desative o estado de mudança
     setTimeout(() => {
       setCategory(newCategory);
       setActiveTab(newCategory);
       setIsChanging(false);
+
+      // Desativar o pulso após um curto intervalo
+      setTimeout(() => setPulseEffect(false), 800);
     }, 300);
   };
 
@@ -170,42 +204,110 @@ const Projects = () => {
             MEUS PROJETOS
           </h2>
           <AdvancedTextAnimation
-            text="Uma seleção dos meus trabalhos mais recentes e significativos, demonstrando minhas habilidades e paixão pelo desenvolvimento web moderno."
+            text="Um pouco da minha história como desenvolvedor, muitos projetos não estão mais no site antigo, ou com disponibilidade de acesso ao código fonte por ser um projeto privado."
             animationStyle="fade"
             once={true}
-            className="text-lg text-white/80 max-w-3xl mx-auto"
+            className="text-md text-white/80 max-w-3xl mx-auto text-center"
           />
         </motion.div>
 
         <Tabs
           defaultValue={category}
-          className="mb-24 xl:mb-48"
+          className="mb-24 xl:mb-48 "
           value={activeTab}
         >
-          <motion.div variants={fadeInUp} transition={{ delay: 0.2 }}>
+          <motion.div
+            variants={fadeInUp}
+            transition={{ delay: 0.2 }}
+            className="relative"
+          >
+            <motion.div
+              className="absolute -inset-1 bg-gradient-to-r from-primary/30 via-secondary/30 to-primary/30 rounded-xl blur-lg opacity-70"
+              animate={{
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+
             <TabsList
-              className="w-full grid h-full md:grid-cols-4
-              lg:max-w-[640px] mb-12 mx-auto md:border border-none
-              backdrop-blur-sm bg-white/5 rounded-xl p-1.5"
+              className="w-full gap-2 grid h-full md:grid-cols-4
+              lg:max-w-[640px] mb-12 mx-auto
+              relative z-10 backdrop-blur-md bg-white/10
+              rounded-xl p-2 border border-white/20 shadow-lg"
             >
               {categories.map((categoryName: string, index: number) => (
                 <TabsTrigger
                   onClick={() => handleCategoryChange(categoryName)}
                   value={categoryName}
                   key={index}
-                  className="capitalize w-[162px] md:w-auto relative overflow-hidden group"
+                  className="w-[162px] md:w-auto relative overflow-hidden group"
                 >
+                  {/* Fundo ativo do botão */}
+                  {categoryName === activeTab && (
+                    <motion.span
+                      className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-md"
+                      layoutId="activeTabBackground"
+                      animate={
+                        pulseEffect
+                          ? {
+                              boxShadow: [
+                                "0 0 0px rgba(255,255,255,0.3)",
+                                "0 0 15px rgba(255,255,255,0.7)",
+                                "0 0 0px rgba(255,255,255,0.3)",
+                              ],
+                              scale: [1, 1.03, 1],
+                            }
+                          : {}
+                      }
+                      transition={{
+                        type: "tween",
+                        duration: 1,
+                        ease: "easeInOut",
+                        times: [0, 0.5, 1],
+                      }}
+                    />
+                  )}
+
                   {/* Efeito de hover no botão da categoria */}
                   <motion.span
-                    className="absolute inset-0 bg-white/10 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    layoutId="tabBackground"
+                    className="absolute inset-0 bg-background/10 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     transition={{
                       type: "spring",
                       bounce: 0.25,
                       duration: 0.5,
                     }}
                   />
-                  {categoryName}
+
+                  {/* Texto com efeito quando ativo */}
+                  <span
+                    className={`relative z-10 font-medium ${
+                      categoryName === activeTab
+                        ? "text-white"
+                        : "text-white/70"
+                    } flex items-center gap-2 justify-center`}
+                  >
+                    <motion.span
+                      transition={
+                        categoryName === activeTab
+                          ? {
+                              duration: 1.5,
+                              ease: "easeInOut",
+                            }
+                          : {}
+                      }
+                      className="text-lg"
+                    >
+                      {categoryName === "Todos" && <RiLayoutGridLine />}
+                      {categoryName === "Full stack" && <RiStackLine />}
+                      {categoryName === "Front end" && <RiCodeSSlashLine />}
+                      {categoryName === "Back end" && <RiDatabase2Line />}
+                    </motion.span>
+                    {categoryName}
+                  </span>
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -217,34 +319,37 @@ const Projects = () => {
             animate={{ opacity: isChanging ? 0.5 : 1 }}
             transition={{ duration: 0.3 }}
           >
-            {filteredProjects.map((project, index) => (
-              <TabsContent
-                value={category}
-                key={index}
-                className="project-card-container"
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.1,
-                    ease: "easeOut",
-                  }}
-                  whileHover={{
-                    y: -10,
-                    transition: { duration: 0.2 },
-                  }}
-                  className="h-full"
+            <AnimatePresence mode="wait">
+              {filteredProjects.map((project) => (
+                <TabsContent
+                  value={category}
+                  key={`project-${project.name}-${project.category}`}
+                  className="project-card-container"
                 >
-                  <ProjectCard
-                    id={index}
-                    project={project}
-                    specialStyle={true}
-                  />
-                </motion.div>
-              </TabsContent>
-            ))}
+                  <motion.div
+                    key={`motion-${project.name}-${project.category}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.4,
+                      ease: "easeOut",
+                    }}
+                    whileHover={{
+                      y: -10,
+                      transition: { duration: 0.2 },
+                    }}
+                    className="h-full"
+                  >
+                    <ProjectCard
+                      id={project.name}
+                      project={project}
+                      specialStyle={true}
+                    />
+                  </motion.div>
+                </TabsContent>
+              ))}
+            </AnimatePresence>
           </motion.div>
         </Tabs>
       </motion.div>

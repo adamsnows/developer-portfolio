@@ -1,7 +1,7 @@
 export const projectData = [
   {
     image: "/portfolio-purple.webp",
-    category: "front end",
+    category: "Front end",
     name: "Portfolio Open Source",
     description:
       "Este é um portfólio desenvolvido para beneficiar desenvolvedores que ainda não têm seu portfólio ou desenvolvedores que desejam um portfólio.",
@@ -10,7 +10,7 @@ export const projectData = [
   },
   {
     image: "/yrprey.webp",
-    category: "front end",
+    category: "Front end",
     name: "YRprey",
     description:
       "Um site modelo que simula diversas vulnerabilidades e falhas de segurança, desafiando desenvolvedores a testar suas habilidades na detecção e correção desses problemas em sistemas web.",
@@ -19,7 +19,7 @@ export const projectData = [
   },
   {
     image: "/portfolio-green.webp",
-    category: "front end",
+    category: "Front end",
     name: "Portfolio Open Source",
     description:
       "Este é um portfólio desenvolvido para beneficiar desenvolvedores que ainda não têm seu portfólio ou desenvolvedores que desejam um portfólio.",
@@ -28,7 +28,7 @@ export const projectData = [
   },
   {
     image: "/dogma.webp",
-    category: "front end",
+    category: "Front end",
     name: "Dogma",
     description:
       "Um website dedicado à empresa de construção, fornecendo informações sobre serviços, projetos concluídos e contatos.",
@@ -37,7 +37,7 @@ export const projectData = [
   },
   {
     image: "/portfolio-blue.png",
-    category: "front end",
+    category: "Front end",
     name: "Portfolio Open Source",
     description:
       "Este é um portfólio desenvolvido para beneficiar desenvolvedores que ainda não têm seu portfólio ou desenvolvedores que desejam um portfólio.",
@@ -46,7 +46,7 @@ export const projectData = [
   },
   {
     image: "/api.webp",
-    category: "back end",
+    category: "Back end",
     name: "User crud ",
     description:
       "Este é um crud de usuário que visa facilitar o acesso com funcionalidades básicas de um usuário e login.",
@@ -55,7 +55,7 @@ export const projectData = [
   },
   {
     image: "/scanner-cnab.webp",
-    category: "full stack",
+    category: "Full stack",
     name: "Scanner CNAB",
     description:
       "Este é a aplicação Scanner CNBA - Que tem fins de facilitar o escaneamento de documentos CNAB.txt",
