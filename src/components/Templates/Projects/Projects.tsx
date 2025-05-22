@@ -220,10 +220,30 @@ const Projects = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Filtrar projetos com base na categoria selecionada
+  // Function to get language priority for sorting
+  const getLanguagePriority = (language?: string) => {
+    switch (language) {
+      case "shopify":
+        return 1;
+      case "typescript":
+        return 2;
+      case "javascript":
+        return 3;
+      case "python":
+        return 4;
+      default:
+        return 5; // Any undefined or other languages come last
+    }
+  };
+
+  // Filtrar projetos com base na categoria selecionada e ordenar por prioridade de linguagem
   const filteredProjects = projectsData
     .filter((project) => {
       return category === "Todos" ? project : project.category === category;
+    })
+    .sort((a, b) => {
+      // Sort by language priority (shopify > typescript > javascript > python)
+      return getLanguagePriority(a.language) - getLanguagePriority(b.language);
     })
     .slice(0, visibleProjects); // Limita o número de projetos exibidos
 
