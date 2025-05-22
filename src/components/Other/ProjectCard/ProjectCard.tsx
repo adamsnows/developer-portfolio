@@ -141,7 +141,9 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
           <div className="flex flex-wrap gap-2 absolute top-4 left-5">
             <Badge
               className={`uppercase text-sm font-medium pointer-events-none ${
-                specialStyle ? "bg-white/10 backdrop-blur-sm" : "bg-slate-700"
+                specialStyle
+                  ? "bg-white/10 backdrop-blur-sm"
+                  : "bg-secondary/80"
               } border border-white/20 text-white hover:bg-primary/80 transition-colors duration-300`}
             >
               {project.category}

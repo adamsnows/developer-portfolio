@@ -30,7 +30,6 @@ import {
   RiArticleLine,
   RiHeart3Fill,
   RiMessageLine,
-  RiRefreshLine,
 } from "react-icons/ri";
 
 interface Post {
@@ -323,53 +322,6 @@ const DevToPosts = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4">
-            <motion.div
-              className="relative"
-              whileTap={{ scale: 0.95 }}
-              initial={{ scale: 1 }}
-              animate={isRefreshing ? { scale: [1, 1.05, 1] } : {}}
-              transition={{ duration: 0.3 }}
-            >
-              <Button
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (!isRefreshing) {
-                    fetchPosts();
-                  }
-                }}
-                variant="outline"
-                size="icon"
-                className={`h-9 w-9 rounded-full transition-all duration-300 ${
-                  isRefreshing
-                    ? "border-primary bg-primary/10 text-white shadow-md shadow-primary/20"
-                    : "border-primary/30 text-primary hover:bg-primary/10 hover:text-white"
-                } mr-2 relative overflow-hidden`}
-                title="Refresh posts"
-                aria-label="Refresh posts"
-                disabled={isRefreshing}
-              >
-                <RiRefreshLine
-                  className={`transition-all duration-300 ${
-                    isRefreshing ? "animate-spin" : ""
-                  }`}
-                  style={{ animationDuration: isRefreshing ? "1.2s" : "0s" }}
-                />
-
-                {isRefreshing && (
-                  <motion.span
-                    className="absolute inset-0 bg-primary/10 rounded-full"
-                    initial={{ scale: 0, opacity: 0.8 }}
-                    animate={{ scale: 1.5, opacity: 0 }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      repeatType: "loop",
-                    }}
-                  />
-                )}
-              </Button>
-            </motion.div>
-
             <Link
               className="group"
               href="https://dev.to/adamsnows"

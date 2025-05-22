@@ -23,13 +23,38 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/Other/UI/tabs";
-import { workData } from "@/data/work";
+
+// Example project data
+export const workData: {
+  image: string;
+  category: string;
+  name: string;
+  description: string;
+  link: string;
+  github: string;
+  language?: "javascript" | "typescript" | "python" | "shopify";
+  tags?: string[];
+}[] = [
+  {
+    image: "some-image.png",
+    category: "Front end",
+    name: "Project Name",
+    description: "Description here",
+    link: "https://example.com",
+    github: "https://github.com/example/project",
+    language: "typescript",
+    // tags: ["typescript", "react"], // Add tags if needed
+  },
+  // ...other projects
+];
 
 interface GitHubProject {
   github: string;
   name: string;
   category: string;
   // Add other fields that are used in your project
+  tags?: string[];
+  language?: string;
 }
 
 // Register ScrollTrigger with GSAP
@@ -149,13 +174,25 @@ const Projects = () => {
       );
 
       // Filtrar apenas os projetos do GitHub que não existem nos projetos atuais
-      const newGithubProjects = githubProjects.filter(
-        (project: GitHubProject) => !existingGithubUrls.has(project.github)
-      );
+      const newGithubProjects = githubProjects
+        .filter(
+          (project: GitHubProject) => !existingGithubUrls.has(project.github)
+        )
+        .sort((a: any, b: any) => {
+          // Ordenar por data de criação, mais antigos primeiro
+          if (a.createdAt && b.createdAt) {
+            return (
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            );
+          }
+          // Se não tiver data, vai pro final
+          if (!a.createdAt) return 1;
+          if (!b.createdAt) return -1;
+          return 0;
+        });
 
-      // Combinar os projetos
-      const combined = [...workData, ...newGithubProjects];
-      console.log("Combined Projects:", combined);
+      // Combinar os projetos - GitHub primeiro, workData por último
+      const combined = [...newGithubProjects, ...workData];
 
       setProjectsData(combined);
       setLastUpdated(new Date());
@@ -514,43 +551,60 @@ const Projects = () => {
               </div>
             ) : (
               <AnimatePresence mode="wait">
-                {filteredProjects.map((project) => (
-                  <TabsContent
-                    value={category}
-                    key={`project-${project.name}-${project.category}`}
-                    className="project-card-container"
-                  >
-                    <motion.div
-                      key={`motion-${project.name}-${project.category}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{
-                        duration: 0.4,
-                        ease: "easeOut",
-                      }}
-                      whileHover={{
-                        y: -10,
-                        transition: { duration: 0.2 },
-                      }}
-                      className="h-full"
+                {filteredProjects.map((project) => {
+                  // Detectar linguagem a partir das tags se não houver language definido
+                  const inferredProject = { ...project };
+                  if (!inferredProject.language && project.tags) {
+                    if (project.tags.includes("typescript"))
+                      inferredProject.language = "typescript";
+                    else if (project.tags.includes("javascript"))
+                      inferredProject.language = "javascript";
+                    else if (project.tags.includes("python"))
+                      inferredProject.language = "python";
+                    else if (project.tags.includes("shopify"))
+                      inferredProject.language = "shopify";
+                  }
+
+                  // Ensure language is a valid type or undefined
+                  if (
+                    inferredProject.language &&
+                    !["typescript", "javascript", "python", "shopify"].includes(
+                      inferredProject.language
+                    )
+                  ) {
+                    inferredProject.language = undefined;
+                  }
+
+                  return (
+                    <TabsContent
+                      value={category}
+                      key={`project-${project.name}-${project.category}`}
+                      className="project-card-container"
                     >
-                      <ProjectCard
-                        id={project.name}
-                        project={{
-                          ...project,
-                          language:
-                            project.language === "typescript" ||
-                            project.language === "javascript" ||
-                            project.language === "python"
-                              ? project.language
-                              : undefined,
+                      <motion.div
+                        key={`motion-${project.name}-${project.category}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                          duration: 0.4,
+                          ease: "easeOut",
                         }}
-                        specialStyle={true}
-                      />
-                    </motion.div>
-                  </TabsContent>
-                ))}
+                        whileHover={{
+                          y: -10,
+                          transition: { duration: 0.2 },
+                        }}
+                        className="h-full"
+                      >
+                        <ProjectCard
+                          id={project.name}
+                          project={inferredProject}
+                          specialStyle={true}
+                        />
+                      </motion.div>
+                    </TabsContent>
+                  );
+                })}
               </AnimatePresence>
             )}
 
