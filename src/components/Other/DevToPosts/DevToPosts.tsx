@@ -73,7 +73,7 @@ const DevToPostCard = ({ post }: { post: Post }) => {
           {post.tags.slice(0, 2).map((tag: string, idx: number) => (
             <span
               key={idx}
-              className="text-xs font-medium bg-primary/90 px-2 py-1 rounded text-white"
+              className="text-xs font-medium bg-secondary/90 px-2 py-1 rounded text-white"
             >
               {tag}
             </span>

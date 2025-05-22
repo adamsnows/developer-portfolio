@@ -26,6 +26,13 @@ import {
 } from "@/components/Other/UI/tabs";
 import { workData } from "@/data/work";
 
+interface GitHubProject {
+  github: string;
+  name: string;
+  category: string;
+  // Add other fields that are used in your project
+}
+
 // Register ScrollTrigger with GSAP
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -144,7 +151,7 @@ const Projects = () => {
 
       // Filtrar apenas os projetos do GitHub que não existem nos projetos atuais
       const newGithubProjects = githubProjects.filter(
-        (project: { github: string }) => !existingGithubUrls.has(project.github)
+        (project: GitHubProject) => !existingGithubUrls.has(project.github)
       );
 
       // Combinar os projetos

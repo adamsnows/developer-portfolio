@@ -18,11 +18,11 @@ const Contact = () => {
               <span className="w-[30px] h-[2px] bg-primary"></span>
               Hey, Adam!
             </div>
-            <h1 className="h1 max-w-md mb-8">Let's work together?</h1>
+            <h1 className="h1 max-w-md mb-8">Let&apos;s work together?</h1>
             <p className="subtitle max-w-[400px]">
-              Ready to turn ideas into reality? Whether it's a project, a
-              collaboration, or just to say hi, leave a message below. I'm all
-              ears and looking forward to starting this journey together!
+              Ready to turn ideas into reality? Whether it&apos;s a project, a
+              collaboration, or just to say hi, leave a message below. I&apos;m
+              all ears and looking forward to starting this journey together!
             </p>
           </div>
           <div

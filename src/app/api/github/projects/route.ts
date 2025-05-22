@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
+// Configure this route as dynamic
+export const dynamic = "force-dynamic";
+
 // Função principal para lidar com a requisição GET
 export async function GET(request: NextRequest) {
   try {
