@@ -3,6 +3,7 @@ import SmoothScrollSection from "@/components/Animations/SmoothScrollSection";
 import BackendExpertise from "@/components/Other/BackendExpertise/BackendExpertise";
 import DevToPosts from "@/components/Other/DevToPosts/DevToPosts";
 import FrontendExpertise from "@/components/Other/FrontendExpertise/FrontendExpertise";
+import GithubActivity from "@/components/Other/GithubContributions/GithubActivity";
 import InitialHome from "@/components/Other/InitialHome/InitialHome";
 import Reviews from "@/components/Other/Reviews/Reviews";
 import Work from "@/components/Other/Work/Work";
@@ -23,6 +24,9 @@ const Home = () => {
         </SmoothScrollSection>
         <SmoothScrollSection>
           <BackendExpertise />
+        </SmoothScrollSection>
+        <SmoothScrollSection>
+          <GithubActivity />
         </SmoothScrollSection>
         <SmoothScrollSection>
           <Reviews />

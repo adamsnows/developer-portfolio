@@ -93,12 +93,7 @@ const Projects = () => {
         return newValue;
       });
     }
-  }, [
-    loadMoreIsVisible,
-    hasMoreProjects,
-    isLoading,
-    totalProjectsInCategory,
-  ]);
+  }, [loadMoreIsVisible, hasMoreProjects, isLoading, totalProjectsInCategory]);
 
   // Efeito para formatar a data de última atualização apenas no cliente
   useEffect(() => {

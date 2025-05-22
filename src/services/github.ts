@@ -19,6 +19,14 @@ interface FormattedGithubRepo {
   github: string;
 }
 
+interface GithubContributions {
+  username: string;
+  totalContributions: number;
+  contributions: Record<string, number>;
+  startDate: string;
+  endDate: string;
+}
+
 export const fetchGithubProjects = async (
   username: string,
   portfolioTag: string = "portfolio-project"
@@ -46,6 +54,36 @@ export const fetchGithubProjects = async (
   } catch (error) {
     console.error("Error fetching GitHub projects:", error);
     return [];
+  }
+};
+
+// Função para buscar dados de contribuições do GitHub
+export const fetchGithubContributions = async (
+  username: string
+): Promise<GithubContributions | null> => {
+  try {
+    const timestamp = new Date().getTime(); // Add timestamp to prevent caching
+    const response = await fetch(
+      `/api/github/contributions?username=${username}&_=${timestamp}`,
+      {
+        headers: {
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch GitHub contributions");
+    }
+
+    const data: GithubContributions = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching GitHub contributions:", error);
+    return null;
   }
 };
 

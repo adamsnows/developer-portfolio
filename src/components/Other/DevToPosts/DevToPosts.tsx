@@ -52,7 +52,7 @@ const DevToPostCard = ({
 }) => {
   return (
     <div className="bg-background/90 border border-slate-700 rounded-xl overflow-hidden h-full shadow-xl">
-      <div className="relative h-40 overflow-hidden">
+      <div className="relative overflow-hidden">
         <Image
           src={post.cover || "/projects/devto-default.png"}
           alt={post.title}
@@ -352,7 +352,7 @@ const DevToPosts = () => {
             <motion.div
               className="absolute top-0 left-0  w-64 md:w-80 h-64 md:h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
               animate={{
-                scale: [1, 3, 1],
+                scale: [0.5, 1, 0.5],
                 opacity: [0.2, 0.4, 0.2],
               }}
               transition={{
@@ -364,7 +364,7 @@ const DevToPosts = () => {
             <motion.div
               className="absolute right-20 top-20  w-60 h-60 bg-primary/30 rounded-full blur-3xl pointer-events-none z-0"
               animate={{
-                scale: [1, 3, 1],
+                scale: [0.5, 1, 0.5],
                 opacity: [0.2, 0.3, 0.2],
               }}
               transition={{
