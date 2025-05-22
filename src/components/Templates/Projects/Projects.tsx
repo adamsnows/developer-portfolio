@@ -31,16 +31,20 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const uniqueCategories: string[] = [
-  "Todos",
-  ...Array.from(new Set(workData.map((item) => item.category))),
-];
-
 const Projects = () => {
-  const [categories] = useState(uniqueCategories);
+  const [projectsData, setProjectsData] = useState(workData);
+  const [categories, setCategories] = useState<string[]>([]);
   const [category, setCategory] = useState("Todos");
   const [activeTab, setActiveTab] = useState("Todos");
   const [isChanging, setIsChanging] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null); // Inicializa como null
+  const [formattedUpdateTime, setFormattedUpdateTime] = useState<string>(""); // String formatada para exibição
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  // Estados para carregamento lazy
+  const [visibleProjects, setVisibleProjects] = useState<number>(9); // Número inicial de projetos visíveis
+  const [hasMoreProjects, setHasMoreProjects] = useState(true); // Indica se há mais projetos para carregar
+  const loadMoreRef = useRef<HTMLDivElement>(null); // Referência para o elemento de observação
   const controls = useAnimation();
   const titleRef = useRef<HTMLHeadingElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -50,10 +54,130 @@ const Projects = () => {
     triggerOnce: false,
   });
 
-  // Filtrar projetos com base na categoria selecionada
-  const filteredProjects = workData.filter((project) => {
-    return category === "Todos" ? project : project.category === category;
+  // Hook para detectar quando o usuário chega ao final da lista
+  const { ref: loadMoreElementRef, inView: loadMoreIsVisible } = useInView({
+    threshold: 0.1,
   });
+
+  // Efeito para carregar mais projetos quando o elemento de carregamento ficar visível
+  useEffect(() => {
+    if (loadMoreIsVisible && hasMoreProjects && !isLoading && !isRefreshing) {
+      // Incrementar o número de projetos visíveis
+      setVisibleProjects((prev) => prev + 6);
+    }
+  }, [loadMoreIsVisible, hasMoreProjects, isLoading, isRefreshing]);
+
+  // Efeito para formatar a data de última atualização apenas no cliente
+  useEffect(() => {
+    // Inicializar a data de última atualização apenas no cliente para evitar erros de hidratação
+    if (!lastUpdated) {
+      setLastUpdated(new Date());
+    }
+
+    // Formatar a data sem incluir segundos para evitar diferenças entre cliente e servidor
+    if (lastUpdated) {
+      const hours = lastUpdated.getHours();
+      const minutes = lastUpdated.getMinutes();
+      const formattedTime = `${hours}:${
+        minutes < 10 ? "0" + minutes : minutes
+      }`;
+      setFormattedUpdateTime(`Última atualização: ${formattedTime}`);
+    }
+  }, [lastUpdated]);
+
+  // Função para carregar projetos do GitHub
+  const loadProjects = async (forceRefresh = false) => {
+    try {
+      if (forceRefresh) {
+        setIsRefreshing(true);
+      } else {
+        setIsLoading(true);
+      }
+
+      // Usar o nome de usuário GitHub das variáveis de ambiente ou valor padrão
+      const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "adamsnows";
+      const portfolioTag =
+        process.env.NEXT_PUBLIC_PORTFOLIO_TAG || "portfolio-project";
+
+      // Adicionar timestamp para evitar cache
+      const timestamp = new Date().getTime();
+
+      // Fazer chamada direta à API para buscar projetos do GitHub
+      const response = await fetch(
+        `/api/github/projects?username=${username}&portfolioTag=${portfolioTag}&_=${timestamp}`,
+        {
+          headers: {
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+          cache: "no-store",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Falha ao buscar projetos do GitHub");
+      }
+
+      const githubProjects = await response.json();
+
+      // Verificar se há algum projeto do GitHub que já existe nos projetos atuais
+      const existingGithubUrls = new Set(
+        workData.map((project) => project.github)
+      );
+
+      // Filtrar apenas os projetos do GitHub que não existem nos projetos atuais
+      const newGithubProjects = githubProjects.filter(
+        (project) => !existingGithubUrls.has(project.github)
+      );
+
+      // Combinar os projetos
+      const combined = [...workData, ...newGithubProjects];
+
+      setProjectsData(combined);
+      setLastUpdated(new Date());
+
+      // Verificar se há mais projetos para carregar além do limite inicial
+      setHasMoreProjects(combined.length > visibleProjects);
+
+      // Atualizar categorias com base nos projetos combinados
+      const uniqueCategories = [
+        "Todos",
+        ...Array.from(new Set(combined.map((item) => item.category))),
+      ];
+      setCategories(uniqueCategories);
+    } catch (error) {
+      console.error("Erro ao carregar projetos:", error);
+      // Fallback para os projetos existentes
+      setProjectsData(workData);
+      const uniqueCategories = [
+        "Todos",
+        ...Array.from(new Set(workData.map((item) => item.category))),
+      ];
+      setCategories(uniqueCategories);
+    } finally {
+      setIsLoading(false);
+      setIsRefreshing(false);
+    }
+  };
+
+  // Função para forçar a atualização dos projetos
+  const handleRefreshProjects = () => {
+    loadProjects(true);
+  };
+
+  // Efeito para carregar projetos do GitHub
+  useEffect(() => {
+    loadProjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Filtrar projetos com base na categoria selecionada
+  const filteredProjects = projectsData
+    .filter((project) => {
+      return category === "Todos" ? project : project.category === category;
+    })
+    .slice(0, visibleProjects); // Limita o número de projetos exibidos
 
   // Efeito para animar o título quando estiver visível
   useEffect(() => {
@@ -144,11 +268,20 @@ const Projects = () => {
     setIsChanging(true);
     setPulseEffect(true); // Ativar pulso ao mudar de categoria
 
+    // Redefinir o número de projetos visíveis ao mudar de categoria
+    setVisibleProjects(9);
+
     // Após um breve intervalo, mude a categoria e desative o estado de mudança
     setTimeout(() => {
       setCategory(newCategory);
       setActiveTab(newCategory);
       setIsChanging(false);
+
+      // Verificar se há mais projetos para carregar na nova categoria
+      const projectsInCategory = projectsData.filter((project) =>
+        newCategory === "Todos" ? true : project.category === newCategory
+      );
+      setHasMoreProjects(projectsInCategory.length > 9);
 
       // Desativar o pulso após um curto intervalo
       setTimeout(() => setPulseEffect(false), 800);
@@ -210,6 +343,36 @@ const Projects = () => {
             once={true}
             className="text-md text-white/50 max-w-3xl mx-auto text-center"
           />
+
+          {/* Informação de última atualização e botão de refresh */}
+          <div className="flex items-center justify-center mt-4 text-sm text-white/60">
+            <span className="mr-2">{formattedUpdateTime}</span>
+            <button
+              onClick={handleRefreshProjects}
+              disabled={isRefreshing || isLoading}
+              className={`flex items-center px-3 py-1 rounded-md transition-all ${
+                isRefreshing || isLoading
+                  ? "bg-gray-700 cursor-not-allowed"
+                  : "bg-secondary/20 hover:bg-secondary/40"
+              }`}
+            >
+              <svg
+                className={`w-4 h-4 mr-1 ${isRefreshing ? "animate-spin" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+              {isRefreshing ? "Atualizando..." : "Atualizar projetos"}
+            </button>
+          </div>
         </motion.div>
 
         <Tabs
@@ -320,37 +483,58 @@ const Projects = () => {
             animate={{ opacity: isChanging ? 0.5 : 1 }}
             transition={{ duration: 0.3 }}
           >
-            <AnimatePresence mode="wait">
-              {filteredProjects.map((project) => (
-                <TabsContent
-                  value={category}
-                  key={`project-${project.name}-${project.category}`}
-                  className="project-card-container"
-                >
-                  <motion.div
-                    key={`motion-${project.name}-${project.category}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      duration: 0.4,
-                      ease: "easeOut",
-                    }}
-                    whileHover={{
-                      y: -10,
-                      transition: { duration: 0.2 },
-                    }}
-                    className="h-full"
+            {isLoading ? (
+              // Indicador de carregamento
+              <div className="col-span-3 py-10 text-center">
+                <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+                <p className="mt-4 text-white/70">Carregando projetos...</p>
+              </div>
+            ) : (
+              <AnimatePresence mode="wait">
+                {filteredProjects.map((project) => (
+                  <TabsContent
+                    value={category}
+                    key={`project-${project.name}-${project.category}`}
+                    className="project-card-container"
                   >
-                    <ProjectCard
-                      id={project.name}
-                      project={project}
-                      specialStyle={true}
-                    />
-                  </motion.div>
-                </TabsContent>
-              ))}
-            </AnimatePresence>
+                    <motion.div
+                      key={`motion-${project.name}-${project.category}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        duration: 0.4,
+                        ease: "easeOut",
+                      }}
+                      whileHover={{
+                        y: -10,
+                        transition: { duration: 0.2 },
+                      }}
+                      className="h-full"
+                    >
+                      <ProjectCard
+                        id={project.name}
+                        project={project}
+                        specialStyle={true}
+                      />
+                    </motion.div>
+                  </TabsContent>
+                ))}
+              </AnimatePresence>
+            )}
+
+            {/* Elemento para carregar mais projetos ao fazer scroll */}
+            {!isLoading && hasMoreProjects && (
+              <div
+                ref={loadMoreElementRef}
+                className="col-span-3 py-8 text-center opacity-0"
+              >
+                <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+                <p className="mt-4 text-white/70">
+                  Carregando mais projetos...
+                </p>
+              </div>
+            )}
           </motion.div>
         </Tabs>
       </motion.div>
