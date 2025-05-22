@@ -155,6 +155,7 @@ const Projects = () => {
 
       // Combinar os projetos
       const combined = [...workData, ...newGithubProjects];
+      console.log("Combined Projects:", combined);
 
       setProjectsData(combined);
       setLastUpdated(new Date());
@@ -536,7 +537,15 @@ const Projects = () => {
                     >
                       <ProjectCard
                         id={project.name}
-                        project={project}
+                        project={{
+                          ...project,
+                          language:
+                            project.language === "typescript" ||
+                            project.language === "javascript" ||
+                            project.language === "python"
+                              ? project.language
+                              : undefined,
+                        }}
                         specialStyle={true}
                       />
                     </motion.div>

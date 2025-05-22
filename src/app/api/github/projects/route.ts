@@ -27,14 +27,65 @@ export async function GET(request: NextRequest) {
     );
 
     // Formatar os projetos
-    const formattedProjects = portfolioProjects.map((repo) => ({
-      image: "/project-bg.webp", // Imagem padrão
-      category: determineCategory(repo.topics),
-      name: repo.name.replace(/-/g, " ").replace(/_/g, " "),
-      description: repo.description || "Projeto no GitHub",
-      link: repo.homepage || "",
-      github: repo.html_url,
-    }));
+    const formattedProjects = await Promise.all(
+      portfolioProjects.map(async (repo) => {
+        // Buscar dados de idiomas para o repositório
+        const languagesResponse = await fetch(
+          `https://api.github.com/repos/${username}/${repo.name}/languages`,
+          {
+            headers: {
+              Accept: "application/vnd.github.v3+json",
+              ...(process.env.GITHUB_TOKEN
+                ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+                : {}),
+            },
+            cache: "no-store",
+          }
+        );
+
+        let language = undefined;
+        if (languagesResponse.ok) {
+          const languages = await languagesResponse.json();
+          const primaryLanguage = Object.keys(languages)[0]?.toLowerCase();
+
+          // Verificar se o repositório tem a tag ou tópico do Shopify
+          const isShopify = repo.topics.some(
+            (topic: string) =>
+              topic.toLowerCase().includes("shopify") ||
+              topic.toLowerCase().includes("liquid")
+          );
+
+          // Mapear os nomes das linguagens do GitHub para os nossos tipos suportados
+          if (isShopify) {
+            language = "shopify";
+          } else if (
+            ["typescript", "javascript", "python"].includes(primaryLanguage)
+          ) {
+            language = primaryLanguage as
+              | "typescript"
+              | "javascript"
+              | "python"
+              | "shopify";
+          }
+        }
+
+        return {
+          image: "/project-bg.webp", // Imagem padrão
+          category: determineCategory(repo.topics),
+          name: repo.name.replace(/-/g, " ").replace(/_/g, " "),
+          description: repo.description || "Projeto no GitHub",
+          link: repo.homepage || "",
+          github: repo.html_url,
+          language,
+          tags: repo.topics.filter(
+            (topic: string) =>
+              !["backend", "frontend", "fullstack", "api"].includes(
+                topic.toLowerCase()
+              )
+          ), // Incluir todas as tags exceto as usadas para categoria
+        };
+      })
+    );
 
     return NextResponse.json(formattedProjects);
   } catch (error) {
@@ -48,38 +99,24 @@ export async function GET(request: NextRequest) {
 
 // Função para determinar a categoria do projeto com base nas tags
 function determineCategory(topics: string[]): string {
-  if (topics.includes("backend") || topics.includes("back-end")) {
-    return "Back end";
-  } else if (topics.includes("frontend") || topics.includes("front-end")) {
-    return "Front end";
-  } else if (topics.includes("fullstack") || topics.includes("full-stack")) {
-    return "Full stack";
-  } else if (topics.includes("mobile")) {
-    return "Mobile";
-  } else if (topics.includes("devops")) {
-    return "DevOps";
-  } else {
-    return "Outros";
-  }
+  if (topics.includes("backend") || topics.includes("api")) return "Back end";
+  if (topics.includes("frontend")) return "Front end";
+  if (topics.includes("fullstack")) return "Full stack";
+  return "Front end"; // Categoria padrão
 }
 
 // Função para buscar todos os repositórios de um usuário do GitHub
 async function fetchUserRepos(username: string) {
-  console.log("Fetching repos for user:", username);
-  console.log("Using GitHub token:", process.env.GITHUB_TOKEN ? "Yes" : "No");
-
   const response = await fetch(
     `https://api.github.com/users/${username}/repos?per_page=100&sort=updated&timestamp=${Date.now()}`,
     {
       headers: {
         Accept: "application/vnd.github.v3+json",
         ...(process.env.GITHUB_TOKEN
-          ? {
-              Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-            }
+          ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
           : {}),
       },
-      cache: "no-store", // Apenas esta opção para controle de cache
+      cache: "no-store",
     }
   );
 
@@ -100,12 +137,10 @@ async function fetchUserRepos(username: string) {
           headers: {
             Accept: "application/vnd.github.v3+json",
             ...(process.env.GITHUB_TOKEN
-              ? {
-                  Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-                }
+              ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
               : {}),
           },
-          cache: "no-store", // Apenas esta opção para controle de cache
+          cache: "no-store",
         }
       );
 

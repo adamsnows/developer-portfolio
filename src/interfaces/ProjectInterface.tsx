@@ -7,6 +7,8 @@ export interface ProjectCardInterface {
     description: string;
     link: string;
     github: string;
+    language?: "javascript" | "typescript" | "python" | "shopify";
+    tags?: string[];
   };
   /**
    * Controls special styling for the card:
