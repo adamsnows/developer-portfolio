@@ -179,10 +179,10 @@ const Projects = () => {
           (project: GitHubProject) => !existingGithubUrls.has(project.github)
         )
         .sort((a: any, b: any) => {
-          // Ordenar por data de criação, mais antigos primeiro
+          // Ordenar por data de criação, mais recentes primeiro
           if (a.createdAt && b.createdAt) {
             return (
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
             );
           }
           // Se não tiver data, vai pro final
