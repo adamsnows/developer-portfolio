@@ -16,7 +16,6 @@ import {
   staggerContainer,
 } from "@/components/Animations/AdvancedTransition";
 import ScrollToTop from "@/components/Animations/ScrollToTop";
-import SmoothScrollSection from "@/components/Animations/SmoothScrollSection";
 import ProjectCard from "@/components/Other/ProjectCard/ProjectCard";
 import {
   Tabs,
@@ -312,14 +311,14 @@ const Projects = () => {
   };
 
   return (
-    <SmoothScrollSection className="min-h-screen pt-12 relative pb-20">
+    <div className="relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute top-1/4 -left-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl"
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.4, 0.2],
+            scale: [1, 1.05, 1],
+            opacity: [0.2, 0.3, 0.2],
           }}
           transition={{
             duration: 6,
@@ -330,7 +329,7 @@ const Projects = () => {
         <motion.div
           className="absolute bottom-1/4 -right-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl"
           animate={{
-            scale: [1, 1.3, 1],
+            scale: [1, 1.05, 1],
             opacity: [0.2, 0.3, 0.2],
           }}
           transition={{
@@ -564,7 +563,7 @@ const Projects = () => {
 
       {/* Botão de voltar ao topo */}
       <ScrollToTop showBelow={300} />
-    </SmoothScrollSection>
+    </div>
   );
 };
 

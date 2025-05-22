@@ -121,22 +121,16 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
             </div>
           </div>
         </CardHeader>
-        <div className="h-64 px-8 py-6 relative">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <Badge
-              className={`uppercase text-sm font-medium mb-2 absolute top-4
+        <div className="h-64 px-6 py-6 relative">
+          <Badge
+            className={`uppercase text-sm font-medium mb-2 absolute top-4
               left-5 ${
                 specialStyle ? "bg-white/10 backdrop-blur-sm" : "bg-slate-700"
               } border border-white/20
               text-white hover:bg-primary/80 transition-colors duration-300`}
-            >
-              {project.category}
-            </Badge>
-          </motion.div>
+          >
+            {project.category}
+          </Badge>
 
           <motion.div
             className="mt-6"
@@ -144,7 +138,7 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <p className="text-xl font-bold mb-2 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+            <p className="text-xl font-bold mb-2 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent capitalize">
               {project.name}
             </p>
             <p className={`text-white/70 text-sm ${cardClass} line-clamp-4`}>
