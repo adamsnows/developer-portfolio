@@ -1,5 +1,5 @@
-import GithubContributionsChart from "@/components/Other/GithubContributions/GithubContributionsChart";
 import { motion } from "framer-motion";
+import GithubContributionsChart from "./GithubContributionsChart";
 
 const GithubActivity = () => {
   return (

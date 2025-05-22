@@ -113,14 +113,20 @@ const GithubContributionsChart = ({
       }
     });
 
-    // Determinar os meses a serem exibidos
-    const monthLabels: { month: number; startIndex: number }[] = [];
+    // Determinar os meses a serem exibidos com posição correta
+    const monthLabels: {
+      month: number;
+      startIndex: number;
+      weekIndex: number;
+    }[] = [];
     let currentMonth = -1;
 
     allDates.forEach((date, index) => {
       const month = new Date(date).getMonth();
       if (month !== currentMonth) {
-        monthLabels.push({ month, startIndex: index });
+        // Calcular em qual semana este dia se encontra
+        const weekIndex = Math.floor(index / 7);
+        monthLabels.push({ month, startIndex: index, weekIndex });
         currentMonth = month;
       }
     });
@@ -128,78 +134,84 @@ const GithubContributionsChart = ({
     return (
       <div className="flex flex-col space-y-2">
         {/* Rótulos de meses para layout horizontal */}
-        <div className="flex justify-between mb-1">
-          {[0, 2, 4, 6, 8, 10].map((monthIndex) => (
-            <div
-              key={`month-${monthIndex}`}
-              className="text-xs text-center text-gray-400 flex-1"
-            >
-              {months[monthIndex]}
-            </div>
-          ))}
+        <div className="flex mb-2 relative">
+          {monthLabels.map((label) => {
+            const leftPosition = label.weekIndex * 20 + 2; // 20px por semana aproximadamente
+            return (
+              <div
+                key={`month-${label.month}`}
+                className="absolute text-xs text-gray-400"
+                style={{ left: `${leftPosition}px` }}
+              >
+                {months[label.month]}
+              </div>
+            );
+          })}
         </div>
 
         {/* Grid de contribuições - Layout Horizontal */}
-        <div className="flex flex-col">
-          {/* Rótulos de dias da semana - Horizontal */}
-          <div className="flex justify-between mb-1 pl-2">
+        <div className="flex">
+          {/* Rótulos de dias da semana - Vertical */}
+          <div className="flex flex-col mr-2 space-y-1">
             {days.map((day, index) => (
               <div
                 key={day}
-                className="w-3 md:w-4 text-xs text-gray-400 text-center"
+                className="h-4 text-xs text-gray-400 flex items-center justify-end"
               >
-                {index % 3 === 0 ? day.charAt(0) : ""}
+                {day.charAt(0)}
               </div>
             ))}
           </div>
 
           {/* Células de contribuição - Horizontal */}
-          <div className="grid grid-rows-7 grid-flow-col gap-1">
-            {[0, 1, 2, 3, 4, 5, 6].map((dayOfWeek) => (
-              <div key={dayOfWeek} className="flex gap-1">
-                {weeks.map((week, weekIndex) => {
-                  const date = week.find(
-                    (d) => new Date(d).getDay() === dayOfWeek
-                  );
-                  if (!date)
-                    return (
-                      <div
-                        key={`empty-${weekIndex}-${dayOfWeek}`}
-                        className="w-3 h-3 md:w-4 md:h-4"
-                      />
+          <div className="flex-1">
+            <div className="grid grid-rows-7 grid-flow-col gap-1">
+              {[0, 1, 2, 3, 4, 5, 6].map((dayOfWeek) => (
+                <div key={dayOfWeek} className="flex gap-1">
+                  {weeks.map((week, weekIndex) => {
+                    const date = week.find(
+                      (d) => new Date(d).getDay() === dayOfWeek
+                    );
+                    if (!date)
+                      return (
+                        <div
+                          key={`empty-${weekIndex}-${dayOfWeek}`}
+                          className="w-4 h-4"
+                        />
+                      );
+
+                    const count = contributions[date] || 0;
+                    const formattedDate = new Date(date).toLocaleDateString(
+                      "pt-BR",
+                      {
+                        weekday: "long",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      }
                     );
 
-                  const count = contributions[date] || 0;
-                  const formattedDate = new Date(date).toLocaleDateString(
-                    "pt-BR",
-                    {
-                      weekday: "long",
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    }
-                  );
-
-                  return (
-                    <motion.div
-                      key={date}
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{
-                        duration: 0.2,
-                        delay: weekIndex * 0.01 + dayOfWeek * 0.02,
-                      }}
-                      className={`w-3 h-3 md:w-4 md:h-4 rounded-sm ${getContributionColor(
-                        count
-                      )} cursor-pointer transition-colors`}
-                      title={`${formattedDate}: ${count} contribuição${
-                        count !== 1 ? "s" : ""
-                      }`}
-                    />
-                  );
-                })}
-              </div>
-            ))}
+                    return (
+                      <motion.div
+                        key={date}
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                          duration: 0.2,
+                          delay: weekIndex * 0.01 + dayOfWeek * 0.02,
+                        }}
+                        className={`w-4 h-4 rounded-sm ${getContributionColor(
+                          count
+                        )} cursor-pointer transition-colors`}
+                        title={`${formattedDate}: ${count} contribuição${
+                          count !== 1 ? "s" : ""
+                        }`}
+                      />
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
