@@ -188,7 +188,7 @@ const FrontendExpertise = () => {
         <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full filter blur-3xl opacity-30"></div>
       </div>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto relative">
         <motion.div
           ref={ref}
           variants={staggerContainer}
@@ -208,7 +208,19 @@ const FrontendExpertise = () => {
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 relative">
+          <motion.div
+            className="absolute top-1/2 left-1/2 inset-x-1/2 w-64 md:w-80 h-64 md:h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
+            animate={{
+              scale: [1, 2, 1],
+              opacity: [0.2, 0.7, 0.2],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
           <FrontendCard
             icon={<RiLayout2Line />}
             title="UI/UX Design"

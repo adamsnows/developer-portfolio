@@ -33,8 +33,8 @@ const SmoothScrollSection = ({
   const y = useTransform(smoothProgress, [0, 1], ["10%", "-10%"]);
 
   return (
-    <div ref={ref} className={`relative overflow-hidden ${className}`}>
-      <motion.div style={{ y }} className="w-full h-full">
+    <div ref={ref} className={`relative ${className}`}>
+      <motion.div style={{ y }} className="">
         {children}
       </motion.div>
     </div>

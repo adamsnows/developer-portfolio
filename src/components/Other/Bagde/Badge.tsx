@@ -13,7 +13,7 @@ const Badge = ({
   if (text) {
     return (
       <div
-        className={`inline-block px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary ${containerStyles}`}
+        className={`inline-block px-3 py-3 text-xs font-semibold rounded-full bg-primary/10 text-primary ${containerStyles}`}
       >
         {text}
       </div>

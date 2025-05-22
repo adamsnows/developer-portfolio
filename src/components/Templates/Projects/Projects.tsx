@@ -204,10 +204,11 @@ const Projects = () => {
             MEUS PROJETOS
           </h2>
           <AdvancedTextAnimation
-            text="Um pouco da minha história como desenvolvedor, muitos projetos não estão mais no site antigo, ou com disponibilidade de acesso ao código fonte por ser um projeto privado."
+            text="Um pouco da minha história como desenvolvedor, muitos projetos não estão mais no site antigo, ou com disponibilidade de acesso ao código fonte por ser um projeto privado, obrigado pela visita, volte sempre e deixe uma crítica no repositório do projeto!"
             animationStyle="fade"
+            speed={0.02}
             once={true}
-            className="text-md text-white/80 max-w-3xl mx-auto text-center"
+            className="text-md text-white/50 max-w-3xl mx-auto text-center"
           />
         </motion.div>
 

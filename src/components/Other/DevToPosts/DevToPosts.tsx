@@ -46,7 +46,7 @@ interface Post {
 
 const DevToPostCard = ({ post }: { post: Post }) => {
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden h-full shadow-xl">
+    <div className="bg-background/90 border border-slate-700 rounded-xl overflow-hidden h-full shadow-xl">
       <div className="relative h-40 overflow-hidden">
         <Image
           src={post.cover || "/projects/devto-default.png"}
@@ -80,7 +80,7 @@ const DevToPostCard = ({ post }: { post: Post }) => {
           ))}
         </div>
       </div>
-      <div className="p-4 bg-slate-800 relative z-10">
+      <div className="p-4 bg-background/90 relative z-10">
         <h3 className="font-semibold mb-2 text-sm h-10 line-clamp-2 text-white">
           {post.title}
         </h3>
@@ -260,7 +260,7 @@ const DevToPosts = () => {
   }, [swiperInstance, posts, isLoading, initialSlide]);
 
   return (
-    <section className="relative xl:pt-[170px] overflow-hidden">
+    <section className="relative xl:pt-[170px] overflow-visible">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full filter blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
@@ -271,7 +271,7 @@ const DevToPosts = () => {
         variants={staggerContainer}
         initial="initial"
         animate={controls}
-        className="container pt-10 -mt-10 pb-[100px] -mb-10 mx-auto xl:flex xl:flex-row-reverse xl:justify-between relative z-10 overflow-hidden px-4 md:px-6 lg:px-8"
+        className="container pt-10 -mt-10 pb-[100px] -mb-10 mx-auto xl:flex xl:flex-row-reverse xl:justify-between relative z-10 overflow-visible px-4 md:px-6 lg:px-8"
       >
         <motion.div
           variants={fadeInUp}
@@ -393,13 +393,13 @@ const DevToPosts = () => {
 
         <motion.div
           variants={fadeInLeft}
-          className="xl:max-w-[800px] lg:max-w-[700px] md:max-w-[600px] sm:max-w-[500px] max-w-full mt-10 xl:mt-0 overflow-hidden"
+          className="xl:max-w-[800px] lg:max-w-[700px] md:max-w-[600px] sm:max-w-[500px] max-w-full mt-10 xl:mt-0 overflow-visible"
         >
-          <div className="relative z-0 overflow-hidden">
+          <div className="relative z-0 overflow-visible">
             <motion.div
-              className="absolute top-0 left-0 md:-top-20 md:-left-20 w-64 md:w-80 h-64 md:h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
+              className="absolute top-0 left-0  w-64 md:w-80 h-64 md:h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
               animate={{
-                scale: [1, 1.2, 1],
+                scale: [1, 3, 1],
                 opacity: [0.2, 0.4, 0.2],
               }}
               transition={{
@@ -409,9 +409,9 @@ const DevToPosts = () => {
               }}
             />
             <motion.div
-              className="absolute bottom-0 left-0 w-60 h-60 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
+              className="absolute right-20 top-20  w-60 h-60 bg-primary/30 rounded-full blur-3xl pointer-events-none z-0"
               animate={{
-                scale: [1, 1.3, 1],
+                scale: [1, 3, 1],
                 opacity: [0.2, 0.3, 0.2],
               }}
               transition={{
@@ -478,7 +478,7 @@ const DevToPosts = () => {
                     height: "auto",
                   }}
                 >
-                  <div className="flex flex-col items-center justify-center h-64 bg-slate-800 border border-slate-700 rounded-xl p-6 w-full">
+                  <div className="flex flex-col items-center justify-center h-64 bg-background/90 border border-slate-700 rounded-xl p-6 w-full">
                     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mb-4"></div>
                     <p className="text-sm text-white/70">
                       Carregando artigos...
@@ -493,7 +493,7 @@ const DevToPosts = () => {
                     height: "auto",
                   }}
                 >
-                  <div className="flex flex-col items-center justify-center h-64 bg-slate-800 border border-slate-700 rounded-xl p-6 text-center w-full">
+                  <div className="flex flex-col items-center justify-center h-64 bg-background/90 border border-slate-700 rounded-xl p-6 text-center w-full">
                     <p className="text-sm text-red-400 mb-2">{error}</p>
                     <p className="text-xs text-white/70">
                       Usando dados de exemplo como fallback.

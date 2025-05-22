@@ -160,9 +160,9 @@ const Work = () => {
 
         <motion.div
           variants={fadeInRight}
-          className="xl:max-w-[780px] top-0 mt-10 xl:mt-0 overflow-hidden"
+          className="xl:max-w-[780px] top-0 mt-10 xl:mt-0 overflow-visible"
         >
-          <div className="relative overflow-hidden">
+          <div className="relative overflow-visible">
             <motion.div
               className="absolute top-0 right-0 md:-right-20 w-64 md:w-80 h-64 md:h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
               animate={{

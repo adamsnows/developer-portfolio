@@ -10,12 +10,20 @@ import Work from "@/components/Other/Work/Work";
 const Home = () => {
   return (
     <AdvancedTransition>
+      <InitialHome />
       <SmoothScrollSection>
-        <InitialHome />
         <DevToPosts />
+      </SmoothScrollSection>
+      <SmoothScrollSection>
         <Work />
+      </SmoothScrollSection>
+      <SmoothScrollSection>
         <FrontendExpertise />
+      </SmoothScrollSection>
+      <SmoothScrollSection>
         <BackendExpertise />
+      </SmoothScrollSection>
+      <SmoothScrollSection>
         <Reviews />
       </SmoothScrollSection>
     </AdvancedTransition>

@@ -16,7 +16,7 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
   // Different background styles based on where the card is used
   const cardBackground = specialStyle
     ? "bg-white/5 backdrop-blur-sm" // Transparent for Projects page
-    : "bg-slate-800/95"; // Solid for Home page
+    : "bg-background/90"; // Solid for Home page
 
   return (
     <motion.div
