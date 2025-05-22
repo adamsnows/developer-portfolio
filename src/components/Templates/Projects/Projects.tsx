@@ -249,7 +249,7 @@ const Projects = () => {
                   {/* Fundo ativo do botão */}
                   {categoryName === activeTab && (
                     <motion.span
-                      className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-md"
+                      className="absolute inset-0 bg-gradient-to-r from-background/50 via-secondary to-background/50 rounded-md"
                       layoutId="activeTabBackground"
                       animate={
                         pulseEffect
@@ -274,7 +274,7 @@ const Projects = () => {
 
                   {/* Efeito de hover no botão da categoria */}
                   <motion.span
-                    className="absolute inset-0 bg-background/10 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute inset-0 bg-background/20 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     transition={{
                       type: "spring",
                       bounce: 0.25,
