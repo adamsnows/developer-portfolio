@@ -1,9 +1,7 @@
 import {
   RiGraduationCapFill,
-  RiCalendarFill,
-  RiMailFill,
-  RiPhoneFill,
   RiHomeFill,
+  RiMailFill,
   RiUserFill,
 } from "react-icons/ri";
 
@@ -18,11 +16,11 @@ export const infoData = [
   },
   {
     icon: <RiGraduationCapFill size={20} />,
-    text: "Desenvolvedor Full Stack",
+    text: "Full Stack Developer",
   },
   {
     icon: <RiHomeFill size={20} />,
-    text: "Natal, RN, Brasil",
+    text: "Natal, RN, Brazil",
   },
 ];
 
@@ -32,13 +30,13 @@ export const qualificationData = [
     data: [
       {
         school: "Kenzie Academy Brasil",
-        qualification: "Desenvolvedor Full Stack",
-        years: "mar de 2022 - mar de 2023",
+        qualification: "Full Stack Developer",
+        years: "Mar 2022 - Mar 2023",
       },
       {
         school: "Centro universitário União das Américas Descomplica",
-        qualification: "Pós em Engenharia de Software",
-        years: "jun de 2023 - dez de 2023",
+        qualification: "Post-grad in Software Engineering",
+        years: "Jun 2023 - Dec 2023",
       },
     ],
   },
@@ -48,17 +46,17 @@ export const qualificationData = [
       {
         company: "SUPER MEGAVENDAS",
         role: "FullStack Tech Leader",
-        years: "jan de 2024 - ago de 2024",
-        location: "Natal, Rio Grande do Norte, Brasil",
+        years: "Jan 2024 - Aug 2024",
+        location: "Natal, Rio Grande do Norte, Brazil",
         description: [
-          "Iniciei e configurei o ambiente de desenvolvimento da empresa, garantindo uma base sólida para o crescimento dos projetos.",
-          "Implementei processos ágeis e eficientes, melhorando a colaboração e produtividade da equipe.",
-          "Selecionei e integrei tecnologias-chave, como NextJS, TailwindCSS, Express e TypeORM.",
-          "Configurei pipelines de CI/CD para automação de build, testes e deploy.",
-          "Liderei o desenvolvimento de soluções inovadoras, como a plataforma SMV Flow e a extensão SMVZap para Chrome.",
-          "Melhorei a experiência do usuário com otimização de sistemas de login e painéis personalizados.",
-          "Criei e otimizei diversos recursos e sistemas, como painéis e dashboards dinâmicos.",
-          "Forneci orientação técnica e suporte à equipe, promovendo um ambiente colaborativo.",
+          "Initiated and set up the company's development environment, ensuring a solid foundation for project growth.",
+          "Implemented agile and efficient processes, improving team collaboration and productivity.",
+          "Selected and integrated key technologies, such as NextJS, TailwindCSS, Express, and TypeORM.",
+          "Configured CI/CD pipelines for build, test, and deployment automation.",
+          "Led the development of innovative solutions, such as the SMV Flow platform and the SMVZap Chrome extension.",
+          "Improved user experience with optimized login systems and customized dashboards.",
+          "Created and optimized various resources and systems, such as dynamic panels and dashboards.",
+          "Provided technical guidance and support to the team, promoting a collaborative environment.",
         ],
         technologies: [
           "NextJS 14",

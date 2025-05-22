@@ -2,9 +2,9 @@ export const workData = [
   {
     image: "/projects/smvzap.png",
     category: "Full stack",
-    name: "SMVZap Extensão",
+    name: "SMVZap Extension",
     description:
-      "Projeto extremamente desafiador, onde pude desenvolver uma extensão para o chrome, que permite a inclusão de ferramentas poderosas para vendedores como disparos em massas, mensagens agendadas, mensagens automáticas, etc.",
+      "Extremely challenging project where I developed a Chrome extension that allows the inclusion of powerful tools for sellers, such as mass messaging, scheduled messages, automated messages, and more.",
     link: "https://chromewebstore.google.com/detail/super-megavendas/edmbabikeafegjamjimkoalapngahbfl?authuser=0&hl=pt-BR",
     github: "/#",
   },
@@ -13,7 +13,7 @@ export const workData = [
     category: "Full stack",
     name: "SMV Flow",
     description:
-      "Painel admin para controle interno de inúmeros processos dentro da empresa Super Megavendas, assim como controle de usuários, permissões, etc.",
+      "Admin panel for internal control of numerous processes within the Super Megavendas company, as well as user and permission management.",
     link: "https://acesso.smvflow.com/",
     github: "/#",
   },
@@ -22,7 +22,7 @@ export const workData = [
     category: "Front end",
     name: "Evnttz",
     description:
-      "Evnttz é uma plataforma de gestão de eventos que simplifica a organização com venda de ingressos, controle de participantes, gamificação e análises em tempo real. Tudo isso em uma interface moderna e intuitiva.",
+      "Evnttz is an event management platform that simplifies organization with ticket sales, participant control, gamification, and real-time analytics. All in a modern and intuitive interface.",
     link: "https://www.evnttz.com.br/",
     github: "/#",
   },
@@ -31,7 +31,7 @@ export const workData = [
     category: "Front end",
     name: "Maestria",
     description:
-      "O sistema Maestria foi desenvolvido com advogados para oferecer uma experiência otimizada. O resultado é uma plataforma intuitiva, que simplifica a busca por jurisprudências e torna a jornada jurídica mais acessível.",
+      "The Maestria system was developed with lawyers to offer an optimized experience. The result is an intuitive platform that simplifies jurisprudence searches and makes the legal journey more accessible.",
     link: "https://site.maestrialaw.com.br/",
     github: "/#",
   },
@@ -40,7 +40,7 @@ export const workData = [
     category: "Front end",
     name: "Migtech Hub",
     description:
-      "Você é um profissional de saúde que busca fazer a transição de sua carreira em um novo país? Nossa equipe oferece suporte completo, desde a revalidação do diploma até a colocação profissional. Com uma abordagem personalizada, garantimos uma transição tranquila para o mercado dos EUA.",
+      "Are you a healthcare professional looking to transition your career to a new country? Our team offers complete support, from diploma revalidation to job placement. With a personalized approach, we ensure a smooth transition to the US market.",
     link: "https://mighub.com/",
     github: "/#",
   },
@@ -49,16 +49,16 @@ export const workData = [
     category: "Front end",
     name: "Vivalá",
     description:
-      "Nosso objetivo é transformar o Brasil no maior destino de turismo sustentável do mundo criando expedições que sejam transformadoras para os viajantes, as comunidades e o planeta.",
+      "Our goal is to make Brazil the largest sustainable tourism destination in the world by creating expeditions that are transformative for travelers, communities, and the planet.",
     link: "https://www.vivala.com.br/",
     github: "/#",
   },
   {
     image: "/projects/jabrasil.png",
     category: "Front end",
-    name: "JA Brasil (Painel Admin)",
+    name: "JA Brasil (Admin Panel)",
     description:
-      "Somos uma das maiores organizações sociais influentes no mundo e atuamos no Brasil há quatro décadas, beneficiando mais de 5 milhões de jovens em todas as regiões do país. Estamos focados em expandir a educação empreendedora e o desenvolvimento econômico do país.",
+      "We are one of the most influential social organizations in the world and have been operating in Brazil for four decades, benefiting more than 5 million young people across all regions of the country. We are focused on expanding entrepreneurial education and the country's economic development.",
     link: "https://jabrasil.org.br/",
     github: "/#",
   },
@@ -66,17 +66,16 @@ export const workData = [
     image: "/projects/gastrobox.png",
     category: "Full stack",
     name: "Gastrobox",
-    description:
-      "Site de delivery de comida, com sistema de gerenciamento de pedidos e cardápio.",
+    description: "Food delivery website with order and menu management system.",
     link: "/#",
     github: "/#",
   },
   {
     image: "/api.webp",
     category: "Back end",
-    name: "SMVZap Clientes",
+    name: "SMVZap Clients",
     description:
-      "A SMVZap API é uma API robusta e multifuncional projetada para gerenciar e controlar aspectos cruciais de um sistema de usuários, incluindo o tempo premium, a criação e gestão de contas, e a definição de tipos de usuário. Esta API fornece endpoints que permitem a integração com o Front end do SMVZap.",
+      "The SMVZap API is a robust and multifunctional API designed to manage and control crucial aspects of a user system, including premium time, account creation and management, and user type definition. This API provides endpoints that allow integration with the SMVZap Front end.",
     link: "/#",
     github: "/#",
   },

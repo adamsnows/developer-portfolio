@@ -50,24 +50,24 @@ const About = () => {
                   Qualificações
                 </TabsTrigger>
                 <TabsTrigger className="w-[162px] xl:w-auto" value="skills">
-                  Habilidades
+                  Skills
                 </TabsTrigger>
               </TabsList>
               <div className="text-lg mt-12 xl:mt-8">
                 <TabsContent value="personal">
                   <div className="text-center xl:text-left">
                     <h3 className="h3 mb-4">
-                      Qualidade de serviço há mais de{" "}
-                      {new Date().getFullYear() - 2020} anos
+                      Quality service for over {new Date().getFullYear() - 2020}{" "}
+                      years
                     </h3>
                     <p className="subtitle max-w-xl mx-auto xl:mx-0">
-                      Movido por uma curiosidade insaciável, dedico-me ao ofício
-                      da codificação, engajando-me em novos projetos e buscando
-                      constantemente aprimorar minhas habilidades. Minha paixão
-                      pelo aprendizado contínuo me impulsiona a explorar novas
-                      tecnologias e técnicas, garantindo que eu esteja sempre à
-                      frente das tendências e preparado para enfrentar qualquer
-                      desafio no desenvolvimento de software.
+                      Driven by an insatiable curiosity, I dedicate myself to
+                      the craft of coding, engaging in new projects and
+                      continuously seeking to improve my skills. My passion for
+                      continuous learning drives me to explore new technologies
+                      and techniques, ensuring that I am always ahead of trends
+                      and prepared to face any challenge in software
+                      development.
                     </p>
                     <div className="grid xl:grid-cols-2 gap-4 mb-12">
                       {infoData.map((item, index) => {
@@ -85,9 +85,9 @@ const About = () => {
                     </div>
 
                     <div className="flex flex-col gap-y-2">
-                      <div className="text-primary">Idiomas</div>
+                      <div className="text-primary">Languages</div>
                       <div className="border-b border-border"></div>
-                      <div>Português(Nativo), Inglês(Avançado) </div>
+                      <div>Portuguese (Native), English (Advanced) </div>
                     </div>
                   </div>
                 </TabsContent>
@@ -95,7 +95,7 @@ const About = () => {
                 <TabsContent value="qualifications">
                   <div>
                     <h3 className="h3 mb-8 text-center xl:text-left">
-                      Minhas qualificações
+                      My qualifications
                     </h3>
                     <div className="grid md:grid-cols-2 gap-y-8">
                       <div className="flex flex-col gap-y-6">

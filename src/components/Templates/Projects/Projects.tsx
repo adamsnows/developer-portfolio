@@ -59,13 +59,29 @@ const Projects = () => {
     threshold: 0.1,
   });
 
+  // Calcular o número total de projetos na categoria atual
+  const totalProjectsInCategory = projectsData.filter((project) =>
+    category === "Todos" ? true : project.category === category
+  ).length;
+
   // Efeito para carregar mais projetos quando o elemento de carregamento ficar visível
   useEffect(() => {
     if (loadMoreIsVisible && hasMoreProjects && !isLoading && !isRefreshing) {
       // Incrementar o número de projetos visíveis
-      setVisibleProjects((prev) => prev + 6);
+      setVisibleProjects((prev) => {
+        const newValue = prev + 6;
+        // Verificar se ainda há mais projetos para carregar depois desta adição
+        setHasMoreProjects(newValue < totalProjectsInCategory);
+        return newValue;
+      });
     }
-  }, [loadMoreIsVisible, hasMoreProjects, isLoading, isRefreshing]);
+  }, [
+    loadMoreIsVisible,
+    hasMoreProjects,
+    isLoading,
+    isRefreshing,
+    totalProjectsInCategory,
+  ]);
 
   // Efeito para formatar a data de última atualização apenas no cliente
   useEffect(() => {
@@ -128,7 +144,7 @@ const Projects = () => {
 
       // Filtrar apenas os projetos do GitHub que não existem nos projetos atuais
       const newGithubProjects = githubProjects.filter(
-        (project) => !existingGithubUrls.has(project.github)
+        (project: { github: string }) => !existingGithubUrls.has(project.github)
       );
 
       // Combinar os projetos
@@ -289,7 +305,7 @@ const Projects = () => {
   };
 
   return (
-    <SmoothScrollSection className="min-h-screen pt-12 relative overflow-hidden">
+    <SmoothScrollSection className="min-h-screen pt-12 relative pb-20">
       {/* Background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -408,7 +424,7 @@ const Projects = () => {
                   onClick={() => handleCategoryChange(categoryName)}
                   value={categoryName}
                   key={index}
-                  className="w-[162px] md:w-auto relative overflow-hidden group"
+                  className="w-[162px] md:w-auto relative overflow-visible group"
                 >
                   {/* Fundo ativo do botão */}
                   {categoryName === activeTab && (
@@ -475,13 +491,13 @@ const Projects = () => {
                 </TabsTrigger>
               ))}
             </TabsList>
-          </motion.div>
-
+          </motion.div>{" "}
           <motion.div
             ref={gridRef}
-            className="text-lg xl:mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6"
+            className="text-lg xl:mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 relative"
             animate={{ opacity: isChanging ? 0.5 : 1 }}
             transition={{ duration: 0.3 }}
+            style={{ minHeight: "300px" }} // Garante altura mínima para o container
           >
             {isLoading ? (
               // Indicador de carregamento

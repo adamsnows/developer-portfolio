@@ -103,15 +103,14 @@ const Work = () => {
             ref={titleRef}
             className="section-title mb-4 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-300%"
           >
-            ÚLTIMOS PROJETOS
+            LATEST PROJECTS
           </h2>
           <p className="text-justify text-sm mb-8 leading-relaxed">
-            Cada projeto reflete um compromisso com a{" "}
-            <span className="text-primary font-medium">inovação</span>,{" "}
-            <span className="text-primary font-medium">eficiência</span> e uma
-            experiência de usuário excepcional, demonstrando habilidades
-            abrangentes e um entendimento profundo das necessidades de
-            desenvolvimento moderno.
+            Each project reflects a commitment to{" "}
+            <span className="text-primary font-medium">innovation</span>,{" "}
+            <span className="text-primary font-medium">efficiency</span> and an
+            exceptional user experience, demonstrating comprehensive skills and
+            a deep understanding of modern development needs.
           </p>
 
           <div className="mb-8 w-full">
@@ -160,9 +159,9 @@ const Work = () => {
 
         <motion.div
           variants={fadeInRight}
-          className="xl:max-w-[780px] top-0 mt-10 xl:mt-0 overflow-visible"
+          className="xl:max-w-[780px] top-0 mt-10 xl:mt-0 overflow-visible relative z-10"
         >
-          <div className="relative overflow-visible">
+          <div className="relative overflow-visible z-99">
             <motion.div
               className="absolute top-0 right-0 md:-right-20 w-64 md:w-80 h-64 md:h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
               animate={{

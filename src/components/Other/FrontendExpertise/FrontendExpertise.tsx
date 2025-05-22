@@ -62,7 +62,7 @@ const FrontendExpertise = () => {
     }
   }, [controls, inView]);
 
-  // Código texto memoizado para prevenir recriação em re-renderizações
+  // Memoized code text to prevent recreation on re-renders
   const codeText = useMemo(() => {
     return `<span style="color:#569CD6">export default function</span> <span style="color:#DCDCAA">AnimatedComponent</span>() {
   <span style="color:#569CD6">const</span> [<span style="color:#4FC1FF">isVisible</span>, <span style="color:#DCDCAA">setIsVisible</span>] = <span style="color:#DCDCAA">useState</span>(<span style="color:#569CD6">false</span>);
@@ -109,10 +109,10 @@ const FrontendExpertise = () => {
       <span style="color:#9CDCFE">className</span>="<span style="color:#CE9178">animated-container</span>"
     >
       <motion.h1 <span style="color:#9CDCFE">variants</span>={<span style="color:#9CDCFE">itemVariants</span>}>
-        Animações incríveis com React!
+        Amazing animations with React!
       </motion.h1>
       <motion.p <span style="color:#9CDCFE">variants</span>={<span style="color:#9CDCFE">itemVariants</span>}>
-        Criando interfaces modernas e interativas
+        Creating modern and interactive interfaces
       </motion.p>
     </motion.section>
   );
@@ -123,7 +123,7 @@ const FrontendExpertise = () => {
     if (codeRef.current && inView && !animationInitializedRef.current) {
       const code = codeRef.current;
 
-      // Usar a função de destaque de sintaxe para animação
+      // Use the syntax highlighting function for animation
       gsap.to(
         {},
         {
@@ -131,15 +131,15 @@ const FrontendExpertise = () => {
         }
       );
 
-      // Marcar como inicializado para evitar renderização duplicada
+      // Mark as initialized to avoid duplicate rendering
       animationInitializedRef.current = true;
     }
 
-    // Animação para o elemento de demonstração
+    // Animation for the demonstration element
     if (animationRef.current) {
       const element = animationRef.current;
 
-      // Configurar animações GSAP mais avançadas
+      // Configure advanced GSAP animations
       const tl = gsap.timeline({ repeat: -1 });
 
       tl.to(element, {
@@ -200,11 +200,11 @@ const FrontendExpertise = () => {
             variants={fadeInUp}
             className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent"
           >
-            Expertise em Front-End
+            Frontend Expertise
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-lg">
-            Interfaces modernas, responsivas e animações cativantes para uma
-            experiência de usuário excepcional
+            Modern, responsive interfaces and captivating animations for an
+            exceptional user experience
           </motion.p>
         </motion.div>
 
@@ -224,42 +224,42 @@ const FrontendExpertise = () => {
           <FrontendCard
             icon={<RiLayout2Line />}
             title="UI/UX Design"
-            description="Criação de interfaces elegantes com foco na experiência do usuário, seguindo os princípios de design e acessibilidade."
+            description="Creation of elegant interfaces focused on user experience, following design principles and accessibility guidelines."
             delay={0.1}
           />
 
           <FrontendCard
             icon={<RiCodeSSlashLine />}
             title="React & Next.js"
-            description="Desenvolvimento de aplicações com React e Next.js, utilizando as melhores práticas e padrões modernos."
+            description="Development of applications with React and Next.js, using best practices and modern patterns."
             delay={0.2}
           />
 
           <FrontendCard
             icon={<RiMagicLine />}
-            title="Animações Avançadas"
-            description="Implementação de animações fluidas e interativas que elevam a experiência do usuário a um novo patamar."
+            title="Advanced Animations"
+            description="Implementation of fluid and interactive animations that elevate the user experience to a new level."
             delay={0.3}
           />
 
           <FrontendCard
             icon={<RiSmartphoneLine />}
-            title="Design Responsivo"
-            description="Interfaces que se adaptam perfeitamente a qualquer dispositivo, garantindo uma experiência consistente."
+            title="Responsive Design"
+            description="Interfaces that adapt perfectly to any device, ensuring a consistent experience."
             delay={0.4}
           />
 
           <FrontendCard
             icon={<RiSpeedLine />}
             title="Performance"
-            description="Otimização de carregamento, renderização e interatividade para sites rápidos e eficientes."
+            description="Optimization of loading, rendering, and interactivity for fast and efficient websites."
             delay={0.5}
           />
 
           <FrontendCard
             icon={<RiPaintBrushLine />}
-            title="CSS Avançado"
-            description="Domínio de Tailwind CSS, Styled Components, CSS Modules, animações e transições personalizadas."
+            title="Advanced CSS"
+            description="Mastery of Tailwind CSS, Styled Components, CSS Modules, animations, and custom transitions."
             delay={0.6}
           />
         </div>
@@ -274,35 +274,33 @@ const FrontendExpertise = () => {
             variants={fadeInLeft}
             className="space-y-6 order-2 lg:order-1"
           >
-            <h3 className="text-2xl font-bold">
-              Experiência visual impactante
-            </h3>
+            <h3 className="text-2xl font-bold">Impactful Visual Experience</h3>
             <p className="text-justify text-white/80">
-              Meu foco é criar interfaces que não apenas funcionem
-              perfeitamente, mas que também encantem os usuários com animações
-              fluidas, design responsivo e alta performance.
+              My focus is on creating interfaces that not only function
+              perfectly but also delight users with fluid animations, responsive
+              design, and high performance.
             </p>
 
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-secondary rounded-full"></div>
-                <span>Interfaces interativas e responsivas</span>
+                <span>Interactive and responsive interfaces</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-secondary rounded-full"></div>
-                <span>Animações e micro-interações avançadas</span>
+                <span>Advanced animations and micro-interactions</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-secondary rounded-full"></div>
-                <span>Arquitetura de componentes escalável</span>
+                <span>Scalable component architecture</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-secondary rounded-full"></div>
-                <span>Aplicações web progressivas (PWA)</span>
+                <span>Progressive Web Applications (PWA)</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-secondary rounded-full"></div>
-                <span>Otimização para SEO e acessibilidade</span>
+                <span>SEO and accessibility optimization</span>
               </div>
             </div>
           </motion.div>

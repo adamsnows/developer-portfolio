@@ -126,11 +126,11 @@ Ready to handle requests...`;
             variants={fadeInUp}
             className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
           >
-            Expertise em Back-End
+            Back-End Expertise
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-lg">
-            Arquiteturas robustas, seguras e escaláveis para aplicações de alto
-            desempenho
+            Robust, secure and scalable architectures for high-performance
+            applications
           </motion.p>
         </motion.div>
 
@@ -149,43 +149,43 @@ Ready to handle requests...`;
           />
           <BackendCard
             icon={<RiServerLine />}
-            title="API RESTful"
-            description="Desenvolvimento de APIs seguindo os melhores padrões e práticas, com documentação completa via Swagger/OpenAPI."
+            title="RESTful API"
+            description="API development following best standards and practices, with complete documentation via Swagger/OpenAPI."
             delay={0.1}
           />
 
           <BackendCard
             icon={<RiDatabase2Line />}
-            title="Bancos de Dados"
-            description="Expertise em SQL e NoSQL, modelagem de dados eficiente, queries otimizadas e implementação de cache."
+            title="Databases"
+            description="Expertise in SQL and NoSQL, efficient data modeling, optimized queries, and cache implementation."
             delay={0.2}
           />
 
           <BackendCard
             icon={<RiSecurePaymentLine />}
-            title="Segurança"
-            description="Implementação de autenticação JWT, OAuth, proteção contra injeção SQL e outros ataques comuns."
+            title="Security"
+            description="Implementation of JWT authentication, OAuth, protection against SQL injection and other common attacks."
             delay={0.3}
           />
 
           <BackendCard
             icon={<RiTerminalBoxLine />}
-            title="Microserviços"
-            description="Arquitetura distribuída, comunicação entre serviços, balanceamento de carga e resiliência de sistema."
+            title="Microservices"
+            description="Distributed architecture, service communication, load balancing, and system resilience."
             delay={0.4}
           />
 
           <BackendCard
             icon={<RiCloudLine />}
             title="Cloud & DevOps"
-            description="Implantação em AWS, Azure, container com Docker, orquestração com Kubernetes, CI/CD."
+            description="Deployment on AWS, Azure, containerization with Docker, orchestration with Kubernetes, CI/CD."
             delay={0.5}
           />
 
           <BackendCard
             icon={<RiCodeSSlashLine />}
-            title="Node.js Avançado"
-            description="Domínio de Express, NestJS, processos assíncronos, streams, workers e otimização de desempenho."
+            title="Advanced Node.js"
+            description="Mastery of Express, NestJS, asynchronous processes, streams, workers, and performance optimization."
             delay={0.6}
           />
         </div>
@@ -215,34 +215,33 @@ Ready to handle requests...`;
           </motion.div>
 
           <motion.div variants={fadeInRight} className="space-y-6">
-            <h3 className="text-2xl font-bold">Arquitetura de Sistema</h3>
+            <h3 className="text-2xl font-bold">System Architecture</h3>
             <p className="text-white/80 text-justify">
-              Construo sistemas back-end com foco em performance, escalabilidade
-              e segurança, utilizando as melhores práticas de engenharia de
-              software para garantir código limpo, testável e de fácil
-              manutenção.
+              I build backend systems focused on performance, scalability, and
+              security, using software engineering best practices to ensure
+              clean, testable, and easily maintainable code.
             </p>
 
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span>Design patterns e princípios SOLID</span>
+                <span>Design patterns and SOLID principles</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span>Testes automatizados e TDD</span>
+                <span>Automated testing and TDD</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span>Arquitetura em camadas e hexagonal</span>
+                <span>Layered and hexagonal architecture</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span>Sistemas distribuídos e escalabilidade horizontal</span>
+                <span>Distributed systems and horizontal scalability</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span>Monitoramento e logging avançado</span>
+                <span>Advanced monitoring and logging</span>
               </div>
             </div>
           </motion.div>

@@ -50,7 +50,7 @@ const ReviewContent = ({ review }: ReviewContentProps) => {
   const handleScroll = () => {
     if (contentRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = contentRef.current;
-      // Consideramos "no fim" quando estamos a 10px ou menos do fim
+      // We consider "at the end" when we are 10px or less from the end
       const isBottom = Math.abs(scrollHeight - scrollTop - clientHeight) <= 10;
       setIsScrolledToBottom(isBottom);
       setNeedsFade(
@@ -67,8 +67,9 @@ const ReviewContent = ({ review }: ReviewContentProps) => {
         onScroll={handleScroll}
         className="text-white/90 leading-relaxed text-sm overflow-y-auto h-[280px] pr-2 scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent"
       >
+        {" "}
         <ClientOnly
-          fallback={<div className="text-white/70">Carregando feedback...</div>}
+          fallback={<div className="text-white/70">Loading feedback...</div>}
         >
           {formatReviewText(review)}
         </ClientOnly>
@@ -82,17 +83,17 @@ const ReviewContent = ({ review }: ReviewContentProps) => {
 
 const formatReviewText = (text: string) => {
   const keywords = [
-    "excelente",
-    "incrível",
-    "talentoso",
-    "habilidade",
-    "profissional",
-    "comunicação",
-    "conhecimento",
-    "inovadoras",
-    "proativo",
-    "dedicado",
-    "capacitado",
+    "excellent",
+    "amazing",
+    "talented",
+    "skill",
+    "professional",
+    "communication",
+    "knowledge",
+    "innovative",
+    "proactive",
+    "dedicated",
+    "capable",
   ];
 
   const paragraphs = text.includes("\n") ? text.split("\n") : [text];
@@ -251,7 +252,7 @@ const Reviews = () => {
                               src={person.avatar}
                               width={80}
                               height={80}
-                              alt={`Foto de ${person.name}`}
+                              alt={`Photo of ${person.name}`}
                               className="rounded-full relative border-2 border-white/20"
                               style={{
                                 width: "80px",

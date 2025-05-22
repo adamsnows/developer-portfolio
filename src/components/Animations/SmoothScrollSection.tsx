@@ -29,12 +29,12 @@ const SmoothScrollSection = ({
     stiffness: 100,
   });
 
-  // Transform the progress into y-position values
-  const y = useTransform(smoothProgress, [0, 1], ["10%", "-10%"]);
+  // Transform the progress into y-position values - reduzimos a amplitude para evitar scroll excessivo
+  const y = useTransform(smoothProgress, [0, 1], ["5%", "-5%"]);
 
   return (
-    <div ref={ref} className={`relative ${className}`}>
-      <motion.div style={{ y }} className="">
+    <div ref={ref} className={`relative overflow-visible ${className}`}>
+      <motion.div style={{ y }} className="overflow-visible">
         {children}
       </motion.div>
     </div>

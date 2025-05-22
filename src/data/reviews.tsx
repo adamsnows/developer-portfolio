@@ -2,101 +2,101 @@ export const reviewsData = [
   {
     avatar: "/people/christian.jpeg",
     name: "Christian Alex Soares Gall de Oliveira",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Eu gostaria de expressar minha mais alta recomendação. Durante o tempo em que trabalhei com ele fiquei impressionado com sua habilidade e capacidade de unir o grupo em torno de objetivos em comuns.\n\nUm conhecimento profundo em desenvolvimento em várias stacks e usa esse conhecimento para propor soluções inovadoras e eficientes. Projetos incríveis.\n\nAlém disso, é extremamente proativo e sempre busca maneiras de melhorar o processo de desenvolvimento e otimizar o trabalho em equipe. Tem uma personalidade alegre e contagiante que inspira os outros a seguir em frente e alcançar resultados juntos.\n\nEm resumo, acredito que é um incansável desenvolvedor full-stack talentoso, e estou confiante de que continuará a se destacar em sua carreira. Eu recomendo sem reservas para qualquer equipe que busque um desenvolvedor altamente capacitado e dedicado.",
+      "I would like to express my highest recommendation. During the time I worked with him, I was impressed by his ability and capacity to unite the group around common goals.\n\nHe has deep knowledge in development across various stacks and uses this knowledge to propose innovative and efficient solutions. Incredible projects.\n\nFurthermore, he is extremely proactive and always seeks ways to improve the development process and optimize teamwork. He has a cheerful and contagious personality that inspires others to move forward and achieve results together.\n\nIn summary, I believe he is a tireless talented full-stack developer, and I am confident that he will continue to excel in his career. I recommend him without reservations to any team looking for a highly skilled and dedicated developer.",
   },
   {
     avatar: "/people/tsunode.jpeg",
     name: "Tsunode (Gabriel Tsunoda)",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Adam é um excelente profissional e consigo falar isso com total autoria, já que tive o prazer de liderar ele durante sua experiência de monitor front-end na Kenzie Academy.\n\nAlém das habilidades técnicas que ele adquiria com facilidade, deixo meu destaque pela paixão que esse cara tem pela comunidade, por ajudar pessoas e a vontade gigante de criar algo, um talento.\n\nAdam criou uma comunidade nomeada 'Os campeões(ãs)', e vem ajudado a galera desde então. Não posso deixar de destacar o período que fui instrutor dele, e o grupo do projeto no qual ele fazia parte nos surpreendeu com um projeto incrível, usando tecnologias além das que tínhamos ensinado, mostrando claramente que tinham proatividade e sede por aprender.\n\nBom, se você leu até aqui, acredito que nesse momento já está chamando o Adam para bater aquele papo, para convidar ele para entrar no seu time, eu não perderia por nada!",
+      "Adam is an excellent professional and I can say this with complete authority, as I had the pleasure of leading him during his experience as a front-end monitor at Kenzie Academy.\n\nBeyond the technical skills that he acquired with ease, I highlight his passion for the community, for helping people, and his enormous desire to create something, a talent.\n\nAdam created a community named 'The Champions', and has been helping people ever since. I must highlight the period when I was his instructor, and the project group he was part of surprised us with an incredible project, using technologies beyond what we had taught, clearly showing their proactivity and thirst for learning.\n\nWell, if you've read this far, I believe that at this moment you're already calling Adam for a chat, to invite him to join your team, I wouldn't miss it for anything!",
   },
   {
     avatar: "/people/jose.jpeg",
     name: "José Cássio",
-    job: "Desenvolvedor de Software @Super Megavendas",
+    job: "Software Developer @Super Megavendas",
     review:
-      "Tive o privilégio de ter Adam como meu tech leader, conseguindo transmitir conhecimentos que com certeza levarei por toda minha jornada. Obtive muito conhecimento enquanto trabalhei ao seu lado e serei eternamente grato por isso. Nunca existiu problema complicado o suficiente que não tivesse uma solução. 'Não existe nada impossível, basta querer'.",
+      "I had the privilege of having Adam as my tech leader, managing to transmit knowledge that I will certainly carry throughout my journey. I gained a lot of knowledge while working by his side and will be eternally grateful for that. There was never a problem complicated enough that didn't have a solution. 'Nothing is impossible, you just have to want it'.",
   },
 
   {
     avatar: "/people/claudio.jpeg",
     name: "Cláudio Bittencourt",
-    job: "Sócio e COO @Super Megavendas",
-    review: "Excelente profissional, organizado, muito criativo e proativo.",
+    job: "Partner and COO @Super Megavendas",
+    review: "Excellent professional, organized, very creative and proactive.",
   },
 
   {
     avatar: "/people/vagner.jpeg",
     name: "Vagner Mengali",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Adam é um desenvolvedor excepcional. Sempre demonstrou habilidades técnicas notáveis, destacando-se em lógica de programação e mantendo-se atualizado com as últimas tendências.\n\nSua proatividade e disposição para ajudar colegas são evidentes, contribuindo para melhorias contínuas nos processos da equipe. Adam é não apenas um profissional talentoso, mas também um colega de equipe exemplar, com habilidades interpessoais notáveis que criam um ambiente de trabalho positivo.\n\nSua expertise em User Experience (UX) resultou em interfaces intuitivas e agradáveis em nossos projetos. Em resumo, Adam é uma adição valiosa para qualquer equipe de desenvolvimento, e estou confiante de que continuará a ter um impacto positivo em seus futuros desafios profissionais.",
+      "Adam is an exceptional developer. He has always demonstrated remarkable technical skills, excelling in programming logic and staying up-to-date with the latest trends.\n\nHis proactivity and willingness to help colleagues are evident, contributing to continuous improvements in team processes. Adam is not only a talented professional but also an exemplary team member, with notable interpersonal skills that create a positive work environment.\n\nHis expertise in User Experience (UX) has resulted in intuitive and pleasant interfaces in our projects. In summary, Adam is a valuable addition to any development team, and I am confident that he will continue to have a positive impact on his future professional challenges.",
   },
   {
     avatar: "/people/luiz.jpeg",
     name: "Luiz Fellype Silveira",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Fez um trabalho incrível como Monitor na Kenzie com a minha supervisão! Sempre atencioso nos atendimentos e preciso nas resoluções de problemas, sem atrapalhar seu próprio desempenho dentro do curso.",
+      "Did an amazing job as a Monitor at Kenzie under my supervision! Always attentive in his assistance and precise in problem-solving, without compromising his own performance in the course.",
   },
   {
     avatar: "/people/axel.jpeg",
     name: "Axel Lima",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Tive a oportunidade de estudar e trabalhar com o profissional e a pessoa excelente que é Adam Neves, sobretudo apesar das brincadeiras e momentos de descontração, Adam é um profissional extremamente capacitado e definitivamente um líder nato, sua forma de unir o time e manter a organização é justamente o que mais impressiona! Além de demonstrar habilidades cruciais para um excelente desenvolvedor como o próprio é, demonstrando grande facilidade em resolução de problemas e proatividade! Acredito fielmente que Adam é um destaque em tudo que se propõe a fazer e que dentro de qualquer empresa ele é/people/será uma peça de grande importância!",
+      "I had the opportunity to study and work with the excellent professional and person that Adam Neves is. Despite the jokes and moments of relaxation, Adam is an extremely capable professional and definitely a natural leader, his way of uniting the team and maintaining organization is precisely what impresses the most! Besides demonstrating crucial skills for an excellent developer as he is, showing great ease in problem-solving and proactivity! I firmly believe that Adam stands out in everything he sets out to do and that within any company he is/will be a piece of great importance!",
   },
   {
     avatar: "/people/giuseppe.jpeg",
     name: "Giuseppe Dias",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Adam é um dos devs mais confiáveis que conheço, possui uma habilidade de comunicação incrível, um fundamento de lógica muito bem estabelecido e uma vontade de se superar contínua. As suas hard skills se apresentam em essência em qualidade, mantendo padrões e boas práticas de código em qualquer que seja o contexto e tech. Além disso, possui uma velocidade de aprendizado impressionante, aprendendo qualquer tech nova em tempo hábil. Em questão das soft skills, Adam sempre foi muito comunicativo e organizado, e isso reflete em seu trabalho, trazendo críticas e pontos de vista relevantes. Também, possui uma grande pró-atividade e tomada de decisão. Então, eu acredito que ele será um complemento extremamente positivo em qualquer vaga que ocupe.",
+      "Adam is one of the most reliable devs I know, has incredible communication skills, a well-established logic foundation, and a continuous desire to improve. His hard skills are essentially quality-focused, maintaining code standards and best practices in any context and tech. Additionally, he has an impressive learning speed, picking up any new tech in a timely manner. Regarding soft skills, Adam has always been very communicative and organized, and this reflects in his work, bringing relevant criticisms and viewpoints. He also has great proactivity and decision-making abilities. So, I believe he will be an extremely positive addition to any position he takes.",
   },
 
   {
     avatar: "/people/gabriel.jpeg",
     name: "Gabriel Fray",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Cara incrivelmente talentoso e dedicado, sempre pronto a ajudar os outros com sua habilidade única de comunicação e empatia. Com profundo conhecimento em sua área de atuação, ele é capaz de desenvolver soluções inovadoras e eficazes para qualquer desafio que surja. Além disso, possui uma postura de liderança natural, sempre motivando e inspirando aqueles ao seu redor a alcançarem seus objetivos. Com ideias brilhantes e visão de futuro, ele é o tipo de pessoa que sempre tem uma nova perspectiva para aprimorar projetos existentes ou criar algo completamente novo e impactante. Admiro muito essa pessoa e espero ter a oportunidade de trabalhar com ele em algum momento, pois tenho certeza de que seria uma experiência enriquecedora e desafiadora ao mesmo tempo.",
+      "Incredibly talented and dedicated guy, always ready to help others with his unique communication skills and empathy. With deep knowledge in his area of expertise, he is capable of developing innovative and effective solutions for any challenge that arises. Additionally, he has a natural leadership posture, always motivating and inspiring those around him to achieve their goals. With brilliant ideas and vision for the future, he is the kind of person who always has a new perspective to enhance existing projects or create something completely new and impactful. I greatly admire this person and hope to have the opportunity to work with him at some point, as I am sure it would be both an enriching and challenging experience.",
   },
   {
     avatar: "/people/sidny.jpeg",
     name: "Sidny Silva",
-    job: "Desenvolvedor de Software",
-    review: `Com certeza um dos melhores devs que tive a oportunidade de auxiliar, sempre muito dedicado, curioso, determinado, amistoso, paciente, com certeza suas soft skills são incríveis. Sua criatividade e ambição o levou a realizar trabalhos incríveis, mesmo estando no início de uma nova jornada, sempre se destacando entre a turma por conta da sua empatia, digo isso, pois, mesmo não tendo obrigação, ele nunca deixou de ajudar seus colegas que tinham mais dificuldades e o que mais me animava era o fato dele não dar resposta, mas sim ensinar o dev a encontrar suas dúvidas e resolvê-las. Como profissional nem tem o que dizer, seu empenho e dedicação estão sempre nitidamente presentes, uma frase que tenho certeza que resume o Adam: Missão dada é missão cumprida. Pois ele não decepciona, independente da dificuldade.`,
+    job: "Software Developer",
+    review: `Definitely one of the best devs I've had the opportunity to assist, always very dedicated, curious, determined, friendly, patient, his soft skills are definitely incredible. His creativity and ambition led him to accomplish amazing work, even being at the beginning of a new journey, always standing out among the class because of his empathy. I say this because, even though he had no obligation, he never stopped helping his colleagues who had more difficulties, and what excited me the most was the fact that he didn't just give answers, but rather taught the dev to find their doubts and solve them. As a professional, there's not much to say, his commitment and dedication are always clearly present. A phrase that I'm sure summarizes Adam: Given mission is accomplished mission. Because he doesn't disappoint, regardless of the difficulty.`,
   },
   {
     avatar: "/people/luan.jpeg",
     name: "Luan Marchi",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Já tive o prazer de trabalhar com o Adam em alguns projetos, ele é uma pessoa muito carismática e objetiva, está sempre em busca de dar seu melhor.",
+      "I've had the pleasure of working with Adam on several projects, he is a very charismatic and objective person, always striving to give his best.",
   },
 
   {
     avatar: "/people/sidarta.jpeg",
     name: "Sidarta Kauã Oliveira Souza",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Um ótimo profissional. Experiente e cumpre tudo que se propõe a fazer, tanto em prazo como em qualidade de trabalho.",
+      "A great professional. Experienced and fulfills everything he sets out to do, both in terms of deadlines and work quality.",
   },
   {
     avatar: "/people/fabio.jpeg",
     name: "Fábio Casanova",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Como aluno Adam sempre se mostrou interessado em ir além do básico. Sempre inovando e buscando novas formas e tecnologias. Atencioso aos detalhes e realizando seus projetos com extrema rapidez!",
+      "As a student, Adam always showed interest in going beyond the basics. Always innovating and seeking new ways and technologies. Attentive to details and completing his projects with extreme speed!",
   },
   {
     avatar: "/people/sara.jpeg",
     name: "Sara Lins",
-    job: "Desenvolvedor de Software",
+    job: "Software Developer",
     review:
-      "Um profissional que admiro. Excelente em tudo que se propõe a fazer! É mestre em experiência de usuário (UX) e CSS.",
+      "A professional I admire. Excellent in everything he sets out to do! He is a master in user experience (UX) and CSS.",
   },
 ];

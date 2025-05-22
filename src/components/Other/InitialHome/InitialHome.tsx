@@ -280,7 +280,7 @@ const InitialHome = () => {
               className="text-sm uppercase font-semibold
               mb-4 text-primary tracking-[4px]"
             >
-              <Badge text="Desenvolvedor Full Stack" />
+              <Badge text="Full Stack Developer" />
             </motion.div>
 
             <h1
@@ -294,17 +294,15 @@ const InitialHome = () => {
               variants={fadeInUp}
               className="max-w-[500px] mx-auto xl:mx-0 text-sm mb-5 leading-relaxed text-justify"
             >
-              Desenvolvimento{" "}
-              <span className="text-primary font-semibold">FullStack</span> com
-              um foco pronunciado e entusiasmo pela criação de soluções
-              poderosas e inovadoras. Minha experiência abrange tanto o{" "}
-              <span className="text-primary font-semibold">front-end</span>{" "}
-              quanto o{" "}
+              <span className="text-primary font-semibold">FullStack</span>{" "}
+              development with a pronounced focus and enthusiasm for creating
+              powerful and innovative solutions. My experience covers both{" "}
+              <span className="text-primary font-semibold">front-end</span> and{" "}
               <span className="text-primary font-semibold">back-end</span>,
-              permitindo-me construir aplicações completas e integradas. Estou
-              constantemente em busca de novos desafios que me permitam aprender
-              e aplicar as mais recentes tecnologias, garantindo a entrega de
-              produtos robustos, escaláveis e seguros.
+              allowing me to build complete and integrated applications. I am
+              constantly looking for new challenges that allow me to learn and
+              apply the latest technologies, ensuring the delivery of robust,
+              scalable, and secure products.
             </motion.p>
 
             <motion.div
@@ -314,7 +312,7 @@ const InitialHome = () => {
             >
               <Link href="/contact" aria-label="contact">
                 <Button className="gap-x-2 group">
-                  Contate-me{" "}
+                  Contact me{" "}
                   <RiMailSendFill
                     size={18}
                     className="transition-transform group-hover:translate-x-1"

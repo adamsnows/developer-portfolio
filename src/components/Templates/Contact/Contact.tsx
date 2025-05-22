@@ -1,4 +1,4 @@
-import { RiMailFill, RiPhoneFill, RiHomeFill } from "react-icons/ri";
+import { RiHomeFill, RiMailFill } from "react-icons/ri";
 
 import Form from "@/components/Other/Form/Form";
 
@@ -18,12 +18,11 @@ const Contact = () => {
               <span className="w-[30px] h-[2px] bg-primary"></span>
               Hey, Adam!
             </div>
-            <h1 className="h1 max-w-md mb-8">Vamos trabalhar juntos?</h1>
+            <h1 className="h1 max-w-md mb-8">Let's work together?</h1>
             <p className="subtitle max-w-[400px]">
-              Pronto para transformar ideias em realidade? Seja um projeto, uma
-              colaboração ou apenas para dizer oi, deixe uma mensagem abaixo.
-              Sou todo ouvidos e estou ansioso para iniciarmos essa jornada
-              juntos!
+              Ready to turn ideas into reality? Whether it's a project, a
+              collaboration, or just to say hi, leave a message below. I'm all
+              ears and looking forward to starting this journey together!
             </p>
           </div>
           <div
@@ -43,7 +42,7 @@ const Contact = () => {
             </div>
             <div className="flex items-center gap-x-8">
               <RiHomeFill size={18} className="text-primary" />
-              <div>Natal, RN, Brasil</div>
+              <div>Natal, RN, Brazil</div>
             </div>
           </div>
           <Form />

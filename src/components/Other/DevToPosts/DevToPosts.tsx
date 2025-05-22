@@ -89,7 +89,7 @@ const DevToPostCard = ({ post }: { post: Post }) => {
         </p>
         <div className="flex justify-between items-center text-xs text-gray-400">
           <span>
-            {new Date(post.date).toLocaleDateString("pt-BR", {
+            {new Date(post.date).toLocaleDateString("en-US", {
               day: "2-digit",
               month: "long",
               year: "numeric",
@@ -199,9 +199,7 @@ const DevToPosts = () => {
       }
     } catch (err) {
       console.error("Erro ao buscar posts do DEV.TO:", err);
-      setError(
-        "Não foi possível carregar os artigos. Usando dados locais como fallback."
-      );
+      setError("Could not load articles. Using local data as fallback.");
     } finally {
       // Calcula quanto tempo se passou desde o início da requisição
       const elapsedTime = Date.now() - startTime;
@@ -284,16 +282,14 @@ const DevToPosts = () => {
             ref={titleRef}
             className="section-title mb-4 bg-gradient-to-r from-secondary via-primary to-secondary bg-clip-text text-transparent bg-300%"
           >
-            PUBLICAÇÕES
+            PUBLICATIONS
           </h2>
           <p className="text-justify text-sm mb-8 leading-relaxed">
-            Compartilho meus conhecimentos e experiências através de artigos no{" "}
-            <span className="text-primary font-medium">DEV.TO</span>, abordando
-            temas relevantes sobre{" "}
-            <span className="text-primary font-medium">
-              desenvolvimento web
-            </span>{" "}
-            e boas práticas de programação.
+            I share my knowledge and experiences through articles on{" "}
+            <span className="text-primary font-medium">DEV.TO</span>, addressing
+            relevant topics about{" "}
+            <span className="text-primary font-medium">web development</span>{" "}
+            and programming best practices.
           </p>
 
           <div className="mb-8 w-full">
@@ -304,10 +300,9 @@ const DevToPosts = () => {
               >
                 <RiArticleLine className="text-secondary text-xl mt-1 ml-1 w-20" />
                 <div className="text-right">
-                  <h3 className="font-medium mb-1">Artigos Técnicos</h3>
+                  <h3 className="font-medium mb-1">Technical Articles</h3>
                   <p className="text-xs text-white/70">
-                    Tutoriais, dicas e melhores práticas para desenvolvimento
-                    web
+                    Tutorials, tips, and best practices for web development
                   </p>
                 </div>
               </motion.div>
@@ -318,10 +313,9 @@ const DevToPosts = () => {
               >
                 <RiArticleLine className="text-secondary text-xl mt-1 ml-1 w-20" />
                 <div className="text-right">
-                  <h3 className="font-medium mb-1">Tendências Tech</h3>
+                  <h3 className="font-medium mb-1">Tech Trends</h3>
                   <p className="text-xs text-white/70">
-                    Análises e insights sobre as novidades no mundo da
-                    tecnologia
+                    Analysis and insights on the latest in technology
                   </p>
                 </div>
               </motion.div>
@@ -350,8 +344,8 @@ const DevToPosts = () => {
                     ? "border-primary bg-primary/10 text-white shadow-md shadow-primary/20"
                     : "border-primary/30 text-primary hover:bg-primary/10 hover:text-white"
                 } mr-2 relative overflow-hidden`}
-                title="Atualizar posts"
-                aria-label="Atualizar posts"
+                title="Refresh posts"
+                aria-label="Refresh posts"
                 disabled={isRefreshing}
               >
                 <RiRefreshLine
@@ -384,7 +378,7 @@ const DevToPosts = () => {
               aria-label="dev.to articles"
             >
               <Button className="gap-x-2 text-white">
-                VER NO DEV.TO{" "}
+                VIEW ON DEV.TO{" "}
                 <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
@@ -480,9 +474,7 @@ const DevToPosts = () => {
                 >
                   <div className="flex flex-col items-center justify-center h-64 bg-background/90 border border-slate-700 rounded-xl p-6 w-full">
                     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mb-4"></div>
-                    <p className="text-sm text-white/70">
-                      Carregando artigos...
-                    </p>
+                    <p className="text-sm text-white/70">Loading articles...</p>
                   </div>
                 </SwiperSlide>
               ) : error ? (
@@ -496,7 +488,7 @@ const DevToPosts = () => {
                   <div className="flex flex-col items-center justify-center h-64 bg-background/90 border border-slate-700 rounded-xl p-6 text-center w-full">
                     <p className="text-sm text-red-400 mb-2">{error}</p>
                     <p className="text-xs text-white/70">
-                      Usando dados de exemplo como fallback.
+                      Using sample data as fallback.
                     </p>
                   </div>
                 </SwiperSlide>
