@@ -10,22 +10,24 @@ import Work from "@/components/Other/Work/Work";
 const Home = () => {
   return (
     <AdvancedTransition>
-      <InitialHome />
-      <SmoothScrollSection>
-        <DevToPosts />
-      </SmoothScrollSection>
-      <SmoothScrollSection>
-        <Work />
-      </SmoothScrollSection>
-      <SmoothScrollSection>
-        <FrontendExpertise />
-      </SmoothScrollSection>
-      <SmoothScrollSection>
-        <BackendExpertise />
-      </SmoothScrollSection>
-      <SmoothScrollSection>
-        <Reviews />
-      </SmoothScrollSection>
+      <div className="overflow-hidden">
+        <InitialHome />
+        <SmoothScrollSection>
+          <DevToPosts />
+        </SmoothScrollSection>
+        <SmoothScrollSection>
+          <Work />
+        </SmoothScrollSection>
+        <SmoothScrollSection>
+          <FrontendExpertise />
+        </SmoothScrollSection>
+        <SmoothScrollSection>
+          <BackendExpertise />
+        </SmoothScrollSection>
+        <SmoothScrollSection>
+          <Reviews />
+        </SmoothScrollSection>
+      </div>
     </AdvancedTransition>
   );
 };

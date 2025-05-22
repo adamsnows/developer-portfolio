@@ -59,7 +59,6 @@ const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null); // Inicializa como null
   const [formattedUpdateTime, setFormattedUpdateTime] = useState<string>(""); // String formatada para exibição
-  const [isRefreshing, setIsRefreshing] = useState(false);
   // Estados para carregamento lazy
   const [visibleProjects, setVisibleProjects] = useState<number>(9); // Número inicial de projetos visíveis
   const [hasMoreProjects, setHasMoreProjects] = useState(true); // Indica se há mais projetos para carregar
@@ -85,7 +84,7 @@ const Projects = () => {
 
   // Efeito para carregar mais projetos quando o elemento de carregamento ficar visível
   useEffect(() => {
-    if (loadMoreIsVisible && hasMoreProjects && !isLoading && !isRefreshing) {
+    if (loadMoreIsVisible && hasMoreProjects && !isLoading) {
       // Incrementar o número de projetos visíveis
       setVisibleProjects((prev) => {
         const newValue = prev + 6;
@@ -98,7 +97,6 @@ const Projects = () => {
     loadMoreIsVisible,
     hasMoreProjects,
     isLoading,
-    isRefreshing,
     totalProjectsInCategory,
   ]);
 
@@ -121,13 +119,9 @@ const Projects = () => {
   }, [lastUpdated]);
 
   // Função para carregar projetos do GitHub
-  const loadProjects = async (forceRefresh = false) => {
+  const loadProjects = async () => {
     try {
-      if (forceRefresh) {
-        setIsRefreshing(true);
-      } else {
-        setIsLoading(true);
-      }
+      setIsLoading(true);
 
       // Usar o nome de usuário GitHub das variáveis de ambiente ou valor padrão
       const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "adamsnows";
@@ -205,13 +199,7 @@ const Projects = () => {
       setCategories(uniqueCategories);
     } finally {
       setIsLoading(false);
-      setIsRefreshing(false);
     }
-  };
-
-  // Função para forçar a atualização dos projetos
-  const handleRefreshProjects = () => {
-    loadProjects(true);
   };
 
   // Efeito para carregar projetos do GitHub
@@ -411,36 +399,6 @@ const Projects = () => {
             once={true}
             className="text-md text-white/50 max-w-3xl mx-auto text-center"
           />
-
-          {/* Informação de última atualização e botão de refresh */}
-          <div className="flex items-center justify-center mt-4 text-sm text-white/60">
-            <span className="mr-2">{formattedUpdateTime}</span>
-            <button
-              onClick={handleRefreshProjects}
-              disabled={isRefreshing || isLoading}
-              className={`flex items-center px-3 py-1 rounded-md transition-all ${
-                isRefreshing || isLoading
-                  ? "bg-gray-700 cursor-not-allowed"
-                  : "bg-secondary/20 hover:bg-secondary/40"
-              }`}
-            >
-              <svg
-                className={`w-4 h-4 mr-1 ${isRefreshing ? "animate-spin" : ""}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                />
-              </svg>
-              {isRefreshing ? "Updating..." : "Refresh projects"}
-            </button>
-          </div>
         </motion.div>
 
         <Tabs

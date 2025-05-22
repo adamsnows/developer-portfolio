@@ -80,7 +80,7 @@ const Work = () => {
 
   return (
     <section className="relative pt-[50px] xl:pt-[100px] overflow-hidden -mt-[150px] mb-10">
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-96 h-96 rounded-full filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full filter blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
       </div>
@@ -163,10 +163,10 @@ const Work = () => {
         >
           <div className="relative overflow-visible z-99">
             <motion.div
-              className="absolute top-0 right-0 md:-right-20 w-64 md:w-80 h-64 md:h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
+              className="absolute top-0 right-0 md:-right-20 w-64 md:w-80 h-64 md:h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0 overflow-hidden"
               animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.2, 0.4, 0.2],
+                scale: [1, 1.1, 1],
+                opacity: [0.2, 0.3, 0.2],
               }}
               transition={{
                 duration: 6,
@@ -175,9 +175,9 @@ const Work = () => {
               }}
             />
             <motion.div
-              className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
+              className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0 overflow-hidden"
               animate={{
-                scale: [1, 1.3, 1],
+                scale: [1, 1.1, 1],
                 opacity: [0.2, 0.3, 0.2],
               }}
               transition={{
@@ -189,7 +189,7 @@ const Work = () => {
             />
 
             <Swiper
-              className="h-fit rounded-xl relative z-10 p-6 pb-14 my-6 mx-auto w-full"
+              className="h-fit rounded-xl relative z-10 p-6 pb-14 my-6 mx-auto w-full overflow-hidden"
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
