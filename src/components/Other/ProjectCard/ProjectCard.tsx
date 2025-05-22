@@ -79,12 +79,16 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
                 className="absolute shadow-2xl translate-y-1/2 -translate-x-1/2 top-0 left-1/2"
                 src={project.image}
                 width={300}
-                height={135}
+                height={200}
                 alt={`${project.name} Project Image`}
                 customStyle={{
                   objectFit: "contain",
+                  maxWidth: "100%",
+                  height: "auto",
+                  maxHeight: "70%",
                 }}
                 unoptimized={true}
+                priority={id === "1"}
               />
             </motion.div>
 
@@ -151,8 +155,8 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
 
             {LanguageIcon && (
               <Badge
-                className={`w-8 h-8 flex items-center justify-center ${
-                  specialStyle ? " bg-transparent" : ""
+                className={`w-8 h-8 bg-transparent flex items-center justify-center ${
+                  specialStyle ? " " : ""
                 }   hover:bg-secondary/80 transition-colors duration-300 p-0 pointer-events-none`}
                 title={project.language}
               >

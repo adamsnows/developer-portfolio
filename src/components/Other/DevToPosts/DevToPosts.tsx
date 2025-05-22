@@ -43,7 +43,13 @@ interface Post {
   excerpt: string;
 }
 
-const DevToPostCard = ({ post }: { post: Post }) => {
+const DevToPostCard = ({
+  post,
+  isPriority = false,
+}: {
+  post: Post;
+  isPriority?: boolean;
+}) => {
   return (
     <div className="bg-background/90 border border-slate-700 rounded-xl overflow-hidden h-full shadow-xl">
       <div className="relative h-40 overflow-hidden">
@@ -53,7 +59,8 @@ const DevToPostCard = ({ post }: { post: Post }) => {
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
           width={500}
           height={200}
-          style={{ width: "100%", height: "100%" }}
+          priority={isPriority}
+          style={{ width: "100%", height: "auto" }}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.onerror = null;
@@ -373,7 +380,7 @@ const DevToPosts = () => {
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
-              slidesPerView={3}
+              slidesPerView={"auto"}
               spaceBetween={10}
               initialSlide={initialSlide}
               slidesPerGroup={1} // Adding slidesPerGroup to fix the loop warning
@@ -407,7 +414,7 @@ const DevToPosts = () => {
                   spaceBetween: 30,
                 },
               }}
-              loop={true}
+              loop={posts.length >= 3}
               speed={800}
               modules={[EffectCoverflow, Navigation, Pagination, Autoplay]}
               onSwiper={(swiper) => {
@@ -464,7 +471,7 @@ const DevToPosts = () => {
                         transition={{ duration: 0.3 }}
                         className="z-20 relative"
                       >
-                        <DevToPostCard post={post} />
+                        <DevToPostCard post={post} isPriority={index === 0} />
                       </motion.div>
                     </Link>
                   </SwiperSlide>

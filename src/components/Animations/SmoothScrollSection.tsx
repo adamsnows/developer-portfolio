@@ -34,7 +34,10 @@ const SmoothScrollSection = ({
 
   return (
     <div ref={ref} className={`relative overflow-visible ${className}`}>
-      <motion.div style={{ y }} className="overflow-visible">
+      <motion.div
+        style={{ y, position: "relative" }}
+        className="overflow-visible"
+      >
         {children}
       </motion.div>
     </div>

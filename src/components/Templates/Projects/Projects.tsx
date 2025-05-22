@@ -34,19 +34,7 @@ export const workData: {
   github: string;
   language?: "javascript" | "typescript" | "python" | "shopify";
   tags?: string[];
-}[] = [
-  {
-    image: "some-image.png",
-    category: "Front end",
-    name: "Project Name",
-    description: "Description here",
-    link: "https://example.com",
-    github: "https://github.com/example/project",
-    language: "typescript",
-    // tags: ["typescript", "react"], // Add tags if needed
-  },
-  // ...other projects
-];
+}[] = [];
 
 interface GitHubProject {
   github: string;
@@ -551,7 +539,7 @@ const Projects = () => {
               </div>
             ) : (
               <AnimatePresence mode="wait">
-                {filteredProjects.map((project) => {
+                {filteredProjects.map((project, index) => {
                   // Detectar linguagem a partir das tags se não houver language definido
                   const inferredProject = { ...project };
                   if (!inferredProject.language && project.tags) {
@@ -597,7 +585,7 @@ const Projects = () => {
                         className="h-full"
                       >
                         <ProjectCard
-                          id={project.name}
+                          id={index === 0 ? "1" : project.name}
                           project={inferredProject}
                           specialStyle={true}
                         />
