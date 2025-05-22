@@ -103,7 +103,7 @@ const Projects = () => {
       const formattedTime = `${hours}:${
         minutes < 10 ? "0" + minutes : minutes
       }`;
-      setFormattedUpdateTime(`Última atualização: ${formattedTime}`);
+      setFormattedUpdateTime(`Last update: ${formattedTime}`);
     }
   }, [lastUpdated]);
 
@@ -138,7 +138,7 @@ const Projects = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Falha ao buscar projetos do GitHub");
+        throw new Error("Failed to fetch GitHub projects");
       }
 
       const githubProjects = await response.json();
@@ -169,7 +169,7 @@ const Projects = () => {
       ];
       setCategories(uniqueCategories);
     } catch (error) {
-      console.error("Erro ao carregar projetos:", error);
+      console.error("Error loading projects:", error);
       // Fallback para os projetos existentes
       setProjectsData(workData);
       const uniqueCategories = [
@@ -356,10 +356,10 @@ const Projects = () => {
             ref={titleRef}
             className="section-title mb-6 text-center mx-auto bg-gradient-to-r from-secondary via-primary to-secondary bg-clip-text text-transparent bg-300%"
           >
-            MEUS PROJETOS
+            MY PROJECTS
           </h2>
           <AdvancedTextAnimation
-            text="Um pouco da minha história como desenvolvedor, muitos projetos não estão mais no site antigo, ou com disponibilidade de acesso ao código fonte por ser um projeto privado, obrigado pela visita, volte sempre e deixe uma crítica no repositório do projeto!"
+            text="A bit of my journey as a developer. Many projects are no longer on the old site, or don't have source code access as they are private projects. Thank you for visiting, come back anytime and feel free to leave feedback in the project repository!"
             animationStyle="fade"
             speed={0.02}
             once={true}
@@ -392,7 +392,7 @@ const Projects = () => {
                   d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                 />
               </svg>
-              {isRefreshing ? "Atualizando..." : "Atualizar projetos"}
+              {isRefreshing ? "Updating..." : "Refresh projects"}
             </button>
           </div>
         </motion.div>
@@ -509,7 +509,7 @@ const Projects = () => {
               // Indicador de carregamento
               <div className="col-span-3 py-10 text-center">
                 <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-                <p className="mt-4 text-white/70">Carregando projetos...</p>
+                <p className="mt-4 text-white/70">Loading projects...</p>
               </div>
             ) : (
               <AnimatePresence mode="wait">
@@ -552,9 +552,7 @@ const Projects = () => {
                 className="col-span-3 py-8 text-center opacity-0"
               >
                 <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-                <p className="mt-4 text-white/70">
-                  Carregando mais projetos...
-                </p>
+                <p className="mt-4 text-white/70">Loading more projects...</p>
               </div>
             )}
           </motion.div>
