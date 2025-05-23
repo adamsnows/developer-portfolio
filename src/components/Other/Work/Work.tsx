@@ -105,7 +105,7 @@ const Work = () => {
           >
             LATEST PROJECTS
           </h2>
-          <p className="text-justify text-sm mb-8 leading-relaxed">
+          <p className="text-justify text-sm mb-8 leading-relaxed mt-20 xl:mt-0">
             Each project reflects a commitment to{" "}
             <span className="text-primary font-medium">innovation</span>,{" "}
             <span className="text-primary font-medium">efficiency</span> and an

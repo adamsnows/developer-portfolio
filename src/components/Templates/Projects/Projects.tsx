@@ -499,7 +499,7 @@ const Projects = () => {
           </motion.div>{" "}
           <motion.div
             ref={gridRef}
-            className="text-lg xl:mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 relative"
+            className="text-lg xl:mt-8 lg:grid lg:grid-cols-3 gap-6 relative"
             animate={{ opacity: isChanging ? 0.5 : 1 }}
             transition={{ duration: 0.3 }}
             style={{ minHeight: "300px" }} // Garante altura mínima para o container

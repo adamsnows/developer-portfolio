@@ -52,7 +52,7 @@ const DevToPostCard = ({
 }) => {
   return (
     <div className="bg-background/90 border border-slate-700 rounded-xl overflow-hidden h-full shadow-xl">
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-visible">
         <Image
           src={post.cover || "/projects/devto-default.png"}
           alt={post.title}
@@ -275,7 +275,7 @@ const DevToPosts = () => {
         variants={staggerContainer}
         initial="initial"
         animate={controls}
-        className="container pt-10 -mt-10 pb-[100px] -mb-10 mx-auto xl:flex xl:flex-row-reverse xl:justify-between relative z-10 overflow-visible px-4 md:px-6 lg:px-8"
+        className="container pt-10 -mt-10 xl:pb-[100px] -mb-10 mx-auto xl:flex xl:flex-row-reverse xl:justify-between relative z-10 overflow-visible px-4 md:px-6 lg:px-8"
       >
         <motion.div
           variants={fadeInUp}
