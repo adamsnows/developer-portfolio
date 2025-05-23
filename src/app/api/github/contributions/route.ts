@@ -143,10 +143,10 @@ async function fetchGithubContributions(username: string) {
     }
 
     // Processar os eventos para criar um mapa de contribuições
-    // Vamos criar uma estrutura semelhante ao gráfico do GitHub
+    // Vamos criar uma estrutura semelhante ao gráfico do GitHub usando exatamente 365 dias
     const today = new Date();
     const oneYearAgo = new Date(today);
-    oneYearAgo.setFullYear(today.getFullYear() - 1);
+    oneYearAgo.setDate(today.getDate() - 364); // 365 dias (hoje + 364 dias anteriores)
 
     // Criar um objeto para armazenar as contribuições por dia
     const contributionsByDay: Record<string, number> = {};

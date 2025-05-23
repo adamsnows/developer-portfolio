@@ -35,7 +35,7 @@ const GithubContributionsChart = ({
           setTotalContributions(data.totalContributions);
         }
       } catch (err) {
-        setError("Erro ao carregar contribuições do GitHub");
+        setError("Error loading GitHub contributions");
         console.error(err);
       } finally {
         setIsLoading(false);
@@ -58,20 +58,20 @@ const GithubContributionsChart = ({
   const renderContributionGrid = () => {
     if (!contributions) return null;
 
-    const days = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const months = [
       "Jan",
-      "Fev",
+      "Feb",
       "Mar",
-      "Abr",
-      "Mai",
+      "Apr",
+      "May",
       "Jun",
       "Jul",
-      "Ago",
-      "Set",
-      "Out",
+      "Aug",
+      "Sep",
+      "Oct",
       "Nov",
-      "Dez",
+      "Dec",
     ];
 
     // Obter datas das contribuições e ordenar
@@ -80,11 +80,15 @@ const GithubContributionsChart = ({
 
     // Determinar o primeiro dia para começar o grid
     const firstDate = new Date(dates[0]);
+    // Ajustar para garantir que começamos no domingo da semana que contém o primeiro dia
+    const adjustedFirstDate = new Date(firstDate);
+    adjustedFirstDate.setDate(firstDate.getDate() - firstDate.getDay());
+
     const lastDate = new Date(dates[dates.length - 1]);
 
     // Criar um array com todos os dias do intervalo
     const allDates: string[] = [];
-    const currentDate = new Date(firstDate);
+    const currentDate = new Date(adjustedFirstDate);
     while (currentDate <= lastDate) {
       allDates.push(currentDate.toISOString().split("T")[0]);
       currentDate.setDate(currentDate.getDate() + 1);
@@ -113,6 +117,11 @@ const GithubContributionsChart = ({
       }
     });
 
+    // Remover a primeira semana (dias 11-17)
+    if (weeks.length > 0) {
+      weeks.shift();
+    }
+
     // Determinar os meses a serem exibidos com posição correta
     const monthLabels: {
       month: number;
@@ -132,14 +141,14 @@ const GithubContributionsChart = ({
     });
 
     return (
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-2 w-full ">
         {/* Rótulos de meses para layout horizontal */}
-        <div className="flex mb-2 relative">
-          {monthLabels.map((label) => {
+        <div className="flex mb-3 relative w-full xl:max-w-[1058px] mx-auto ms-4 xl:ms-auto xl:me-12">
+          {monthLabels.map((label, index) => {
             const leftPosition = label.weekIndex * 20 + 2; // 20px por semana aproximadamente
             return (
               <div
-                key={`month-${label.month}`}
+                key={`month-${label.month}-${label.startIndex}`}
                 className="absolute text-xs text-gray-400"
                 style={{ left: `${leftPosition}px` }}
               >
@@ -150,25 +159,30 @@ const GithubContributionsChart = ({
         </div>
 
         {/* Grid de contribuições - Layout Horizontal */}
-        <div className="flex">
+        <div className="flex w-full xl:justify-center">
           {/* Rótulos de dias da semana - Vertical */}
           <div className="flex flex-col mr-2 space-y-1">
-            {days.map((day, index) => (
+            {[0, 1, 2, 3, 4, 5, 6].map((dayIndex) => (
               <div
-                key={day}
+                key={days[dayIndex]}
                 className="h-4 text-xs text-gray-400 flex items-center justify-end"
               >
-                {day.charAt(0)}
+                {days[dayIndex].charAt(0)}
               </div>
             ))}
           </div>
 
           {/* Células de contribuição - Horizontal */}
-          <div className="flex-1">
-            <div className="grid grid-rows-7 grid-flow-col gap-1">
+          <div className="flex-1 xl:max-w-[1058px]">
+            <div className="grid grid-rows-7 grid-flow-col gap-1 w-full xl:max-w-[1058px]">
+              {/* Usando a ordem exata dos dias de semana como no GitHub original */}
               {[0, 1, 2, 3, 4, 5, 6].map((dayOfWeek) => (
-                <div key={dayOfWeek} className="flex gap-1">
+                <div
+                  key={dayOfWeek}
+                  className="flex gap-1 justify-stretch xl:max-w-[1058px]"
+                >
                   {weeks.map((week, weekIndex) => {
+                    // Find the date in this week that corresponds to the current day of week
                     const date = week.find(
                       (d) => new Date(d).getDay() === dayOfWeek
                     );
@@ -180,16 +194,22 @@ const GithubContributionsChart = ({
                         />
                       );
 
-                    const count = contributions[date] || 0;
-                    const formattedDate = new Date(date).toLocaleDateString(
-                      "pt-BR",
-                      {
-                        weekday: "long",
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      }
-                    );
+                    // Ajustar a data um dia à frente para corrigir o desalinhamento com o GitHub
+                    const adjustedDate = new Date(date);
+                    adjustedDate.setDate(adjustedDate.getDate() - 1);
+                    const adjustedDateStr = adjustedDate
+                      .toISOString()
+                      .split("T")[0];
+
+                    const count = contributions[adjustedDateStr] || 0;
+                    const formattedDate = new Date(
+                      adjustedDate
+                    ).toLocaleDateString("en-US", {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    });
 
                     return (
                       <motion.div
@@ -203,7 +223,7 @@ const GithubContributionsChart = ({
                         className={`w-4 h-4 rounded-sm ${getContributionColor(
                           count
                         )} cursor-pointer transition-colors`}
-                        title={`${formattedDate}: ${count} contribuição${
+                        title={`${formattedDate}: ${count} contribution${
                           count !== 1 ? "s" : ""
                         }`}
                       />
@@ -215,15 +235,15 @@ const GithubContributionsChart = ({
           </div>
         </div>
 
-        {/* Legenda */}
-        <div className="flex flex-wrap justify-end items-center text-xs text-gray-400 pt-1 gap-1">
-          <span>Menos</span>
+        {/* Legend */}
+        <div className="flex flex-wrap justify-start xl:justify-end items-center text-xs text-gray-400 pt-1 gap-1 xl:me-12 ">
+          <span>Less</span>
           <div className="w-3 h-3 bg-gray-900 rounded-sm"></div>
           <div className="w-3 h-3 bg-primary/20 rounded-sm"></div>
           <div className="w-3 h-3 bg-primary/40 rounded-sm"></div>
           <div className="w-3 h-3 bg-primary/70 rounded-sm"></div>
           <div className="w-3 h-3 bg-primary rounded-sm"></div>
-          <span>Mais</span>
+          <span>More</span>
         </div>
       </div>
     );
@@ -233,9 +253,9 @@ const GithubContributionsChart = ({
     <ClientOnly>
       <Card className="w-full overflow-hidden backdrop-blur-sm bg-background/70 border border-primary/20 shadow-lg">
         <CardHeader className="pb-2">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-            <CardTitle className="text-lg md:text-xl text-primary">
-              {"Github's Contributions"}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 max-w-[1058px] xl:ms-16">
+            <CardTitle className="text-lg md:text-xl text-muted-foreground">
+              {"Last 365 days of contributions"}
             </CardTitle>
             <span className="text-sm text-muted-foreground">
               {totalContributions} contributions in the last year
@@ -263,12 +283,12 @@ const GithubContributionsChart = ({
                   d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                 />
               </svg>
-              <p>Não foi possível carregar as contribuições do GitHub</p>
+              <p>Could not load GitHub contributions</p>
               <button
                 onClick={() => window.location.reload()}
                 className="mt-2 px-3 py-1 bg-primary/20 hover:bg-primary/30 rounded-md text-sm transition-colors"
               >
-                Tentar novamente
+                Try again
               </button>
             </div>
           ) : !contributions ||
@@ -288,22 +308,23 @@ const GithubContributionsChart = ({
                   d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
                 />
               </svg>
-              <p>Nenhuma contribuição encontrada no último ano</p>
+              <p>No contributions found in the last year</p>
               <a
                 href={`https://github.com/${username}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 px-3 py-1 bg-primary/20 hover:bg-primary/30 rounded-md text-sm transition-colors"
               >
-                Ver perfil no GitHub
+                View GitHub profile
               </a>
             </div>
           ) : (
-            <div className="overflow-x-auto pb-2">
+            <div className="overflow-x-auto pb-2 w-full">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
+                className="w-full"
               >
                 {renderContributionGrid()}
               </motion.div>
