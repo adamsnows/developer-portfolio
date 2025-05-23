@@ -158,8 +158,8 @@ async function fetchGithubContributions(username: string) {
     }
 
     // Processar os eventos reais para contar contribuições
-    if (events && Array.isArray(events)) {
-      events.forEach((event: any) => {
+    if (eventsData && Array.isArray(eventsData)) {
+      eventsData.forEach((event: any) => {
         if (event && event.created_at) {
           const eventDate = new Date(event.created_at);
           if (eventDate >= oneYearAgo) {
