@@ -12,14 +12,14 @@ const WhatsappButton = () => {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 text-white bg-primary rounded-full shadow-lg hover:bg-opacity-90 hover:scale-110 transition-all duration-300"
+      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 text-white bg-primary rounded-full shadow-lg hover:bg-opacity-90 hover:scale-110 transition-all duration-300 border-gray-700 border-2 hover:border-secondary"
       aria-label="Contato via WhatsApp"
       style={{
         boxShadow: "0 0 15px rgba(122, 144, 255, 0.7)",
         animation: "pulse 2s infinite",
       }}
     >
-      <FaWhatsapp className="text-4xl ms-[2px]" />
+      <FaWhatsapp className="text-4xl ms-[1px] mb-[2px]" />
       <style jsx>{`
         @keyframes pulse {
           0% {
