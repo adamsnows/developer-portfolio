@@ -242,7 +242,7 @@ const Work = () => {
             href="/projects"
             aria-label="projects"
           >
-            <Button className="gap-x-2 text-white">
+            <Button className="gap-x-2 text-white" variant="outline">
               EXPLORE ALL PROJECTS{" "}
               <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
             </Button>

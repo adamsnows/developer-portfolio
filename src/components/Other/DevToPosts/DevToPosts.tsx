@@ -328,7 +328,7 @@ const DevToPosts = () => {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-4 relative z-[99] cursor-pointer ">
             <Link
               className="group"
               href="https://dev.to/adamsnows"
@@ -336,7 +336,7 @@ const DevToPosts = () => {
               rel="noopener noreferrer"
               aria-label="dev.to articles"
             >
-              <Button className="gap-x-2 text-white">
+              <Button className="gap-x-2 text-white " variant="outline">
                 VIEW ON DEV.TO{" "}
                 <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
               </Button>
