@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import { RiExternalLinkFill, RiGithubFill } from "react-icons/ri";
+import { RiCodeFill, RiExternalLinkFill, RiGithubFill } from "react-icons/ri";
 import {
   SiJavascript,
   SiPython,
@@ -152,7 +152,19 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
             >
               {project.category}
             </Badge>
-
+            {project.tags?.includes("open-source") && (
+              <Badge
+                className={`flex items-center gap-1 px-2 py-1 text-xs font-medium pointer-events-none ${
+                  specialStyle
+                    ? "bg-green-500/10 backdrop-blur-sm border-green-500/30"
+                    : "bg-green-500/10 border-green-500/20"
+                } border text-green-100 hover:bg-green-500/30 transition-colors duration-300`}
+                title="Open Source Project"
+              >
+                <RiCodeFill className="text-sm" />
+                Open Source
+              </Badge>
+            )}
             {LanguageIcon && (
               <Badge
                 className={`w-8 h-8 bg-transparent flex items-center justify-center ${

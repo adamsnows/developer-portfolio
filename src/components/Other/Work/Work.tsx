@@ -29,6 +29,17 @@ import {
   RiDatabase2Line,
 } from "react-icons/ri";
 
+interface GitHubProject {
+  github: string;
+  name: string;
+  category: string;
+  tags?: string[];
+  language?: string;
+  image?: string;
+  description?: string;
+  link?: string;
+}
+
 const Work = () => {
   const controls = useAnimation();
   const { ref, inView } = useInView({
@@ -38,6 +49,82 @@ const Work = () => {
 
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [highlightedProjects, setHighlightedProjects] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Função para carregar projetos destacados (hardcoded + projetos com tag "highlight")
+  const loadHighlightedProjects = async () => {
+    try {
+      setIsLoading(true);
+
+      // Usar o nome de usuário GitHub das variáveis de ambiente ou valor padrão
+      const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "adamsnows";
+
+      // Fazer chamada à API para buscar projetos do GitHub com tag "highlight"
+      const response = await fetch(
+        `/api/github/projects?username=${username}&portfolioTag=highlight`
+      );
+
+      if (response.ok) {
+        const githubProjects = await response.json();
+
+        // Verificar se temos um array válido
+        if (Array.isArray(githubProjects) && githubProjects.length > 0) {
+          const highlightGithubProjects = githubProjects.map(
+            (project: any) => ({
+              ...project,
+              language:
+                project.language || inferLanguageFromTags(project.tags || []),
+            })
+          );
+
+          // Combinar projetos hardcoded com os projetos destacados do GitHub
+          const combined = [...workData, ...highlightGithubProjects];
+          setHighlightedProjects(combined);
+        } else {
+          // Se não recebemos projetos ou array vazio, usar apenas hardcoded
+          console.log(
+            "No GitHub projects found with 'highlight' tag, using hardcoded projects only"
+          );
+          setHighlightedProjects(workData);
+        }
+      } else if (response.status === 429) {
+        // Rate limit exceeded, check for fallback data
+        try {
+          const errorData = await response.json();
+          if (errorData.fallback && Array.isArray(errorData.fallback)) {
+            console.log("Using fallback data due to rate limit");
+            setHighlightedProjects([...workData, ...errorData.fallback]);
+          } else {
+            console.log("Rate limit exceeded, using hardcoded projects only");
+            setHighlightedProjects(workData);
+          }
+        } catch {
+          console.log("Rate limit exceeded, using hardcoded projects only");
+          setHighlightedProjects(workData);
+        }
+      } else {
+        // Fallback para apenas os projetos hardcoded
+        console.log("GitHub API error, using hardcoded projects only");
+        setHighlightedProjects(workData);
+      }
+    } catch (error) {
+      console.error("Error loading highlighted projects:", error);
+      // Fallback para apenas os projetos hardcoded
+      setHighlightedProjects(workData);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Função para inferir linguagem a partir das tags
+  const inferLanguageFromTags = (tags: string[]): string | undefined => {
+    if (tags.includes("typescript")) return "typescript";
+    if (tags.includes("javascript")) return "javascript";
+    if (tags.includes("python")) return "python";
+    if (tags.includes("shopify")) return "shopify";
+    return undefined;
+  };
 
   useEffect(() => {
     const checkMobile = () => {
@@ -53,6 +140,11 @@ const Work = () => {
     // Clean up the listener
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // Carregar projetos destacados na montagem do componente
+  useEffect(() => {
+    loadHighlightedProjects();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (inView) {
@@ -212,29 +304,73 @@ const Work = () => {
                 dynamicBullets: true,
                 horizontalClass: "swiper-pagination-horizontal",
               }}
-              loop={true}
+              loop={highlightedProjects.length > 1}
               speed={800}
               modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
             >
-              {workData.slice(0, 6).map((project: any, index: number) => {
-                return (
-                  <SwiperSlide
-                    key={index}
-                    className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 mx-auto"
-                    style={{
-                      width: isMobile ? "280px" : "320px",
-                      height: "auto",
-                    }}
-                  >
-                    <motion.div transition={{ duration: 0.3 }}>
-                      <ProjectCard
-                        project={project}
-                        id={index === 0 ? "1" : undefined}
-                      />
-                    </motion.div>
-                  </SwiperSlide>
-                );
-              })}
+              {isLoading ? (
+                // Mostrar um loading simples durante o carregamento
+                <SwiperSlide
+                  className="rounded-lg overflow-hidden mx-auto flex items-center justify-center"
+                  style={{
+                    width: isMobile ? "280px" : "320px",
+                    height: "400px",
+                  }}
+                >
+                  <div className="text-center">
+                    <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+                    <p className="mt-4 text-white/70">Loading projects...</p>
+                  </div>
+                </SwiperSlide>
+              ) : (
+                highlightedProjects
+                  .slice(0, 8)
+                  .map((project: any, index: number) => {
+                    // Detectar linguagem a partir das tags se não houver language definido
+                    const inferredProject = { ...project };
+                    if (!inferredProject.language && project.tags) {
+                      if (project.tags.includes("typescript"))
+                        inferredProject.language = "typescript";
+                      else if (project.tags.includes("javascript"))
+                        inferredProject.language = "javascript";
+                      else if (project.tags.includes("python"))
+                        inferredProject.language = "python";
+                      else if (project.tags.includes("shopify"))
+                        inferredProject.language = "shopify";
+                    }
+
+                    // Ensure language is a valid type or undefined
+                    if (
+                      inferredProject.language &&
+                      ![
+                        "typescript",
+                        "javascript",
+                        "python",
+                        "shopify",
+                      ].includes(inferredProject.language)
+                    ) {
+                      inferredProject.language = undefined;
+                    }
+
+                    return (
+                      <SwiperSlide
+                        key={`${project.name}-${index}`}
+                        className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 mx-auto"
+                        style={{
+                          width: isMobile ? "280px" : "320px",
+                          height: "auto",
+                        }}
+                      >
+                        <motion.div transition={{ duration: 0.3 }}>
+                          <ProjectCard
+                            project={inferredProject}
+                            id={index === 0 ? "1" : undefined}
+                          />
+                        </motion.div>
+                      </SwiperSlide>
+                    );
+                  })
+              )}
             </Swiper>
           </div>
         </motion.div>
