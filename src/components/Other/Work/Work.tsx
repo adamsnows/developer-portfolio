@@ -171,8 +171,8 @@ const Work = () => {
   }, []);
 
   return (
-    <section className="relative pt-[50px] xl:pt-[100px] overflow-hidden -mt-[150px] mb-10">
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <section className="relative pt-[50px] xl:pt-[100px]  -mt-[150px] mb-10">
+      <div className="absolute inset-0 pointer-events-none ">
         <div className="absolute top-0 left-0 w-96 h-96 rounded-full filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full filter blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
       </div>
@@ -254,34 +254,8 @@ const Work = () => {
           className="xl:max-w-[780px] top-0 mt-10 xl:mt-0 overflow-visible relative z-10"
         >
           <div className="relative overflow-visible z-99">
-            <motion.div
-              className="absolute top-0 right-0 md:-right-20 w-64 md:w-80 h-64 md:h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0 overflow-hidden"
-              animate={{
-                scale: [1, 1.1, 1],
-                opacity: [0.2, 0.3, 0.2],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-            />
-            <motion.div
-              className="absolute bottom-0 left-0 w-80 h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0 overflow-hidden"
-              animate={{
-                scale: [1, 1.1, 1],
-                opacity: [0.2, 0.3, 0.2],
-              }}
-              transition={{
-                duration: 7,
-                repeat: Infinity,
-                repeatType: "reverse",
-                delay: 1,
-              }}
-            />
-
             <Swiper
-              className="h-fit rounded-xl relative z-10 p-6 pb-14 my-6 mx-auto w-full overflow-hidden"
+              className="h-fit rounded-xl relative z-10 p-6 pb-14 my-6 mx-auto w-full "
               effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
@@ -311,7 +285,7 @@ const Work = () => {
               {isLoading ? (
                 // Mostrar um loading simples durante o carregamento
                 <SwiperSlide
-                  className="rounded-lg overflow-hidden mx-auto flex items-center justify-center"
+                  className="rounded-lg  mx-auto flex items-center justify-center"
                   style={{
                     width: isMobile ? "280px" : "320px",
                     height: "400px",
@@ -355,7 +329,7 @@ const Work = () => {
                     return (
                       <SwiperSlide
                         key={`${project.name}-${index}`}
-                        className="rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 mx-auto"
+                        className="rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 mx-auto"
                         style={{
                           width: isMobile ? "280px" : "320px",
                           height: "auto",

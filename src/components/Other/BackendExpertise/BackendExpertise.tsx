@@ -107,7 +107,7 @@ Ready to handle requests...`;
   }, [inView]);
 
   return (
-    <section className="py-5 pb-10 relative overflow-hidden">
+    <section className="py-5 pb-10 relative ">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 right-0 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl opacity-30"></div>
@@ -198,7 +198,7 @@ Ready to handle requests...`;
         >
           <motion.div
             variants={fadeInLeft}
-            className="bg-white/10 rounded-lg border border-white/10 p-6 shadow-2xl overflow-hidden"
+            className="bg-white/10 rounded-lg border border-white/10 p-6 shadow-2xl overflow-visible"
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>

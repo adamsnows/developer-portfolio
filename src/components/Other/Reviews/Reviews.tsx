@@ -145,49 +145,7 @@ const formatReviewText = (text: string) => {
 
 const Reviews = () => {
   return (
-    <section className="xl:pt-[50px] pt-[50px] pb-20  relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full filter blur-3xl opacity-40"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 left-0 w-80 h-80 bg-secondary/10 rounded-full filter blur-3xl opacity-40"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: 1,
-          }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/4 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl opacity-30"
-          animate={{
-            scale: [1, 1.25, 1],
-            opacity: [0.2, 0.4, 0.2],
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: 2,
-          }}
-        />
-      </div>
-
+    <section className="xl:pt-[50px] pt-[50px] pb-20  relative overflow-visible">
       <div className="lg:container mx-auto relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -200,32 +158,6 @@ const Reviews = () => {
         </motion.h2>
 
         <div className="relative mx-auto max-w-[1200px]">
-          <motion.div
-            className="absolute -top-20 -right-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none z-0"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          />
-          <motion.div
-            className="absolute -bottom-20 -left-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.2, 0.3, 0.2],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: 1,
-            }}
-          />
-
           <Swiper
             effect={"coverflow"}
             grabCursor={true}
@@ -262,7 +194,7 @@ const Reviews = () => {
                   className="rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/20"
                 >
                   <motion.div transition={{ duration: 0.3 }}>
-                    <Card className="border border-white/10 shadow-lg p-6 max-h-[450px] overflow-hidden hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
+                    <Card className="border border-white/10 shadow-lg p-6 max-h-[450px] overflow-visible hover:shadow-primary/10 hover:shadow-xl transition-all duration-300">
                       <CardHeader className="p-0 mt-4 mb-4">
                         <div className="flex items-center gap-x-5">
                           <div className="relative">

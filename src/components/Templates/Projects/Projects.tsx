@@ -340,7 +340,7 @@ const Projects = () => {
   };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-visible">
       {/* Background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div

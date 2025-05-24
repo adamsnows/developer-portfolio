@@ -294,33 +294,6 @@ const SimpleSkillsVisualization: React.FC<SimpleSkillsVisualizationProps> = ({
           ))}
         </motion.div>
       )}
-
-      {/* Background animations */}
-      <motion.div
-        className="absolute -bottom-20 -right-20 w-40 h-40 bg-secondary/20 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.3, 0.2],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      />
-
-      <motion.div
-        className="absolute -top-20 -left-20 w-60 h-60 bg-primary/20 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      />
     </div>
   );
 };

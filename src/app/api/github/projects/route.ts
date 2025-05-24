@@ -44,7 +44,6 @@ function setCachedData(key: string, data: any): void {
     timestamp: now,
     expiresAt: now + CACHE_TTL,
   });
-  console.log(`Data cached for key: ${key}`);
 }
 
 // Função principal para lidar com a requisição GET

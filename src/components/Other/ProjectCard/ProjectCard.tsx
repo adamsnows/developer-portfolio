@@ -52,13 +52,13 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
     >
       <Card
         id={id?.toString()}
-        className={`group overflow-hidden relative h-full border border-white/10 ${cardBackground} shadow-xl hover:shadow-primary/20 transition-all duration-300`}
+        className={`group overflow-visible relative h-full border border-white/10 ${cardBackground} shadow-xl hover:shadow-primary/20 transition-all duration-300`}
       >
         <CardHeader className="p-0">
           <div
             className={`relative w-full h-72 flex items-center justify-center ${
               specialStyle ? "bg-secondary/40" : "bg-slate-900"
-            } bg-work_project_bg xl:bg-no-repeat overflow-hidden xl:bg-contain`}
+            } bg-work_project_bg xl:bg-no-repeat overflow-visible xl:bg-contain`}
           >
             <motion.div
               className="absolute inset-0 bg-gradient-to-br from-primary/50 to-secondary/50 z-10"

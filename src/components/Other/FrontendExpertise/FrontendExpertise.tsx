@@ -209,18 +209,6 @@ const FrontendExpertise = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 relative">
-          <motion.div
-            className="absolute top-1/2 left-1/2 inset-x-1/2 w-64 md:w-80 h-64 md:h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
-            animate={{
-              scale: [1, 2, 1],
-              opacity: [0.2, 0.7, 0.2],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          />
           <FrontendCard
             icon={<RiLayout2Line />}
             title="UI/UX Design"
@@ -307,7 +295,7 @@ const FrontendExpertise = () => {
 
           <motion.div
             variants={fadeInRight}
-            className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/10 p-6 shadow-2xl overflow-hidden order-1 lg:order-2"
+            className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/10 p-6 shadow-2xl overflow-visible order-1 lg:order-2"
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>

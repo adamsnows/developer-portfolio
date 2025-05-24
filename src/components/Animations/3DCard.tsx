@@ -81,7 +81,7 @@ const Card3D = ({
   return (
     <div
       ref={ref}
-      className={`relative ${className} overflow-hidden rounded-xl`}
+      className={`relative ${className}  rounded-xl`}
       style={{
         perspective: "1000px",
         transformStyle: "preserve-3d",

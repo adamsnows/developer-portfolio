@@ -51,7 +51,7 @@ const DevToPostCard = ({
   isPriority?: boolean;
 }) => {
   return (
-    <div className="bg-background/90 border border-slate-700 rounded-xl overflow-hidden h-full shadow-xl">
+    <div className="bg-background/90 border border-slate-700 rounded-xl overflow-visible h-full shadow-xl">
       <div className="relative overflow-visible">
         <Image
           src={post.cover || "/projects/devto-default.png"}
@@ -349,32 +349,6 @@ const DevToPosts = () => {
           className="xl:max-w-[800px] lg:max-w-[700px] md:max-w-[600px] sm:max-w-[500px] max-w-full mt-10 xl:mt-0 overflow-visible"
         >
           <div className="relative z-0 overflow-visible">
-            <motion.div
-              className="absolute top-0 left-0  w-64 md:w-80 h-64 md:h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none z-0"
-              animate={{
-                scale: [0.5, 1, 0.5],
-                opacity: [0.2, 0.4, 0.2],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-            />
-            <motion.div
-              className="absolute right-20 top-20  w-60 h-60 bg-primary/30 rounded-full blur-3xl pointer-events-none z-0"
-              animate={{
-                scale: [0.5, 1, 0.5],
-                opacity: [0.2, 0.3, 0.2],
-              }}
-              transition={{
-                duration: 7,
-                repeat: Infinity,
-                repeatType: "reverse",
-                delay: 1,
-              }}
-            />
-
             <Swiper
               className="h-fit rounded-xl relative z-30 p-6 pb-14 my-6 mx-auto w-full"
               effect={"coverflow"}
