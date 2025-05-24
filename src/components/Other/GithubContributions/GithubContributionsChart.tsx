@@ -196,7 +196,7 @@ const GithubContributionsChart = ({
 
                     // Ajustar a data um dia à frente para corrigir o desalinhamento com o GitHub
                     const adjustedDate = new Date(date);
-                    adjustedDate.setDate(adjustedDate.getDate() - 1);
+                    adjustedDate.setDate(adjustedDate.getDate());
                     const adjustedDateStr = adjustedDate
                       .toISOString()
                       .split("T")[0];
