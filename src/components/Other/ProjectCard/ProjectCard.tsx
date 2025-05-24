@@ -45,7 +45,6 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      whileHover={{ scale: 1.02 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       className="h-full"
@@ -58,7 +57,7 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
           <div
             className={`relative w-full h-72 flex items-center justify-center ${
               specialStyle ? "bg-secondary/40" : "bg-slate-900"
-            } bg-work_project_bg xl:bg-no-repeat overflow-visible xl:bg-contain`}
+            } bg-work_project_bg xl:bg-no-repeat overflow-hidden xl:bg-contain`}
           >
             <motion.div
               className="absolute inset-0 bg-gradient-to-br from-primary/50 to-secondary/50 z-10"
@@ -197,19 +196,6 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
               {project.description}
             </p>
           </motion.div>
-
-          <motion.div
-            className="absolute -bottom-10 -right-10 w-20 h-20 rounded-full bg-primary/30 blur-xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          />
         </div>
       </Card>
     </motion.div>
