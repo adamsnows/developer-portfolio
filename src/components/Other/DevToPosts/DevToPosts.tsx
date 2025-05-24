@@ -51,8 +51,8 @@ const DevToPostCard = ({
   isPriority?: boolean;
 }) => {
   return (
-    <div className="bg-background/90 border border-slate-700 rounded-xl overflow-visible h-full shadow-xl">
-      <div className="relative overflow-visible">
+    <div className="bg-background/90 border border-slate-700 rounded-xl overflow-hidden h-full shadow-xl">
+      <div className="relative overflow-hidden">
         <Image
           src={post.cover || "/projects/devto-default.png"}
           alt={post.title}
