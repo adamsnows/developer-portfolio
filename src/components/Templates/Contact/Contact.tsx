@@ -124,24 +124,23 @@ const Contact = () => {
                 duration={5}
                 distance={10}
               >
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="flex flex-col items-center gap-4"
-                >
-                  <div className="text-4xl text-primary">
-                    <RiMailFill />
-                  </div>
-                  <h3 className="text-xl font-semibold">Email</h3>
-                  <a
-                    href="mailto:adamangelow@gmail.com"
-                    className="text-white/70 hover:text-primary transition-colors"
+                <a href="mailto:adamangelow@gmail.com">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="flex flex-col items-center gap-4"
                   >
-                    adamangelow@gmail.com
-                  </a>
-                  <p className="text-sm text-white/50">
-                    Available for inquiries 24/7
-                  </p>
-                </motion.div>
+                    <div className="text-4xl text-primary">
+                      <RiMailFill />
+                    </div>
+                    <h3 className="text-xl font-semibold">Email</h3>
+                    <span className="text-white/70 hover:text-primary transition-colors">
+                      adamangelow@gmail.com
+                    </span>
+                    <p className="text-sm text-white/50">
+                      Available for inquiries 24/7
+                    </p>
+                  </motion.div>
+                </a>
               </FloatingElement>
 
               <FloatingElement
@@ -150,26 +149,30 @@ const Contact = () => {
                 distance={10}
                 delay={0.2}
               >
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="flex flex-col items-center gap-4"
+                <a
+                  href="https://wa.me/5584991398170"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <div className="text-4xl text-primary">
-                    <RiWhatsappLine />
-                  </div>
-                  <h3 className="text-xl font-semibold">WhatsApp</h3>
-                  <a
-                    href="https://wa.me/5584991398170"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white/70 hover:text-primary transition-colors"
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="flex flex-col items-center gap-4"
                   >
-                    +55 (84) 99139-8170
-                  </a>
-                  <p className="text-sm text-white/50">
-                    Quick responses during business hours
-                  </p>
-                </motion.div>
+                    <div className="text-4xl text-primary">
+                      <RiWhatsappLine />
+                    </div>
+                    <h3 className="text-xl font-semibold">WhatsApp</h3>
+                    <span
+                      rel="noopener noreferrer"
+                      className="text-white/70 hover:text-primary transition-colors"
+                    >
+                      +55 (84) 99139-8170
+                    </span>
+                    <p className="text-sm text-white/50">
+                      Quick responses during business hours
+                    </p>
+                  </motion.div>
+                </a>
               </FloatingElement>
             </motion.div>
 
