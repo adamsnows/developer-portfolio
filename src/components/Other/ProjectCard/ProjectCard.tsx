@@ -51,7 +51,7 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
     >
       <Card
         id={id?.toString()}
-        className={`group overflow-visible relative h-full border border-white/10 ${cardBackground} shadow-xl hover:shadow-primary/20 transition-all duration-300`}
+        className={`group overflow-visible relative h-full border border-white/10 ${cardBackground} shadow-xl hover:shadow-primary/20 transition-all duration-300 overflow-hidden`}
       >
         <CardHeader className="p-0">
           <div
@@ -60,7 +60,7 @@ const ProjectCard = ({ project, specialStyle, id }: ProjectCardInterface) => {
             } bg-work_project_bg xl:bg-no-repeat overflow-hidden xl:bg-contain`}
           >
             <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-primary/50 to-secondary/50 z-10"
+              className="absolute inset-0 bg-gradient-to-br from-primary/50 to-secondary/50 z-10 overflow-hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: isHovered ? 0.8 : 0 }}
               transition={{ duration: 0.3 }}
