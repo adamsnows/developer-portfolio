@@ -7,6 +7,8 @@ import GithubActivity from "@/components/Other/GithubContributions/GithubActivit
 import InitialHome from "@/components/Other/InitialHome/InitialHome";
 import Reviews from "@/components/Other/Reviews/Reviews";
 import Work from "@/components/Other/Work/Work";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const Home = () => {
   return (
@@ -32,6 +34,8 @@ const Home = () => {
           <Reviews />
         </SmoothScrollSection>
       </div>
+      <Analytics />
+      <SpeedInsights />
     </AdvancedTransition>
   );
 };
