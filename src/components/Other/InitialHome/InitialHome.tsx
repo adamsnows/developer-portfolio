@@ -47,14 +47,17 @@ const techStackData = [
 ];
 
 import {
+  fadeInDown,
+  fadeInLeft,
   fadeInRight,
   fadeInUp,
   staggerContainer,
 } from "@/components/Animations/AdvancedTransition";
 import ClientOnly from "@/components/Animations/ClientOnly";
 import FloatingElement from "@/components/Animations/FloatingElement";
-import Badge from "@/components/Other/Bagde/Badge";
 import DevImg from "@/components/Other/DevImg/DevImg";
+import { StackIcon } from "@/components/Other/ProfessionalBadge/Icons";
+import ProfessionalBadge from "@/components/Other/ProfessionalBadge/ProfessionalBadge";
 import Socials from "@/components/Other/Socials/Socials";
 import { Button } from "@/components/Other/UI/button";
 
@@ -273,16 +276,21 @@ const InitialHome = () => {
           className="flex flex-col xl:flex-row justify-between gap-x-8 items-center"
         >
           <motion.div
-            variants={fadeInUp}
+            variants={fadeInDown}
             className="flex max-w-[600px] flex-col justify-center
             mx-auto xl:mx-0 text-center xl:text-left"
           >
             <motion.div
               variants={fadeInUp}
               className="text-sm uppercase font-semibold
-              mb-4 text-primary tracking-[4px]"
+              mb-6 text-primary tracking-[4px] flex justify-center xl:justify-start"
             >
-              <Badge text="Full Stack Developer" />
+              <ProfessionalBadge
+                text="Full Stack Developer"
+                icon={<StackIcon size={14} />}
+                animated={true}
+                gradient={true}
+              />
             </motion.div>
 
             <h1
@@ -293,7 +301,7 @@ const InitialHome = () => {
             </h1>
 
             <motion.p
-              variants={fadeInUp}
+              variants={fadeInDown}
               className="max-w-[500px] mx-auto xl:mx-0 text-sm mb-5 leading-relaxed text-justify"
             >
               <span className="text-primary font-semibold">FullStack</span>{" "}
@@ -308,7 +316,7 @@ const InitialHome = () => {
             </motion.p>
 
             <motion.div
-              variants={fadeInUp}
+              variants={fadeInDown}
               className="flex flex-col gap-y-3 md:flex-row gap-x-3
               mx-auto xl:mx-0 mb-8"
             >
@@ -336,7 +344,7 @@ const InitialHome = () => {
               </Link>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="hidden md:block mb-8">
+            <motion.div variants={fadeInRight} className="hidden md:block mb-8">
               <div className="flex items-center justify-between">
                 <div className="font-semibold text-xs uppercase tracking-wider mb-2">
                   Tech Stack:
@@ -398,7 +406,7 @@ const InitialHome = () => {
               </div>
             </motion.div>
 
-            <motion.div variants={fadeInUp}>
+            <motion.div variants={fadeInRight}>
               <Socials
                 containerStyles="flex gap-x-6 mx-auto xl:mx-0"
                 iconsStyles="text-foreground text-[22px] hover:text-primary transition-all"
@@ -406,10 +414,7 @@ const InitialHome = () => {
             </motion.div>
           </motion.div>
 
-          <motion.div
-            variants={fadeInRight}
-            className="hidden xl:flex relative"
-          >
+          <motion.div variants={fadeInLeft} className="hidden xl:flex relative">
             <FloatingElement
               className="w-full overflow-hidden"
               duration={10}

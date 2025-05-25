@@ -1,3 +1,4 @@
+import { fadeInUp } from "@/components/Animations/AdvancedTransition";
 import ClientOnly from "@/components/Animations/ClientOnly";
 import {
   Card,
@@ -320,12 +321,7 @@ const GithubContributionsChart = ({
             </div>
           ) : (
             <div className="overflow-x-auto pb-2 w-full">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="w-full"
-              >
+              <motion.div variants={fadeInUp} className="w-full">
                 {renderContributionGrid()}
               </motion.div>
             </div>
