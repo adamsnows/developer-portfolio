@@ -34,6 +34,8 @@ const techStackData = [
   { name: "Jest", category: "testing", featured: false },
   { name: "Linux", category: "os", featured: false },
   { name: "Postman", category: "tools", featured: false },
+  { name: "Insomnia", category: "tools", featured: false },
+  { name: "Figma", category: "tools", featured: false },
   { name: "Vercel", category: "hosting", featured: false },
   { name: "Vite", category: "frontend", featured: false },
   { name: "Bootstrap", category: "frontend", featured: false },
