@@ -3,7 +3,7 @@ import GithubContributionsChart from "./GithubContributionsChart";
 
 const GithubActivity = () => {
   return (
-    <section className="py-12 xl:py-4 relative">
+    <section className="lg:py-4 relative">
       {/* Background decoration */}
       <div className="absolute inset-0 z-[-1] opacity-10">
         <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-primary/20 blur-3xl"></div>

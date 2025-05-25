@@ -107,7 +107,7 @@ Ready to handle requests...`;
   }, [inView]);
 
   return (
-    <section className="py-5 pb-10 relative ">
+    <section className="lg:py-5 lg:pb-10 relative ">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 right-0 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl opacity-30"></div>

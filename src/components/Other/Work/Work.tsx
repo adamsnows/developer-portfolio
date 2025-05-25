@@ -186,7 +186,7 @@ const Work = () => {
       >
         <motion.div
           variants={fadeInUp}
-          className="px-8 lg:px-0 max-w-[400px] mx-auto my-auto
+          className="pt-20 lg:pt-0 px-8 lg:px-0 max-w-[400px] mx-auto my-auto
           xl:mx-0 text-center xl:text-left xl:h-fit
           flex flex-col justify-center items-center xl:justify-center
           xl:items-start"
@@ -197,7 +197,7 @@ const Work = () => {
           >
             LATEST PROJECTS
           </h2>
-          <p className="text-justify text-sm mb-8 leading-relaxed mt-20 xl:mt-0">
+          <p className="text-justify text-sm mb-8 leading-relaxed lg:mt-20 ">
             Each project reflects a commitment to{" "}
             <span className="text-primary font-medium">innovation</span>,{" "}
             <span className="text-primary font-medium">efficiency</span> and an

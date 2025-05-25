@@ -181,7 +181,7 @@ const FrontendExpertise = () => {
   }, [inView, codeText]);
 
   return (
-    <section className="py-5 relative overflow-visible">
+    <section className="lg:py-5 relative overflow-visible">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-0 w-64 h-64 bg-secondary/5 rounded-full filter blur-3xl opacity-30"></div>
