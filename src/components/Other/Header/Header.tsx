@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import Logo from "@/components/Other/Logo/Logo";
-import Nav from "@/components/Other/Nav/Nav";
 import { MobileNav } from "@/components/Other/Nav/MobileNav";
-
+import Nav from "@/components/Other/Nav/Nav";
 
 const Header = () => {
   const [header, setHeader] = useState(false);
@@ -20,11 +19,10 @@ const Header = () => {
 
   return (
     <header
-      className={`${header
-          ? "py-6 shadow-lg bg-tertiary"
-          : "py-6 bg-transparent"
-        } sticky top-0 z-30 transition-all 
-              ${pathname === "/" && "bg-[#fef9f5]"}`}
+      className={`${
+        header ? "py-2 shadow-lg backdrop-blur-sm" : "lg:py-6 bg-transparent"
+      } sticky top-0 z-30 transition-all
+              ${pathname === "/" && "backdrop-blur-sm bg-tertiary/70"}`}
     >
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
@@ -33,7 +31,7 @@ const Header = () => {
             <Nav
               containerStyles="hidden xl:flex gap-x-8 items-center"
               linkStyles="relative hover:text-primary transition-all"
-              underlineStyles="absolute left-0 top-full h-[2px] 
+              underlineStyles="absolute left-0 top-full h-[2px]
                         bg-primary w-full"
             />
 
