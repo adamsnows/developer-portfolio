@@ -189,7 +189,6 @@ const DevToPosts = () => {
 
     try {
       const fetchedPosts = await fetchDevtoPosts("adamsnows");
-      console.log("Fetched posts length:", fetchedPosts.length);
 
       if (fetchedPosts.length > 0) {
         // Animação suave para atualizar os posts
@@ -197,7 +196,6 @@ const DevToPosts = () => {
 
         // Atualiza os posts
         setPosts(fetchedPosts);
-        console.log("Fetched posts:", fetchedPosts);
 
         // Feedback visual sobre a atualização
         if (oldPostsLength !== fetchedPosts.length) {

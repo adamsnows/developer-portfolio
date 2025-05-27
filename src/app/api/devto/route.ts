@@ -31,14 +31,6 @@ export async function GET(request: NextRequest) {
 
     const data = await response.json();
 
-    // Log para debug
-    console.log("DEV.to Response Status:", response.status);
-    console.log("Number of posts received:", data.length);
-    console.log(
-      "Response Headers:",
-      Object.fromEntries(response.headers.entries())
-    );
-
     // Return the data with appropriate CORS headers
     return NextResponse.json(data, {
       status: 200,
