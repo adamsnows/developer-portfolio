@@ -65,10 +65,6 @@ const DevToPostCard = ({
             const target = e.target as HTMLImageElement;
             target.onerror = null;
             target.src = "/projects/devto-default.png";
-            console.log(
-              "Erro ao carregar imagem, usando fallback:",
-              post.cover
-            );
           }}
           unoptimized={
             post.cover?.includes("dev.to") ||
@@ -179,11 +175,21 @@ const DevToPosts = () => {
     setIsRefreshing(true);
     setError(null);
 
+    // Força uma nova requisição desativando o cache do navegador
+    await fetch("/api/devto", {
+      method: "HEAD",
+      headers: {
+        "Clear-Site-Data": '"cache"',
+        "Cache-Control": "no-cache",
+      },
+    }).catch(() => {});
+
     // Registra o tempo de início para garantir animação mínima de 1 segundo
     const startTime = Date.now();
 
     try {
       const fetchedPosts = await fetchDevtoPosts("adamsnows");
+      console.log("Fetched posts length:", fetchedPosts.length);
 
       if (fetchedPosts.length > 0) {
         // Animação suave para atualizar os posts
@@ -191,6 +197,7 @@ const DevToPosts = () => {
 
         // Atualiza os posts
         setPosts(fetchedPosts);
+        console.log("Fetched posts:", fetchedPosts);
 
         // Feedback visual sobre a atualização
         if (oldPostsLength !== fetchedPosts.length) {
@@ -329,18 +336,38 @@ const DevToPosts = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 relative z-[99] cursor-pointer ">
-            <Link
-              className="group"
-              href="https://dev.to/adamsnows"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="dev.to articles"
-            >
-              <Button className="gap-x-2 text-white " variant="outline">
-                VIEW ON DEV.TO{" "}
-                <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
+            <div className="flex gap-4">
+              <Button
+                onClick={() => {
+                  setIsRefreshing(true);
+                  fetchPosts();
+                }}
+                className="gap-x-2 text-white"
+                variant="secondary"
+                disabled={isRefreshing}
+              >
+                {isRefreshing ? (
+                  <div className="flex items-center gap-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white"></div>
+                    Refreshing...
+                  </div>
+                ) : (
+                  <>Refresh Posts</>
+                )}
               </Button>
-            </Link>
+              <Link
+                className="group"
+                href="https://dev.to/adamsnows"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="dev.to articles"
+              >
+                <Button className="gap-x-2 text-white" variant="outline">
+                  VIEW ON DEV.TO{" "}
+                  <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </motion.div>
 

@@ -31,7 +31,6 @@ const GithubContributionsChart = ({
         setIsLoading(true);
         const data = await fetchGithubContributions(username);
         if (data) {
-          console.log("GitHub contributions data received:", data);
           setContributions(data.contributions);
           setTotalContributions(data.totalContributions);
         }

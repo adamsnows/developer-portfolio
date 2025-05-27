@@ -30,16 +30,16 @@ export const fetchDevtoPosts = async (
   username: string
 ): Promise<FormattedDevtoPost[]> => {
   try {
-    const timestamp = new Date().getTime(); // Add timestamp to prevent caching
+    const timestamp = Date.now();
     const response = await fetch(
-      `/api/devto?username=${username}&_=${timestamp}`,
+      `/api/devto?username=${username}&t=${timestamp}`,
       {
+        cache: "no-store",
         headers: {
-          "Cache-Control": "no-cache, no-store, must-revalidate",
+          "Cache-Control": "no-cache, no-store, must-revalidate, max-age=0",
           Pragma: "no-cache",
-          Expires: "0",
+          Expires: "-1",
         },
-        cache: "no-store", // Using Next.js fetch cache control
       }
     );
 

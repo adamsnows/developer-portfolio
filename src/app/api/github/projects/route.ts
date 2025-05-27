@@ -27,7 +27,6 @@ const CACHE_TTL = 15 * 60 * 1000; // 15 minutes in milliseconds
 function getCachedData(key: string): any | null {
   const entry = cache.get(key);
   if (entry && Date.now() < entry.expiresAt) {
-    console.log(`Cache hit for key: ${key}`);
     return entry.data;
   }
   if (entry) {
@@ -191,7 +190,6 @@ export async function GET(request: NextRequest) {
         // Try to get stale cached data as a fallback
         const staleData = cache.get(cacheKey);
         if (staleData) {
-          console.log("Returning stale cached data due to rate limit");
           return NextResponse.json(staleData.data);
         }
       }

@@ -83,9 +83,6 @@ const Work = () => {
           setHighlightedProjects(combined);
         } else {
           // Se não recebemos projetos ou array vazio, usar apenas hardcoded
-          console.log(
-            "No GitHub projects found with 'highlight' tag, using hardcoded projects only"
-          );
           setHighlightedProjects(workData);
         }
       } else if (response.status === 429) {
@@ -93,19 +90,15 @@ const Work = () => {
         try {
           const errorData = await response.json();
           if (errorData.fallback && Array.isArray(errorData.fallback)) {
-            console.log("Using fallback data due to rate limit");
             setHighlightedProjects([...workData, ...errorData.fallback]);
           } else {
-            console.log("Rate limit exceeded, using hardcoded projects only");
             setHighlightedProjects(workData);
           }
         } catch {
-          console.log("Rate limit exceeded, using hardcoded projects only");
           setHighlightedProjects(workData);
         }
       } else {
         // Fallback para apenas os projetos hardcoded
-        console.log("GitHub API error, using hardcoded projects only");
         setHighlightedProjects(workData);
       }
     } catch (error) {
