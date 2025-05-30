@@ -43,6 +43,62 @@ Este é um portfólio profissional desenvolvido com tecnologias modernas para ap
 - **/projects**: Portfólio de projetos realizados
 - **/contact**: Formulário de contato e informações para conexão
 
+## Configuração das Integrações
+
+### Configurando a integração com GitHub
+
+Para exibir seus projetos e gráfico de contribuições do GitHub, configure as seguintes variáveis de ambiente:
+
+1. **Criar um Token do GitHub (obrigatório para evitar rate limiting)**:
+   - Acesse [GitHub Settings > Tokens](https://github.com/settings/tokens)
+   - Clique em "Generate new token" → "Generate new token (classic)"
+   - Dê um nome como "Portfolio Projects API"
+   - Selecione apenas as permissões: `public_repo` e `read:user`
+   - Clique em "Generate token" e copie o valor gerado
+
+2. **Configurar variáveis de ambiente**:
+   ```bash
+   # Copie o arquivo de exemplo
+   cp .env.example .env.local
+
+   # Edite o arquivo .env.local com suas informações:
+   GITHUB_TOKEN=seu_token_aqui
+   NEXT_PUBLIC_GITHUB_USERNAME=seu_usuario_github
+   NEXT_PUBLIC_PORTFOLIO_TAG=portfolio-project
+   ```
+
+3. **Marcar projetos para exibição no portfólio**:
+   - Acesse os repositórios que deseja exibir no portfólio
+   - Vá em "Settings" → "General" → "Topics"
+   - Adicione a tag `portfolio-project` (ou a tag configurada em `NEXT_PUBLIC_PORTFOLIO_TAG`)
+
+### Configurando a integração com Dev.to
+
+Para exibir seus artigos do Dev.to, apenas configure o nome de usuário:
+
+```bash
+# No arquivo .env.local, adicione ou edite:
+NEXT_PUBLIC_DEVTO_USERNAME=seu_usuario_devto
+```
+
+Se não configurar, o sistema usará "adamsnows" como padrão.
+
+### Estrutura das Tags nos Projetos GitHub
+
+O sistema categoriza automaticamente seus projetos baseado nas tags:
+- `backend` ou `back-end` → **Back end**
+- `frontend` ou `front-end` → **Front end**
+- `fullstack` ou `full-stack` → **Full stack**
+- `mobile` → **Mobile**
+- `devops` → **DevOps**
+
+### GitHub Charts e Contribuições
+
+O gráfico de contribuições é carregado automaticamente usando o nome de usuário configurado em `NEXT_PUBLIC_GITHUB_USERNAME`. Ele mostra:
+- Contribuições dos últimos 365 dias
+- Estatísticas totais de commits
+- Visualização interativa do calendário de contribuições
+
 ## Instalação
 
 Para executar este projeto localmente, siga as instruções abaixo:
@@ -67,7 +123,14 @@ Para executar este projeto localmente, siga as instruções abaixo:
    yarn install
    ```
 
-4. Inicie o servidor de desenvolvimento:
+4. Configure as variáveis de ambiente:
+
+   ```bash
+   cp .env.example .env.local
+   # Edite o arquivo .env.local com suas configurações
+   ```
+
+5. Inicie o servidor de desenvolvimento:
 
    ```bash
    npm run dev
@@ -75,7 +138,7 @@ Para executar este projeto localmente, siga as instruções abaixo:
    yarn dev
    ```
 
-5. Acesse a aplicação no seu navegador:
+6. Acesse a aplicação no seu navegador:
 
    ```
    http://localhost:3000/
@@ -98,6 +161,9 @@ Para informações detalhadas sobre a configuração do CI/CD, consulte [README 
 - **Otimização de Imagens**: Uso do sistema de otimização de imagens do Next.js
 - **CI/CD Automatizado**: Workflow GitHub Actions para deploy automatizado na Vercel
 - **Gerenciamento de Dependências**: Configuração personalizada para lidar com dependências complexas
+- **Integração GitHub API**: Sistema de cache para otimizar requisições à API do GitHub
+- **Integração Dev.to API**: Carregamento automático de artigos publicados
+- **Gráfico de Contribuições**: Visualização interativa das contribuições do GitHub
 
 ## Contribuição
 
@@ -138,6 +204,62 @@ This is a professional portfolio developed with modern technologies to showcase 
 - **/projects**: Portfolio of completed projects
 - **/contact**: Contact form and connection information
 
+## Setup and Configuration
+
+### Configuring GitHub Integration
+
+To display your GitHub projects and contribution charts, configure the following environment variables:
+
+1. **Create a GitHub Token (required to avoid rate limiting)**:
+   - Go to [GitHub Settings > Tokens](https://github.com/settings/tokens)
+   - Click "Generate new token" → "Generate new token (classic)"
+   - Give it a name like "Portfolio Projects API"
+   - Select only these permissions: `public_repo` and `read:user`
+   - Click "Generate token" and copy the generated value
+
+2. **Configure environment variables**:
+   ```bash
+   # Copy the example file
+   cp .env.example .env.local
+
+   # Edit .env.local with your information:
+   GITHUB_TOKEN=your_token_here
+   NEXT_PUBLIC_GITHUB_USERNAME=your_github_username
+   NEXT_PUBLIC_PORTFOLIO_TAG=portfolio-project
+   ```
+
+3. **Tag projects for portfolio display**:
+   - Go to the repositories you want to showcase
+   - Go to "Settings" → "General" → "Topics"
+   - Add the tag `portfolio-project` (or the tag configured in `NEXT_PUBLIC_PORTFOLIO_TAG`)
+
+### Configuring Dev.to Integration
+
+To display your Dev.to articles, just configure your username:
+
+```bash
+# In .env.local file, add or edit:
+NEXT_PUBLIC_DEVTO_USERNAME=your_devto_username
+```
+
+If not configured, the system will use "adamsnows" as default.
+
+### GitHub Project Tags Structure
+
+The system automatically categorizes your projects based on tags:
+- `backend` or `back-end` → **Back end**
+- `frontend` or `front-end` → **Front end**
+- `fullstack` or `full-stack` → **Full stack**
+- `mobile` → **Mobile**
+- `devops` → **DevOps**
+
+### GitHub Charts and Contributions
+
+The contribution chart is automatically loaded using the username configured in `NEXT_PUBLIC_GITHUB_USERNAME`. It shows:
+- Contributions from the last 365 days
+- Total commit statistics
+- Interactive contribution calendar visualization
+
 ## Installation
 
 To run this project locally, follow these instructions:
@@ -162,7 +284,14 @@ To run this project locally, follow these instructions:
    yarn install
    ```
 
-4. Start the development server:
+4. Configure environment variables:
+
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local file with your configurations
+   ```
+
+5. Start the development server:
 
    ```bash
    npm run dev
@@ -170,7 +299,7 @@ To run this project locally, follow these instructions:
    yarn dev
    ```
 
-5. Access the application in your browser:
+6. Access the application in your browser:
 
    ```
    http://localhost:3000/
@@ -193,6 +322,9 @@ For detailed information on the CI/CD setup, see [CI/CD README](./.github/CI_CD_
 - **Image Optimization**: Use of Next.js image optimization system
 - **Automated CI/CD**: GitHub Actions workflow for automated deployment to Vercel
 - **Dependency Management**: Custom configuration to handle complex library dependencies
+- **GitHub API Integration**: Caching system to optimize GitHub API requests
+- **Dev.to API Integration**: Automatic loading of published articles
+- **Contribution Charts**: Interactive visualization of GitHub contributions
 
 ## Contribution
 
