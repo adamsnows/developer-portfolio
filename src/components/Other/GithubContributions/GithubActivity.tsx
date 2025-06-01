@@ -47,6 +47,32 @@ const GithubActivity = () => {
             username={process.env.NEXT_PUBLIC_GITHUB_USERNAME || "adamsnows"}
           />
 
+          {/* GitHub Sponsors Card */}
+          <motion.div
+            className="mt-8 w-full"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative rounded-lg overflow-hidden border border-primary/20 bg-background/50 backdrop-blur-sm p-1 w-full">
+              <iframe
+                src={`https://github.com/sponsors/${
+                  process.env.NEXT_PUBLIC_GITHUB_USERNAME || "adamsnows"
+                }/card`}
+                title={`Sponsor ${
+                  process.env.NEXT_PUBLIC_GITHUB_USERNAME || "adamsnows"
+                }`}
+                className="rounded-md w-full block h-[305px]  md:h-[135px]"
+                style={{
+                  border: 0,
+                  width: "100%",
+                }}
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+
           <div className="mt-6 text-center">
             <motion.a
               href="https://github.com/adamsnows"
